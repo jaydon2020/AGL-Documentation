@@ -1,6 +1,6 @@
 #### *Welcome to the Automotive Grade Linux (AGL) documentation.*
 
-![AGL](img/agl.png)
+<p style="text-align:center;"><img src="img/agl.png" alt="AGL" width="300"></p>
 
 This current page provides you with a brief overview of the AGL Distribution
 and with an introduction to selected topics that can help

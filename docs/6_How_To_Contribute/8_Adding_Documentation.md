@@ -100,7 +100,7 @@ the site.
     $ sudo pip3 install git-review 
     ```
 
-2. Write commit message
+2. Write commit message (**Note:** Please follow [submitting changes](./4_Submitting_Changes.md) guideline to write your commit message.)
 
     ```sh
     # track all the new changes

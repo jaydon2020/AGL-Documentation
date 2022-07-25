@@ -1,10 +1,11 @@
-#### *Welcome to the Automotive Grade Linux (AGL) documentation.*
 
 <p style="text-align:center;"><img src="img/agl.png" alt="AGL" width="300"></p>
 
-This current page provides you with a brief overview of the AGL Distribution
-and with an introduction to selected topics that can help
-you get a quick start using AGL for development.
+### Welcome to the Automotive Grade Linux (AGL) documentation.
+
+This page will provide a brief overview of the AGL Distribution
+and an introduction to selected topics that can help you get a quick
+start using AGL for development.
 
 What is Automotive Grade Linux?
 -------------------------------
@@ -55,23 +56,26 @@ You can use the "Getting Started" sections to do the following:
 * [Learn How to Create an Application](./3_Developer_Guides/1_Setting_Up_AGL_SDK.md) using the
   application development workflow.
 
-The AGL community is diverse and supportive.
-You can become an active community member that contributes feedback,
-ideas, suggestions, bugs and documentation.
 
-* Join the IRC conversation using the `#automotive` channel on
-  `irc.libera.chat`. Make sure to turn on SSL and register your nickname.
+Participate
+-----------
 
-* Subscribe to the AGL discussions mailing list at
-  [agl-dev-community](https://lists.automotivelinux.org/g/agl-dev-community).
+The AGL community is diverse and supportive. Anyone can join the mailing list, participate in Zoom meetings, or contribute to any of our projects at any time. You can become an active community member that contributes feedback, ideas, suggestions, bugs and documentation.
 
-* Learn about AGL distribution by visiting the
-  "[AGL Distribution](https://wiki.automotivelinux.org/agl-distro)" wiki page.
+**Communications**
 
-* Explore further "Getting Started" information by visiting the
-  "[Getting Started with AGL](./0_Getting_Started/1_Quickstart/Using_Ready_Made_Images.md)"
-  wiki page.
+AGL uses [groups.io](https://lists.automotivelinux.org/g/agl-main) for communication. The AGL technical community uses the AGL Developer Community mail list. The [agl-dev-community on groups.io contains](https://lists.automotivelinux.org/g/agl-dev-community) a vast [archive](https://lists.automotivelinux.org/g/agl-dev-community/topics) of publicly viewable messages and content. Please [subscribe](https://lists.automotivelinux.org/g/agl-dev-community) to the mail for developer questions, general issues, etc. This is where most of the AGL developer discussions occur. If you need help with something, do not hesitate to post your questions to this list, the AGL Community will help you!
 
-* Learn how to contribute by visiting the
-  "[Contributing to the AGL Distro](./6_How_To_Contribute/4_Submitting_Changes.md)"
-  wiki page.
+**IRC (Internet Relay Chat)**
+
+Please join us on IRC at the #automotive channel on Libera.chat
+
+If you have not used IRC before, Internet Relay Chat (IRC) is a convenient way to connect to teams and share text-based information in realtime. IRC is widely used by engineers when collaborating on open source projects.
+
+You can access IRC via the web or a traditional client - here is a [list of clients](http://www.irchelp.org/irchelp/clients/) and a primer on [how to use IRC](http://www.irchelp.org/irchelp/new2irc.html) if you are new to it.
+
+If you are behind a firewall, a web client may be best; [irccloud](https://www.irccloud.com) is a popular hosted solution. If you want to host your own service for web access, [shout-irc](http://shout-irc.com) may be of interest and is fully open source. Codethink has setup a live instance of shout-irc at [chat.codethink.co.uk](https://chat.codethink.co.uk) for AGL community members to try out.
+
+**Recurring Meetings**
+
+We have a weekly developer meeting and a number of other recurring Expert Group meetings that everyone is invited to participate in. The complete list of meetings and their information is available on AGL [Google Calendar](https://lists.automotivelinux.org/g/agl-dev-community/calendar). You can subscribe to AGL [Google Calendar](https://lists.automotivelinux.org/g/agl-dev-community/calendar) by logging to your LF account and clicking subscribe to calendar button at the bottom of AGL [Google Calendar](https://lists.automotivelinux.org/g/agl-dev-community/calendar) page. 

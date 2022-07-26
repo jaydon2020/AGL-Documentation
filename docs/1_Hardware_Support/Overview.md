@@ -4,8 +4,6 @@ title: Supported Boards
 
 The following table briefs about the various hardware platforms, supported by AGL :
 
-**NOTE:** Further information about AGL Distribution available at [AGL wiki](https://wiki.automotivelinux.org/agl-distro).
-
 ### AGL Reference Machines
 
 |      BOARD      |    $MACHINE    | ARCHITECHTURE |
@@ -33,15 +31,9 @@ The following table briefs about the various hardware platforms, supported by AG
 |               |                       |               |
 |   i.MX 6      |      cubox-i          |     arm32     |
 |               | imx6qdlsabreauto      |     arm32     |
-|               |    nitrogen6x         |     arm32     |
 |               |                       |               |
 |   i.MX 8      |     imx8mqevk         |     arm64     |
 |               |   imx8mqevk-viv       |     arm64     |
-|               |                       |               |
-|  Snapdragon   | dragonboard-410c      |     arm64     |
-|               | dragonboard-820c      |     arm64     |
-|               |                       |               |
-|    ARC HS     |       hsdk            |      ARC      |
 |               |                       |               |
 |     virtio    | virtio-aarch64        |     arm64     |
 
@@ -55,7 +47,7 @@ AGL supports a variety of interfaces, each requiring unique setup configuration.
 
 AGL Reference Boards (QEMU, RCar Gen 3, agl-refhw & Raspberry Pi 4)
 
-Community supported Machines (i. MX 6, i. MX 8, Snapdragon & ARC HS)
+Community supported Machines (BBE, i. MX 6, i. MX 8)
 
 * Qt Based :
 

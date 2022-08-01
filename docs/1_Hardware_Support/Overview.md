@@ -2,17 +2,25 @@
 title: Supported Boards
 ---
 
+
+
+AGL makes two types of hardware support available: Reference BSPs and Community BSPs.
+
+1) **Reference Boards** have Board Support Packages (BSPs) that are maintained by their sponsoring companies and are included in our Jenkins CI system. Reference BSPs have snapshot builds that are made available daily and are fully validated with test results made available for every major AGL release.
+
+2) **Community Boards** have BSPs that are maintained as a best effort by the AGL community based on upstream BSPs. Community Boards include some of the most-used Hobbyist boards such as older automotive boards.
+
 The following table briefs about the various hardware platforms, supported by AGL :
 
 ### AGL Reference Machines
 
-|      BOARD      |    $MACHINE    | ARCHITECHTURE |
-|:---------------:|:--------------:|:-------------:|
-|       QEMU      |   qemu-x86-64  |      x86      |
+|      BOARD      |     MACHINE    | ARCHITECHTURE | QUICK START GUIDE|
+|:---------------:|:--------------:|:-------------:|:----------------:|
+|       QEMU      |   qemu-x86-64  |      x86      |[QEMU Quick Start](https://docs.automotivelinux.org/en/master/#0_Getting_Started/1_Quickstart/Using_Ready_Made_Images/#_top)|
 |                 |    qemu-arm    |     arm32     |
 |                 |   qemu-arm64   |     arm64     |
 |                 |                |               |
-|    RCar Gen 3   |     h3ulcb     |     arm64     |
+|    RCar Gen 3   |     h3ulcb     |     arm64     |[RCar Gen 3 Quick Start](https://docs.automotivelinux.org/en/master/#0_Getting_Started/1_Quickstart/Using_Ready_Made_Images/#3-r-car-h3sk-h3ulcb-board)|
 |                 | h3-salvator-x  |     arm64     |
 |                 |      h3-kf     |     arm64     |
 |                 |     m3ulcb     |     arm64     |
@@ -20,11 +28,12 @@ The following table briefs about the various hardware platforms, supported by AG
 |                 |      m3-kf     |     arm64     |
 |                 |   agl-refhw    |     arm64     |
 |                 |                |               |
-|  Raspberry Pi   |  raspberrypi4  |     arm64     |
+|  Raspberry Pi   |  raspberrypi4  |     arm64     |[Raspberry Pi Quick Start](https://docs.automotivelinux.org/en/master/#0_Getting_Started/1_Quickstart/Using_Ready_Made_Images/#2-raspberry-pi-4)|
 
-### Community supported Machines
 
-|    BOARD      |     $MACHINE          | ARCHITECHTURE |
+### Community Supported Boards
+
+|    BOARD      |      MACHINE          | ARCHITECHTURE |
 |:-------------:|:---------------------:|:-------------:|
 |  BeagleBone   |        bbe            |     arm32     |
 |               |    beaglebone         |     arm32     |

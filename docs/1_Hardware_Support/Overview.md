@@ -1,8 +1,8 @@
 ---
-title: Supported Boards
+title: Supported Hardware
 ---
 
-
+### Supported Hardware
 
 AGL makes two types of hardware support available: Reference BSPs and Community BSPs.
 
@@ -12,15 +12,15 @@ AGL makes two types of hardware support available: Reference BSPs and Community 
 
 The following table briefs about the various hardware platforms, supported by AGL :
 
-### AGL Reference Machines
+### AGL Reference Boards
 
-|      BOARD      |     MACHINE    | ARCHITECHTURE | QUICK START GUIDE|
-|:---------------:|:--------------:|:-------------:|:----------------:|
-|       QEMU      |   qemu-x86-64  |      x86      |[QEMU Quick Start](https://docs.automotivelinux.org/en/master/#0_Getting_Started/1_Quickstart/Using_Ready_Made_Images/#_top)|
-|                 |    qemu-arm    |     arm32     |
-|                 |   qemu-arm64   |     arm64     |
+|      BOARD      |     MACHINE    | ARCHITECTURE | QUICK START GUIDE| LATEST SNAPSHOT |
+|:---------------:|:--------------:|:------------:|:----------------:|:--------------------:|
+|       QEMU      |   qemu-x86-64  |      x86      |[QEMU Quick Start](https://docs.automotivelinux.org/en/master/#0_Getting_Started/1_Quickstart/Using_Ready_Made_Images/#_top)| [qemu-x86-64](https://download.automotivelinux.org/AGL/snapshots/master/latest/qemux86-64/)|
+|                 |    qemu-arm    |     arm32     | | [qemu-arm](https://download.automotivelinux.org/AGL/snapshots/master/latest/qemuarm/)|
+|                 |   qemu-arm64   |     arm64     | | [qemu-arm64](https://download.automotivelinux.org/AGL/snapshots/master/latest/qemuarm64/)|
 |                 |                |               |
-|    RCar Gen 3   |     h3ulcb     |     arm64     |[RCar Gen 3 Quick Start](https://docs.automotivelinux.org/en/master/#0_Getting_Started/1_Quickstart/Using_Ready_Made_Images/#3-r-car-h3sk-h3ulcb-board)|
+|    RCar Gen 3   |     h3ulcb     |     arm64     |[RCar Gen 3 Quick Start](https://docs.automotivelinux.org/en/master/#0_Getting_Started/1_Quickstart/Using_Ready_Made_Images/#3-r-car-h3sk-h3ulcb-board)| [h3ulcb-nogfx](https://download.automotivelinux.org/AGL/snapshots/master/latest/h3ulcb-nogfx/)|
 |                 | h3-salvator-x  |     arm64     |
 |                 |      h3-kf     |     arm64     |
 |                 |     m3ulcb     |     arm64     |
@@ -28,112 +28,21 @@ The following table briefs about the various hardware platforms, supported by AG
 |                 |      m3-kf     |     arm64     |
 |                 |   agl-refhw    |     arm64     |
 |                 |                |               |
-|  Raspberry Pi   |  raspberrypi4  |     arm64     |[Raspberry Pi Quick Start](https://docs.automotivelinux.org/en/master/#0_Getting_Started/1_Quickstart/Using_Ready_Made_Images/#2-raspberry-pi-4)|
+|  Raspberry Pi   |  raspberrypi4  |     arm64     |[Raspberry Pi Quick Start](https://docs.automotivelinux.org/en/master/#0_Getting_Started/1_Quickstart/Using_Ready_Made_Images/#2-raspberry-pi-4)|[raspberrypi4](https://download.automotivelinux.org/AGL/snapshots/master/latest/raspberrypi4/)|
 
+**Note:** Latest stable release source tar and binary for all the boards can be found [here](https://wiki.automotivelinux.org/agl-distro/release-notes#latest_stable_release)
 
 ### Community Supported Boards
 
-|    BOARD      |      MACHINE          | ARCHITECHTURE |
-|:-------------:|:---------------------:|:-------------:|
-|  BeagleBone   |        bbe            |     arm32     |
+|    BOARD      |      MACHINE          | ARCHITECTURE  | 
+|:-------------:|:---------------------:|:-------------:| 
+|  BeagleBone   |        bbe            |     arm32     | 
 |               |    beaglebone         |     arm32     |
 |               |                       |               |
 |   i.MX 6      |      cubox-i          |     arm32     |
 |               | imx6qdlsabreauto      |     arm32     |
 |               |                       |               |
-|   i.MX 8      |     imx8mqevk         |     arm64     |
+|   i.MX 8      |     imx8mqevk         |     arm64     | 
 |               |   imx8mqevk-viv       |     arm64     |
 |               |                       |               |
 |     virtio    | virtio-aarch64        |     arm64     |
-
-### Supported Images
-
-AGL supports a variety of interfaces, each requiring unique setup configuration.
-
-#### 1. In-Vehicle Infotainment (IVI)
-
-**Supported boards** :
-
-AGL Reference Boards (QEMU, RCar Gen 3, agl-refhw & Raspberry Pi 4)
-
-Community supported Machines (BBE, i. MX 6, i. MX 8)
-
-* Qt Based :
-
-    * Setting up flags at `aglsetup` script :
-
-        ```sh
-        $ source meta-agl/scripts/aglsetup.sh -f -m $MACHINE -b build-$MACHINE agl-demo
-
-        #To enable Developer Options
-        $ source meta-agl/scripts/aglsetup.sh -f -m $MACHINE -b build-$MACHINE agl-demo agl-devel
-        ```
-
-    * Building target image :
-
-        ```sh
-        $ time bitbake agl-demo-platform
-        ```
-
-* HTML5 Based :
-
-    * Setting up flags at `aglsetup` script :
-
-        ```sh
-        $ source meta-agl/scripts/aglsetup.sh -f -m $MACHINE -b build-$MACHINE agl-demo
-
-        # To enable Developer Options
-        $ source meta-agl/scripts/aglsetup.sh -f -m $MACHINE -b build-$MACHINE agl-demo agl-devel
-        ```
-
-    * Building target image :
-
-        ```sh
-        $ time bitbake agl-demo-platform-html5
-        ```
-
-
-#### 2. Instrument Cluster
-
-**Supported boards** :
-
-AGL Reference Boards (QEMU, RCar Gen 3 & Raspberry Pi 4)
-
-* Setting up flags at `aglsetup` script :
-
-    ```sh
-    $ source meta-agl/scripts/aglsetup.sh -f -m $MACHINE -b build-$MACHINE agl-demo
-
-    # To enable Developer Options
-    $ source meta-agl/scripts/aglsetup.sh -f -m $MACHINE -b build-$MACHINE agl-demo agl-devel
-    ```
-
-* Building target image :
-
-    ```sh
-    $ time bitbake agl-cluster-demo
-    ```
-
-#### 3. Telematics
-
-Headless demo platform for low-spec boards.
-
-**Supported boards** :
-
-Community supported Machines (BeagleBone)
-
-
-* Setting up flags at `aglsetup` script :
-
-    ```sh
-    $ source meta-agl/scripts/aglsetup.sh -f -m $MACHINE -b build-$MACHINE agl-demo
-
-    # To enable Developer Options
-    $ source meta-agl/scripts/aglsetup.sh -f -m $MACHINE -b build-$MACHINE agl-demo agl-devel
-    ```
-
-* Building target image :
-
-    ```sh
-    $ time bitbake agl-telematics-demo
-    ```

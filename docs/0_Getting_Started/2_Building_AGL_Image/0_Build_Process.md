@@ -29,5 +29,5 @@ elsewhere.
 4. Make sure your build configuration is defined exactly how you want it for your build.
 
 5. Use
-   [BitBake](https://yoctoproject.org/docs/3.1.4/bitbake-user-manual/bitbake-user-manual.html)
+   [BitBake](https://docs.yoctoproject.org/bitbake.html)
    to build your image.

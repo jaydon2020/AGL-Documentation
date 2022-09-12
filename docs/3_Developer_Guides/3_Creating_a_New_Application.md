@@ -2,11 +2,13 @@
 title: Creating a New Application
 ---
 
-Applications are either software designed to perform a specific task during a limited amount of
-time, or graphical applications presenting the user with an interface they can interact with.
+Applications are:
 
-Such applications are executed by `applaunchd`, the AGL
-[application launcher service](1_Application_Framework/2_Application_Startup/).
+-  Software designed to perform a specific task during a limited amount of time.
+-  Graphical interface allowing user to interact with.
+
+Applications are executed by `applaunchd`, the AGL
+[application launcher service](../1_Application_Framework/2_Application_Startup/).
 
 # Basic requirements
 
@@ -58,7 +60,7 @@ refer to the [graphical applications](#graphical-applications) section for more 
 
 # D-Bus activation
 
-Similarly to [services](2_Creating_a_New_Service.md/#d-bus-activation), applications can
+Similarly to [services](../2_Creating_a_New_Service/#d-bus-activation), applications can
 also be activated through D-Bus.
 
 Such applications must name their `.desktop` file after the D-Bus name they register. In addition,
@@ -116,16 +118,16 @@ implement the `org.freedesktop.Application` interface as defined in the
 
 In addition, graphical applications need to comply with a few more requirements:
 
-1. Each application must set a Wayland application ID appropriately as soon as its main window
+1\. Each application must set a Wayland application ID appropriately as soon as its main window
 is created.
 
-2. The `app-id` must be specified in the desktop entry file by adding the following line:
+2\. The `app-id` must be specified in the desktop entry file by adding the following line:
 
 ```
 StartupWMClass=APP_ID
 ```
 
-3. The desktop entry file must be named `APP_ID.desktop`.
+3\. The desktop entry file must be named `APP_ID.desktop`.
 
 Doing so will ensure other software can associate the actual `app-id` to the proper application.
 

@@ -4,10 +4,12 @@ title: Creating a New Service
 
 Services are software running in the background and providing, as their name suggests,
 various services to other software: access to specific system hardware, connectivity
-management, network servers... They can be split into 2 categories:
-- system services: those usually run as a privileged user and make use of shared system
+management, and network servers. Services can be split into 2 categories:
+
+- **System services:** those usually run as a privileged user and make use of shared system
   resources which they should have exclusive access to
-- user services: such services run as part of an unprivileged user's session and can
+
+- **User services:** such services run as part of an unprivileged user's session and can
   only be called by said user
 
 # Basic requirements
@@ -15,7 +17,9 @@ management, network servers... They can be split into 2 categories:
 The only mandatory requirement is that service packages provide a `.service` file
 so they can be properly managed by `systemd`. This file must be installed to a specific
 location, determined by the service type (system or user):
+
 - `/usr/lib/systemd/system/` for system services
+
 - `/usr/lib/systemd/user/` for user services
 
 Below is an example of a simple user service, running in a graphical session and
@@ -36,7 +40,7 @@ WantedBy=agl-session.target
 ```
 
 The `WantedBy=agl-session.target` indicates the service is part of the default AGL
-user session, as mentioned in the [Application Framework](1_Application_Framework/1_Introduction/#user-session-management)
+user session, as mentioned in the [Application Framework](../1_Application_Framework/1_Introduction/#user-session-management)
 documentation.
 
 The `Restart=on-failure` directive ensures the service will be automatically
@@ -65,7 +69,9 @@ ExecStart=/path/to/executable
 
 In addition, they must provide a D-Bus service file named `NAME.service` and installed
 to one of the following locations:
+
 - `/usr/share/dbus-1/system-services` for system services
+
 - `/usr/share/dbus-1/services` for user services
 
 The contents of the D-Bus service file must be the following:
@@ -95,19 +101,19 @@ executed on system or session startup.
 System services can take advantage of the Yocto `systemd` class which automates the process of
 enabling such services.
 
-1. Ensure the recipe inherits from the `systemd` class:
+1\. Ensure the recipe inherits from the `systemd` class:
 
 ```
 inherit systemd
 ```
 
-2. Declare the system services that needs to be enabled on boot:
+2\. Declare the system services that needs to be enabled on boot:
 
 ```
 SYSTEMD_SERVICE:${PN} = "NAME.service"
 ```
 
-3. Ensure the `FILES` variable includes the systemd service directory the corresponding
+3\. Ensure the `FILES` variable includes the systemd service directory the corresponding
 file will be installed to:
 
 ```
@@ -122,7 +128,7 @@ FILES:${PN} = "\
 The `systemd` class doesn't provide an equivalent mechanism for user services. This must
 therefore be done manually as part of the package's install process.
 
-1. Make the service a part of the user session:
+1\. Make the service a part of the user session:
 
 ```
 do_install:append() {
@@ -134,7 +140,7 @@ do_install:append() {
 This ensures `agl-session.target` depends on `NAME.service`, the latter being therefore
 automatically started on session creation.
 
-2. Ensure the `FILES` variable includes the systemd service directory the corresponding
+2\. Ensure the `FILES` variable includes the systemd service directory the corresponding
 file will be installed to:
 
 ```

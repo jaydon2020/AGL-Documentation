@@ -138,6 +138,59 @@ presenting.
 Please consult the [protocol file](https://gerrit.automotivelinux.org/gerrit/gitweb?p=src/agl-compositor.git;a=blob_plain;f=protocol/agl-shell.xml;hb=refs/heads/master)
 as that is the authoritative way of getting the latest version.
 
+#### V2 updates
+
+Version 2 of the agl-shell protocol, while it is is not obligatory to be
+supported by the shell client, it adds two new events: bound_ok and bound_fail
+events.
+
+It has been observed that in some cases where we do not explicitly have a knob
+in the toolkit to tell whether the application is a regular one (which doesn't
+need to bind to the agl-shell protocol) or a one that needs to implement
+agl-shell protocol might result in terminating the wayland connection.
+
+That happens because we can't have multiple clients bind to the agl-shell
+protocol interface and was particularly visible when using regular
+flutter applications with other shell clients (Qt homescreen, or WAM/chromum),
+basically mashing together different kind of toolkits in the same image. Once
+a client has already bound to the agl-shell protocol interface any other client
+that attempts to do same will get its wayland connection severed and the
+application will be terminated.
+
+These two events provide a race-free method in which the clients can tell if
+they're in charge (of being the shell client) or their just regular
+applications. Explicitly implementing this protocol if you have other means to
+specify which type of application it is running wouldn't be required nor
+necessary. But by using the protocol we can provide the same thing,
+programmatically, without fearing that the wayland connection might be
+severed, and implicitly taking down the application.
+
+#### V3 updates
+
+Version 3 of the agl-shell protocol adds 4 more events to signal out when the
+application state was changed: started, activated, deactivated and terminated.
+
+Version 3 update was mostly prompted by an issue with start-up of applications
+but also is part of the first steps to reduce and simplify a bit more
+activation handling in the compositor.  Specifically with this protocol update,
+we can correctly orchestrate start-up and activation of applications.
+
+At the moment of adding this protocol update, the default compositor behaviour
+is to display/activate applications as soon they're started, a feature which
+we've called activate-by-default (and which is turned on by default).
+But users can choose to disable that in such a way that activation is entirely
+driven the shell client.
+
+Implicitly having this activate-by-default papered over various
+issue when don't have that activation by default turned on. Supporting both
+use-cases (activate-by-default, on and off) turned out to be cluster of
+problems and regression over time. Not only that the amount of complexity in
+the compositor is unwarranted and can simplified by telling the shell client
+handle any window management interaction on its own.
+
+Further more, with this protocol update we also includes some events already
+present in the agl-shell-desktop protocol like  deactivate and terminate.
+
 ### agl-shell-desktop
 
 This extension is targeted at keeping some of the functionally already

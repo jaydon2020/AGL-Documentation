@@ -50,10 +50,18 @@ $ source master/meta-agl/scripts/aglsetup.sh -b build-flutter-cluster -m qemux86
 - Running this script, will create a build directory if it does not exist. Default build directory: `$AGL_TOP/master/build-flutter-cluster`
 - Default target paltform: `qemux86-64`
 
+** NOTE: Set the API key in local.conf **
+ 
+- By default navigation will not work, you need to set your openrouteservie API key to the variable `OPENROUTE_API_KEY` in your local.conf
+- It is present at `$AGL_TOP/master/build-flutter-cluster/conf/local.conf`
+ 
+- Example: Just add `OPENROUTE_API_KEY = "your_openrouteservice_api_key"` to the end of local.conf
+
+
 ## 5. Using BitBake
 
 ```bash
-$ cd $AGL_TOP/build-flutter-cluster
+$ cd $AGL_TOP/master/build-flutter-cluster
 $ source agl-init-build-env
 $ bitbake agl-cluster-demo-platform-flutter
 ```
@@ -62,7 +70,7 @@ $ bitbake agl-cluster-demo-platform-flutter
 Boot the image using QEMU
 
 ```bash
-$ cd $AGL_TOP/build-flutter-cluster
+$ cd $AGL_TOP/master/build-flutter-cluster
 $ source agl-init-build-env
 $ runqemu kvm serialstdio slirp publicvnc
 ```

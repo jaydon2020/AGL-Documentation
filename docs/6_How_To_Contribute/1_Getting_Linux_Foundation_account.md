@@ -40,22 +40,23 @@ What follows explains how to generate an SSH key pair in a Linux environment ---
 follow the equivalent steps on your OS.
 
 First, create an SSH key pair with the command:
+**Note:** This guide recommends using ed25519 keys because it has been found that this type works well across all operating systems.
 
  ```sh
- $ ssh-keygen -t rsa -C "John Doe john.doe@example.com"
+ $ ssh-keygen -t ed25519 -C "your_name@example.com"
  ```
 
-**Note:** This will ask you for a password to protect the private key as
+**Note:** When you’re prompted to “Enter a file in which to save the key” press Enter. This accepts the default location. Next, it will ask you for a password to protect the private key as
 it generates a unique key. Please keep this password private, and DO NOT
 enter a blank password.
 
-The generated SSH key pair can be found in the files ``~/.ssh/id_rsa`` and
-``~/.ssh/id_rsa.pub``.
+The generated SSH key pair can be found in the files ``~/.ssh/id_ed25519`` and
+``~/.ssh/id_ed25519.pub``.
 
-Next, add the private key in the ``id_rsa`` file to your key ring, e.g.:
+Next, add the private key in the ``id_ed25519`` file to your key ring, e.g.:
 
  ```sh
- $ ssh-add ~/.ssh/id_rsa
+ $ ssh-add ~/.ssh/id_ed25519
  ```
 
 Finally, add the public key of the generated key pair to the Gerrit
@@ -69,12 +70,10 @@ server, with the following steps:
 
 4. On the left side menu, click on ``SSH Public Keys``.
 
-5. Paste the contents of your public key ``~/.ssh/id_rsa.pub`` and click
+5. Paste the contents of your public key ``~/.ssh/id_ed25519.pub`` and click
    ``Add key``.
 
-**Note:** The ``id_rsa.pub`` file can be opened with any text editor.
-Ensure that all the contents of the file are selected, copied and pasted
-into the ``Add SSH key`` window in Gerrit.
+**Note:** The ``id_ed25519.pub`` file can be opened with any text editor or you can run the command ``cat ~/.ssh/id_ed25519.pub`` in your terminal and copy output. Ensure that all the contents of the file are selected, copied and pasted into the ``Add SSH key`` window in Gerrit.
 
 **Note:** The SSH key generation instructions operate on the assumption
 that you are using the default naming. It is possible to generate
@@ -82,19 +81,18 @@ multiple SSH keys and to name the resulting files differently. See the
 [ssh-keygen](https://en.wikipedia.org/wiki/Ssh-keygen) documentation for
 details on how to do that. Once you have generated non-default keys, you
 need to configure SSH to use the correct key for Gerrit. In that case,
-you need to create a ``~/.ssh/config`` file modeled after the one below.
+you need to create a ``~/.ssh/config`` file with command ``touch ~/.ssh/config`` and add details in config file.
 
- ```sh
+```
 host gerrit.automotivelinux.org
   HostName gerrit.automotivelinux.org
-  IdentityFile ~/.ssh/id_rsa_automotivelinux_gerrit
+  IdentityFile ~/.ssh/id_ed25519
   User <LFID>
+  Port 29418
 ```
 
-`<LFID>` is your Linux Foundation ID and the value of IdentityFile is the
+`<LFID>` is your Linux Foundation ID(username) and the value of IdentityFile is the
 name of the public key file you generated.
 
 **Warning:** Potential Security Risk! Do not copy your private key
-``~/.ssh/id_rsa``. Use only the public ``~/.ssh/id_rsa.pub``.
-
-
+``~/.ssh/id_ed25519``. Use only the public ``~/.ssh/id_ed25519.pub``.

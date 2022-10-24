@@ -78,4 +78,37 @@ If you are behind a firewall, a web client may be best; [irccloud](https://www.i
 
 **Recurring Meetings**
 
-We have a weekly developer meeting and a number of other recurring Expert Group meetings that everyone is invited to participate in. The complete list of meetings and their information is available on AGL [Google Calendar](https://lists.automotivelinux.org/g/agl-dev-community/calendar). You can subscribe to AGL [Google Calendar](https://lists.automotivelinux.org/g/agl-dev-community/calendar) by logging to your LF account and clicking subscribe to calendar button at the bottom of AGL [Google Calendar](https://lists.automotivelinux.org/g/agl-dev-community/calendar) page. 
+We have a weekly developer meeting and a number of other recurring Expert Group meetings that everyone is invited to participate in. The complete list of meetings and their information is available on AGL [Google Calendar](https://lists.automotivelinux.org/g/agl-dev-community/calendar). You can subscribe to AGL [Google Calendar](https://lists.automotivelinux.org/g/agl-dev-community/calendar) by logging to your LF account and clicking subscribe to calendar button at the bottom of AGL [Google Calendar](https://lists.automotivelinux.org/g/agl-dev-community/calendar) page.
+
+
+Platforms
+---------
+AGL uses variety of Platforms for different puposes.
+
+**Marketing**
+
+- [Website](https://www.automotivelinux.org/)
+
+- [Twitter]( https://twitter.com/autogradelinux)
+
+- [LinkdIn](https://www.linkedin.com/company/automotive-grade-linux/)
+
+- [Youtube](https://www.youtube.com/channel/UC1axavgir413w00rwBHPAtQ)
+
+**Developers**
+
+- [Gerrit](https://gerrit.automotivelinux.org) for code collaboration.
+
+- [Jira](https://jira.automotivelinux.org/) for issue tracking.
+
+- [Docs](https://docs.automotivelinux.org/) for AGL documentation.
+
+- [Wiki](https://wiki.automotivelinux.org/) for coordinating dynamic content.
+
+- [Confluence](https://confluence.automotivelinux.org) for AGL desing work.
+
+- [Git](https://git.automotivelinux.org/) for hosting AGL repositories.
+
+- [Lava](https://lava.automotivelinux.org/) for continuous integration.
+
+- [Download](http://download.automotivelinux.org/) for downloading code.

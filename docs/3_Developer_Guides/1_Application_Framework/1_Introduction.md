@@ -33,16 +33,23 @@ In order to be as simple as possible and avoid any unneded custom implementation
 Application Framework relies mainly on third-party technologies and/or software
 components, most of those being maintained under the
 [freedesktop.org](https://www.freedesktop.org) umbrella. Those include:
-- [systemd](https://www.freedesktop.org/wiki/Software/systemd/): system and services
-  management
+
+
+- [systemd](https://www.freedesktop.org/wiki/Software/systemd/): system services and user session services management
+
+
 - [D-Bus](https://www.freedesktop.org/wiki/Software/dbus/): inter-process communication
+
+
 - [Desktop Entry specification](https://www.freedesktop.org/wiki/Specifications/desktop-entry-spec/):
   application enumeration and startup
 
 AGL also provides reference implementations whenever possible and relevant, located in
-the [meta-agl](../6_AGL_Layers/2_meta-agl/) layer under `meta-app-framework`. At the
+the [meta-agl](/3_Developer_Guides/6_AGL_Layers/2_meta-agl/) layer under `meta-app-framework`. At the
 moment, the Application Framework contains 2 such components:
+
 - `agl-session`: `systemd` unit files for user sessions management
+
 - `applaunchd`: application launcher service
 
 # Services management
@@ -63,7 +70,7 @@ developers can take advantage of some of its advanced features, allowing for imp
 reliability and security.
 
 Each service should be represented by a `systemd` unit file installed to the appropriate
-location. More details can be obtained from the [Creating a New Service](../2_Creating_a_New_Service/)
+location. More details can be obtained from the [Creating a New Service](/3_Developer_Guides/2_Creating_a_New_Service/)
 document.
 
 # User session management
@@ -72,7 +79,8 @@ Similarly, user sessions and the services they rely on are also managed by `syst
 
 AGL provides 2 `systemd` units:
 
-1. `agl-session@.service` is a template system service for managing user sessions; it
+
+1\. `agl-session@.service` is a template system service for managing user sessions; it
 takes a username or UID as a parameter, creating a session for the desired user.
 Instanciating this service can be achieved by enabling `agl-session@USER.service`, for
 example by executing the following command on a running system:
@@ -87,7 +95,8 @@ user `agl-driver`.
 *Note: while you can create sessions for as many users as needed, only one instance of
 `agl-session@.service` is allowed per user.*
 
-2. `agl-session.target` is a user target for managing user services and their
+
+2\. `agl-session.target` is a user target for managing user services and their
 dependencies. It is started by `agl-session@.service`.
 
 By default, `agl-compositor` is part of this target. It is therefore automatically
@@ -111,10 +120,14 @@ as the preferred way for applications to interact with services.
 Most services already included in AGL provide one or several D-Bus interfaces, and can
 therefore interact with D-Bus capable applications and services without requiring any
 additional component. Those services include, among others:
+
 - [ConnMan](https://git.kernel.org/pub/scm/network/connman/connman.git/): network connectivity
+
 - [BlueZ](http://www.bluez.org/): Bluetooth connectivity
+
 - [oFono](https://git.kernel.org/pub/scm/network/ofono/ofono.git): telephony and modem
   management
+
 - [GeoClue](https://gitlab.freedesktop.org/geoclue/geoclue/-/wikis/home): geolocation
 
 # Application launcher service
@@ -134,4 +147,4 @@ interface for services and applications to:
 - request the startup and/or activation of a specific application
 - be notified when applications are started or terminated
 
-`applaunchd` is described with more details in [the following document](2_Application_Startup/).
+`applaunchd` is described with more details in [the following document](../2_Application_Startup/).

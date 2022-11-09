@@ -49,16 +49,23 @@ Find existing or add new markdowns in the following directory structure.
 ```sh
 documentation
 ├── docs
-│   ├── 0_Getting_Started
+│   ├── 1_Getting_Started
 │   │   ├── 1_Quickstart
 │   │   └── 2_Building_AGL_Image
 |   ├── .....
 |   |
-|   ├──<Chapter-Number>_<Chapter-Name>
-|   |   ├──<Subchapter-Number>_<Subchapter-Name>
-|   |   |   ├──<Index-Number>_<Markdown-Title>.md
+|   ├──<Chapter_Number>_<Chapter_Name>
+|   |   ├──<Subchapter_Number>_<Subchapter_Name>
+|   |   |   ├──<Index_Number>_<Markdown_Title>.md
 |   |   |   ├── .....
 ```
+**File Naming convention** AGL follows Snake Case (snake_case) naming convention to name the documentation files.
+This type of naming combines words simply by replacing the space with an underscore (_).
+All the names will also include a index number before the name.
+Index number will use two digit numbers from 01-99 followed by name of the file.
+For example: If the file name is Build Process then it will be written as 01_build_process.md
+
+**Note:** If a file needs to be inserted in between already created sequences, then the index number will be the last index number followed by new numbering. For example, A new file is inserted between 06-07, then the index number for the new file will be 07_01, as in gist sorting, 07_01 will appear after 06 and before 07.
 
 ## Markdown Formatting
 
@@ -74,6 +81,9 @@ documentation
 
     ```sh
     [<enter-title>](../<Chapter-Number>_<Chapter-Name>/<Subchapter-Number>_<Subchapter-Name>/<Index-Number>_<Markdown-Title>.md)
+
+
+
     ```
 
 ## Test Hyperlinks

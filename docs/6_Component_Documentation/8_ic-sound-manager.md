@@ -37,10 +37,10 @@ not need to be aware of the exact applications that are running on this containe
 
 - All the containers, including the host, are running a variant of AGL
 
-- The host OS and the secondary domain container use PipeWire and WirePlumber 
+- The host OS and the secondary domain container use PipeWire and WirePlumber
   to implement the sound system
 
-- The sound hardware offers, on the Linux kernel driver side, a separate ALSA 
+- The sound hardware offers, on the Linux kernel driver side, a separate ALSA
   device for sounds that belong to the IC and a separate ALSA device for other sounds
 
 ## Architectural design
@@ -70,7 +70,7 @@ them the ability to pause or resume sounds that are being routed via PipeWire.
 
 Finally, IC applications are given a library (icipc library) that allows them to send messages
 to pipewire-ic-ipc on the host. This library is minimal and has no external dependencies,
-for safety reasons. 
+for safety reasons.
 
 For sound playback, IC applications are expected to use the ALSA API directly and communicate
 with the dedicated ALSA device that is meant for IC sounds. Arbitration of this device between
@@ -101,7 +101,7 @@ pipewire-ic-ipc. This library allows sending two commands:
 
 IC Applications are expected to send the SUSPEND command before starting playback of a sound
 to their dedicated ALSA device. The RESUME command should be sent after playback of this IC
-sound has finished. 
+sound has finished.
 
 It should be noted that the RESUME command is also issued automatically when the IC application
 disconnects from the pipewire-ic-ipc UNIX socket.

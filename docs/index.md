@@ -47,13 +47,13 @@ The "Getting Started" topics allow you to quickly accomplish some work using
 AGL.
 You can use the "Getting Started" sections to do the following:
 
-* [Quickstart](./0_Getting_Started/1_Quickstart/Using_Ready_Made_Images.md) to quickly install the     pre-built images into an emulation or hardware platform.
+* [Quickstart](./01_Getting_Started/01_Quickstart/01_Using_Ready_Made_Images.md) to quickly install the     pre-built images into an emulation or hardware platform.
 
-* [Learn How to Build an AGL Image](./0_Getting_Started/2_Building_AGL_Image/0_Build_Process.md) by working
+* [Learn How to Build an AGL Image](./01_Getting_Started/02_Building_AGL_Image/01_Build_Process_Overview.md) by working
   through fundamental steps that show you how to build for various supported
   hardware targets (e.g. Raspberry PI boards).
 
-* [Learn How to Create an Application](./3_Developer_Guides/1_Setting_Up_AGL_SDK.md) using the
+* [Learn How to Create an Application](./04_Developer_Guides/01_Setting_Up_AGL_SDK.md) using the
   application development workflow.
 
 

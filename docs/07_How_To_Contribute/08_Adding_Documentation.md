@@ -87,17 +87,23 @@ For example: If the file name is Build Process then it will be written as 01_bui
     ```
 
 ## Test Hyperlinks
-
-[LinkChecker](https://wummel.github.io/linkchecker/) is a tool that allows to
+[Broken Link Checker](https://github.com/stevenvachon/broken-link-checker) is a tool that allows to
 check all the hyperlinks in the site.
 
 For testing hyperlinks as soon as the local site is running, do:
 
 ```sh
-$ linkchecker http://localhost:8000
+$ blc http://localhost:8000 -ro
 ```
 
-The ```linkchecker``` output will display the broken link and there location in
+
+For testing hyperlinks of live website do:
+
+```sh
+$ blc https://docs.automotivelinux.org/en/master/ -ro
+```
+
+The ```Broken Link Checker``` output will display the broken link and there location in
 the site.
 
 

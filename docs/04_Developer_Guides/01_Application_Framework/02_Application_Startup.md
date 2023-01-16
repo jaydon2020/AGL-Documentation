@@ -73,7 +73,7 @@ any valid string, it is highly recommended to use the "reverse DNS" convention i
 to avoid potential name collisions and ease D-Bus integration.
 
 The application ID is set in the desktop entry file itself for
-[graphical applications](../3_Creating_a_New_Application/#graphical-applications):
+[graphical applications](/04_Developer_Guides/03_Creating_a_New_Application/#graphical-applications):
 it is the value of the `StartupWMClass` field, which must be identical to the `app-id`
 advertised through the Wayland XDG toplevel protocol. In case this field is missing
 (as is usually the case for non-graphical application), the application ID will be the

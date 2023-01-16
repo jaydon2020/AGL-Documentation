@@ -58,8 +58,7 @@ The `meta-agl-demo` layer has the following base dependencies:
 ### Hardware Dependencies
 
 Aside from the previously listed base dependencies, if you are using a
-[supported Renesas board](../../0_Getting_Started/2_Building_AGL_Image/5_3_RCar_Gen_3.md)
-supported Renesas board, these dependencies exist:
+[supported Renesas board](/01_Getting_Started/02_Building_AGL_Image/09_Building_for_Supported_Renesas_Boards.md), these dependencies exist:
 
 - AGL's `meta-renesas` Layer:
 
@@ -67,7 +66,7 @@ supported Renesas board, these dependencies exist:
 
 ### Feature Dependencies
 
-The `meta-agl-demo` layer has the following AGL [feature](../../0_Getting_Started/2_Building_AGL_Image/3_Initializing_Your_Build_Environment.md#agl-features)
+The `meta-agl-demo` layer has the following AGL [feature](/01_Getting_Started/02_Building_AGL_Image/04_Initializing_Your_Build_Environment/#agl-features)
 dependencies:
 
 - Yocto Project `meta-security` Layer:

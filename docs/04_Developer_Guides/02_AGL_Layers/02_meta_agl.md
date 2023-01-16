@@ -10,7 +10,7 @@ You use this layer as the minimal core on which to build AGL profiles.
 
 **NOTE:** The `meta-agl` layer does not include a reference UI.
   The reference UI is included as part of the
-  [`meta-agl-demo`](3_meta-agl-demo.md) layer.
+  [`meta-agl-demo`](03_meta_agl_demo.md) layer.
   Furthermore, `meta-agl` does not include additional components, such
   as security, which are part of the
   `meta-agl-extra` layer.
@@ -121,4 +121,3 @@ design:
 * packagegroup-agl-test.bb
 
   Additional tools used in QA tests (for agl-image*-qa).
-

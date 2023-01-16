@@ -5,7 +5,7 @@ title: Adding Documentation
 The [documentation gerrit
 repository](https://gerrit.automotivelinux.org/gerrit/admin/repos/AGL/documentation)
 contains AGL documentation website template and content, rendering is visible at
-[https://automotivegradelinux.readthedocs.io/en/latest/](https://automotivegradelinux.readthedocs.io/en/latest/).
+[https://docs.automotivelinux.org](https://docs.automotivelinux.org).
 The documentation site is hosted on
 [readthedocs](https://readthedocs.org/projects/automotivegradelinux/) and
 corresponding builds are mentioned

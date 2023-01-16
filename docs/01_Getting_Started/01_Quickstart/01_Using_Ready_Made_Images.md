@@ -199,14 +199,14 @@ The AGL demo images do require 1920x1080. The instructions below have been adapt
 
 ### 2. BeagleBone Enhanced (BBE)
 
-  1. Download the [compressed prebuilt image](https://download.automotivelinux.org/AGL/snapshots/master/latest/bbe/deploy/images/bbe/agl-demo-platform-crosssdk-bbe.wic.xz).
+  1. Download the [compressed prebuilt image](https://download.automotivelinux.org/AGL/snapshots/master/latest/bbe/deploy/images/bbe/agl-telematics-demo-platform-bbe.wic.xz).
 
   2. Extract the image into the SD card of BeagleBone Enhanced :
 
     ```sh
     $ lsblk
     $ sudo umount <sdcard_device_name>
-    $ xzcat agl-demo-platform-crosssdk-bbe.wic.xz | sudo dd of=<sdcard_device_name> bs=4M
+    $ xzcat agl-telematics-demo-platform-bbe.wic.xz | sudo dd of=<sdcard_device_name> bs=4M
     $ sync
     ```
 

@@ -316,7 +316,7 @@ panel/display, without some kind of compositor driving it, the necessity of
 handling input events is an important feature to have, giving the user to
 possibility to manipulate the application/environment as he or she seems fit.
 The compositor loads a plug-in that streams out the buffers to an output
-remotely, with [another plug-in](2_waltham-receiver_waltham-transmitter.md)
+remotely, with [another plug-in](03_waltham_receiver_transmitter.md)
 handling the input events. The events, which are sent back from the display to
 the compositor, are generated with the help of wayland-eque protocol that works
 over the network, called [Waltham](https://github.com/waltham/waltham).
@@ -336,7 +336,7 @@ SMACK label and compares it with the ones statically defined.
 
 In the works, there's a new policy model, called [Role Based
 Arbitration](https://gerrit.automotivelinux.org/gerrit/admin/repos/staging/rba).
-Internally, how it works, should be found at [RBA](3_rba.md).
+Internally, how it works, should be found at [RBA](04_Rule_Based_Arbitrator.md).
 While the other two policies are embedded into the compositor, the RBA policy
 model is an off the-shell policy.  Obviously, vendors and users can hook up
 their own policies, just like RBA did.  These all work towards satisfying

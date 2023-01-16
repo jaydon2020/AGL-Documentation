@@ -115,7 +115,7 @@ root@qemux86-64:~# /usr/sbin/kuksa_vss_init.py
 
 #### **Using `kuksa_viss_client`**
 
-Know more about kuksa_viss_client, [Follow this](https://github.com/eclipse/kuksa.val/tree/master/kuksa_viss_client)
+Know more about kuksa_viss_client, [Follow this](https://github.com/eclipse/kuksa.val/tree/master/)
 
 - Run the kuksa_viss_client
 - Authorize using token

@@ -60,7 +60,7 @@ refer to the [graphical applications](#graphical-applications) section for more 
 
 # D-Bus activation
 
-Similarly to [services](../2_Creating_a_New_Service/#d-bus-activation), applications can
+Similarly to [services](../02_Creating_a_New_Service/#d-bus-activation), applications can
 also be activated through D-Bus.
 
 Such applications must name their `.desktop` file after the D-Bus name they register. In addition,

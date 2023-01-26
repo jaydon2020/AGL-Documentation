@@ -160,7 +160,7 @@ Following are brief descriptions of the AGL features you can specify on the
   sdcards. Needs additional setup.
 
 * **agl-ptest**: Enables
-  [Ptest](https://yoctoproject.org/docs/3.1.4/dev-manual/dev-manual.html#testing-packages-with-ptest)
+  [Ptest](https://docs.yoctoproject.org/dev-manual/common-tasks.html#testing-packages-with-ptest)
   as part of the build.
 
 * **agl-demo**: Enables the layers meta-agl-demo and meta-qt5.
@@ -246,10 +246,10 @@ You can find lots of information on configuring builds in the Yocto Project
 documentation set.
 Here are some references if you want to dig into configuration further:
 
-* [Customizing Images Using local.conf](https://yoctoproject.org/docs/3.1.4/dev-manual/dev-manual.html#usingpoky-extend-customimage-localconf)
-* [Local](https://yoctoproject.org/docs/3.1.4/ref-manual/ref-manual.html#ref-varlocality-config-local)
-* [build/conf/local.conf](https://yoctoproject.org/docs/3.1.4/ref-manual/ref-manual.html#structure-build-conf-local.conf)
-* [build/conf/bblayers.conf](https://yoctoproject.org/docs/3.1.4/ref-manual/ref-manual.html#structure-build-conf-bblayers.conf)
-* [BBLAYERS](https://yoctoproject.org/docs/3.1.4/ref-manual/ref-manual.html#var-BBLAYERS)
-* [User Configuration](https://yoctoproject.org/docs/3.1.4/ref-manual/ref-manual.html#user-configuration)
-* [Enabling Your Layer](https://yoctoproject.org/docs/3.1.4/dev-manual/dev-manual.html#enabling-your-layer)
+* [Customizing Images Using local.conf](https://docs.yoctoproject.org/dev-manual/common-tasks.html#customizing-images-using-local-conf)
+* [Local](https://docs.yoctoproject.org/ref-manual/varlocality.html#local)
+* [build/conf/local.conf](https://docs.yoctoproject.org/ref-manual/structure.html#build-conf-local-conf)
+* [build/conf/bblayers.conf](https://docs.yoctoproject.org/ref-manual/structure.html#build-conf-bblayers-conf)
+* [BBLAYERS](https://docs.yoctoproject.org/ref-manual/variables.html#term-BBLAYERS)
+* [User Configuration](https://docs.yoctoproject.org/ref-manual/structure.html#build)
+* [Enabling Your Layer](https://docs.yoctoproject.org/dev-manual/common-tasks.html#enabling-your-layer)

@@ -81,7 +81,7 @@ in `meta-agl`:
 ## Packagegroups
 
 This section describes the AGL
-[packagegroup](https://yoctoproject.org/docs/3.1.4/dev-manual/dev-manual.html#usingpoky-extend-customimage-customtasks)
+[packagegroup](https://docs.yoctoproject.org/dev-manual/common-tasks.html#customizing-images-using-custom-package-groups)
 design:
 
 * packagegroup-agl-image-minimal

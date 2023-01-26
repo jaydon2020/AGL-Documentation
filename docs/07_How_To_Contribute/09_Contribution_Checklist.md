@@ -47,7 +47,7 @@ title: Contribution Checklist
  - [ ] Code contributions submitted need to have a Sign-off-by! (Follow [**DCO**](https://developercertificate.org/).)
 
 ## Yocto/OE
- - [ ] Recipes need to follow the guidelines of : [**new-recipe-writing-a-new-recipe**](https://www.yoctoproject.org/docs/latest/mega-manual/mega-manual.html#new-recipe-writing-a-new-recipe).
+ - [ ] Recipes need to follow the guidelines of : [**new-recipe-writing-a-new-recipe**](https://docs.yoctoproject.org/dev/dev-manual/new-recipe.html#following-recipe-style-guidelines).
  - [ ] Recipes follow the [**bitbake style guide**](https://www.openembedded.org/wiki/Styleguide).
  - [ ] Your 'meta-*' layer needs to pass the yocto-check-layer tool.
 

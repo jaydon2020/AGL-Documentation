@@ -86,7 +86,7 @@ allowing for improved reliability and security.
 
 Each service should be represented by a `systemd` unit file installed to the
 appropriate location. More details can be obtained from the [Creating a New
-Service](/04_Developer_Guides/02_Creating_a_New_Service/) document.
+Service](../03_Creating_a_New_Service/) document.
 
 # User session management
 

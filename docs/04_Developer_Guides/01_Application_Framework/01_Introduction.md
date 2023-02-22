@@ -12,10 +12,15 @@ of the features of the previous Application Framework. Some of those will be
 added back over time, others have been discarded in favor of more modern and/or
 widely-used alternatives.
 
-With `needlefish` release, further changes have been added, including a gRPC
-interface, alongside a D-BUs one, as well as using systemd units to start
-applications.
+With the `needlefish` release, further changes have been added, including a
+[gRPC IPC](https://grpc.io/about), alongside a deprecated D-Bus one, as well as
+using as using systemd units as opposed on using
+[Desktop Entry specification](https://www.freedesktop.org/wiki/Specifications/desktop-entry-spec/)
+to list applications, and relies entirely on systemd to start application,
+rather than spawning them directly.
 
+Once all platforms transitioned to gRPC, the D-Bus functionality will be
+removed entirely, mentioning it in only in documentation for history purposes.
 
 # Introduction
 
@@ -37,7 +42,7 @@ The Application Framework's scope extends to the following areas:
   lifecycle management
 - inter-process communication
 
-In order to be as simple as possible and avoid any unneded custom
+In order to be as simple as possible and avoid any unneeded custom
 implementation, the Application Framework relies mainly on third-party
 technologies and/or software components, most of those being maintained under
 the [freedesktop.org](https://www.freedesktop.org) umbrella. Those include:
@@ -48,9 +53,10 @@ the [freedesktop.org](https://www.freedesktop.org) umbrella. Those include:
 
 
 - [D-Bus](https://www.freedesktop.org/wiki/Software/dbus/): inter-process
-  communication, now in deprecated phase.
+  communication, with `needlefish' release deprecated phase.
 
-- [gRPC](https://grpc.io/about): inter-process communication
+- [gRPC](https://grpc.io/about): inter-process communication, new recommmended
+  system-wide IPC, which should be used instead of D-Bus.
 
 
 - [Desktop Entry specification](https://www.freedesktop.org/wiki/Specifications/desktop-entry-spec/):
@@ -133,7 +139,7 @@ In order to provide a "standard", language-independent IPC mechanism and avoid
 the need for maintaining custom bindings for each programming language to be
 used on top of AGL, the Application Framework used to promote the use of
 [D-Bus](https://www.freedesktop.org/wiki/Software/dbus/) as the preferred way
-for applications to interact with services. Starting with `needlefish` release
+for applications to interact with services. Starting with `needlefish` release,
 we instead switched to using [gRPC](https://grpc.io) for our system-wide IPC,
 with D-Bus being kept to provide functionality to services and application
 which haven't transitioned yet to using gRPC.
@@ -154,12 +160,16 @@ others:
 - [GeoClue](https://gitlab.freedesktop.org/geoclue/geoclue/-/wikis/home):
   geolocation
 
+Similarly, we're in the phase of expanding various services to expose a
+gRPC interface.
+
 # Application launcher service
 
-The Application Framework used to follow the guidelines of the
-[Desktop Entry specification](https://www.freedesktop.org/wiki/Specifications/desktop-entry-spec/)
-for application enumeration and startup, but now instead relies on systemd to
-provide that functionality indirectly, using the `applaunchd` application.
+The Application Framework used to follow the guidelines of the [Desktop Entry
+specification](https://www.freedesktop.org/wiki/Specifications/desktop-entry-spec/)
+for application enumeration and startup, but with the `needlefish` release
+instead it relies on systemd to provide that functionality, indirectly, by
+using the `applaunchd` application.
 
 As no simple reference implementation exists for this part of the
 specification, AGL provides an application launcher service named `applaunchd`.
@@ -172,5 +182,5 @@ D-bus (deprecated)/gRPC interface for services and applications to:
 - request the startup and/or activation of a specific application
 - be notified when applications are started or terminated
 
-`applaunchd` is described with more details in
-[the following document](../02_Application_Startup/).
+`applaunchd` with the D-Bus interface is described with more details in
+[the following document](../02_Application_Startup_Dbus/).

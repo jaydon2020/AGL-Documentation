@@ -1,6 +1,10 @@
 ---
-title: Creating a New Application
+title: Creating a New Application with D-bus activation
 ---
+
+*Note: The that the D-Bus interface is in deprecation phase and for the time
+being only available for application & services that still rely on them. Once
+we migrate everything to gRPC, we will remove D-Bus IPC support.*
 
 Applications are:
 
@@ -8,7 +12,7 @@ Applications are:
 -  Graphical interface allowing user to interact with.
 
 Applications are executed by `applaunchd`, the AGL
-[application launcher service](../01_Application_Framework/02_Application_Startup/).
+[application launcher service](../01_Application_Framework/02_Application_Startup_Dbus/).
 
 # Basic requirements
 

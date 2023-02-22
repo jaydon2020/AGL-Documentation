@@ -1,0 +1,30 @@
+#!/usr/bin/mscgen -Tpng
+
+msc {
+       hscale="1.5";
+
+       u [label = "touch/pointer event" ],
+       s [label = "runtime/shell-client"],
+       a [label = "applaunchd" ],
+       g [label = "gRPC-proxy" ],
+       c [label = "compositor" ],
+       d [label = "libsystemd"];
+
+       |||;
+
+       --- [label = "initial phase - subscribe for signal/status events" ];
+
+       s >> g [label = "subscribe for AGL compositor AppStatusState"];
+       g >> c [label = "listen for app_state Wayland events"];
+
+       --- [label = "handling start-up & activation" ];
+
+       u => s [label = "tapShortCut(appid)" ];
+       s => a [label = "StartApplication(appid)"];
+       a => d [label = "start application's systemd unit"];
+       d => a [label = "return status from starting systemd unit"];
+       a => s [label = "StartResponse(status = TRUE)"];
+       c => g [label = "app_state(app_state = APP_STARTED)"];
+       g => s [label = "AppStatusResponse(app_id, APP_STARTED)"];
+       s => c [label = "activate_app(app_id)"];
+}

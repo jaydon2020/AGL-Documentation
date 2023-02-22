@@ -1,0 +1,29 @@
+#!/usr/bin/mscgen -Tpng
+
+msc {
+       hscale="1.5";
+
+       u [label = "touch/pointer event" ],
+       l [label = "launcher app" ],
+       s [label = "runtime/shell-client"],
+       a [label = "applaunchd" ],
+       g [label = "gRPC-proxy" ],
+       c [label = "compositor" ],
+       d [label = "libsystemd"];
+
+       |||;
+
+       --- [label = "initial phase - subscribe for signal/status events, assume app_id already started" ];
+
+       s >> a [label = "subscribe for applaunchd GetStatusEvents"];
+
+       --- [label = "handling of application switching" ];
+
+       u => l [label = "tapShortCut(appid)" ];
+       l => a [label = "StartApplication(appid)"];
+       a => d [label = "start application's systemd unit"];
+       d => a [label = "return status from starting systemd unit"];
+       a => s [label = "StartResponse(status = TRUE)"];
+       a => s [label = "StatusResponse(app_id, 'started')"];
+       s => c [label = "activate_app(app_id)"];
+}

@@ -138,7 +138,111 @@ This can be useful, for example, when switching between graphical applications:
 
 - the application switcher doesn't need to track the state of each application;
   instead, it can simply send a `StartApplication` request to `applaunchd`
-  every time the user requests to switch to another application
+  every time the user requests to switch to another application. Obviously, the
+  client needs to subscribe to get these events and act accordingly.
 - the shell client then receives the `StatusResponse` with the message `status`
   string set to "started" indicating it that it should activate the window with
-  the corresponding `id` string
+  the corresponding `id` string, or alternatively the string `status` is
+  set to "terminated" to denote that the application has been terminated,
+  forcibly or not
+
+## A deeper look at start-up, activation and application switching
+
+Application start-up, activation and application switching are sometimes
+conflated into a single operation but underneath some of these are distinct
+steps, and a bit flaky in some circumstances.
+The [AGL compositor](../../06_Component_Documentation/02_agl_compositor/) has
+some additional events which one can use when creating an application
+start-up & switching scheme in different run-times.
+
+Start-up of application is handled entirely by `applaunchd` service while
+activation -- the window which I want to display, but which has never been
+shown, and application switching -- bring forward an application already
+shown/displayed in the past, are operations handled entirely by the
+AGL compositor.
+
+The issue stems from the fact that underneath `applaunchd` can't make any
+guarantees when the application actually started, as it calls into libsystemd
+API to start the specific application systemd unit.
+
+If `StartApplication` can't start the systemd unit, it returns a false
+`status` boolean value and a error message in `StartResponse` message, but if
+the application is indeed started we doesn't really know the *moment* when the
+application is ready to be displayed. Additionally, the AGL compositor
+performed the activation on its own when it detected that a new application
+has been started, but that implicit activation can now be handled outside
+by the desktop run-time/shell client.
+
+*Note: Some of the run-times still rely on the compositor to perform activation
+as this synchronization part between `applaunchd` has not been implemented. The
+plan is to migrate all of remaining run-times to using this approach.*
+
+### Start-up & activation
+
+This means that we require some sort of interaction between `StartApplication`
+method and the events sent by the AGL compositor in order to correctly handle
+start-up & activation of application.
+
+There are couple of ways of achieving that, either using Wayland native calls,
+or using the gRPC proxy interface, which underneath is using the same Wayland
+native calls.
+
+For the first approach, the AGL compositor has an `app_state` Wayland event
+which contains the application ID, and an enum `app_state` that will propagate
+the following application state events:
+
+```
+<enum name="app_state" since="3">
+  <entry name="started" value="0"/>
+  <entry name="terminated" value="1"/>
+  <entry name="activated" value="2"/>
+  <entry name="deactivated" value="3"/>
+</enum>
+```
+
+The `started` event can be used in correlation with the `StartApplication`
+method from `applaunchd` such that upon received the `started` even, it can
+explicitly activate that particular appid in order for the compositor to
+display it. See [AGL compositor](../../06_Component_Documentation/02_agl_compositor/)
+about how activation should be handled.
+
+*Note: These can only be received if by the client shell which binds to the
+agl_shell interface*.
+
+Alternatively, when using the gRPC proxy one can register to receive these
+status events similar to the `applaunchd` events, subscribing to
+`AppStatusState` method from the grpc-proxy helper application, which has the
+following protobuf messages:
+
+```
+message AppStateRequest {
+}
+message AppStateResponse {
+        int32 state = 1;
+        string app_id = 2;
+}
+```
+
+The integer state maps to the `enum app_state` from the Wayland protocol, so
+they are a 1:1 match.
+
+Here's the state diagram for the Qt homescreen implementation of the
+application start-up:
+
+![Application_start](../images/start_and_activation.png)
+
+### Application switching
+
+With the compositor providing application status events, it might seem that the
+`applaunchd`'s, `GetStatusEvents` might be redundant, but in fact it is being
+used to perform application switching. The run-time/shell client would in fact
+subscribe to `GetStatusEvents` and each application wanting to switch to another
+application would basically call `StartApplication`. That would eventually reach
+the run-time/shell-client and have a handler that would ultimately activate the
+application ID.
+
+![Application_switching](../images/application_switching.png)
+
+*Note: In practice, the run-time/shell-client would subscribe to both `applaunchd`
+and to the AGL compositor, either Wayland native events, or using the gPRC-proxy
+helper client, although the diagrams show them partly decoupled*.

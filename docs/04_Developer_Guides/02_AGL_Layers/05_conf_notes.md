@@ -1,0 +1,43 @@
+---
+title: config-notes
+---
+
+Common targets are:
+- meta-agl layer:
+  - included by default
+    * agl-image-boot                (just enough to boot)
+    * agl-image-minimal             (minimal filesystem with APIs)
+    * agl-image-minimal-crosssdk    (crosssdk for ^^)
+
+    * agl-image-weston              (minimal filesystem with weston)
+
+- meta-agl-demo:                    (IVI demo with UI)
+  - with 'agl-demo'
+    * agl-image-ivi                 (base for IVI targets)
+    * agl-image-ivi-crosssdk        (sdk for ^^)
+
+    * agl-image-graphical-qt5       (weston plus qt5 framework libs)
+    * agl-image-graphical-qt5-crosssdk  (sdk for ^^)
+
+    * agl-image-graphical-html5     (weston plus chromium for html5)
+
+    * agl-image-cluster             (minimal image with APIs for cluster)
+    * agl-image-cluster-qt5         (image with QT5 and APIs for cluster)
+
+    * agl-image-telematics          (image with APIs for telematics)
+
+    * agl-demo-platform             (* default IVI demo target *)
+    * agl-demo-platform-crosssdk    (sdk for ^^)
+
+    * agl-cluster-demo-platform     (cluster demo image)
+    * agl-cluster-demo-platform-crosssdk  (sdk for ^^)
+    * agl-cluster-demo-qtcompositor (cluster demo using own compositor)
+
+    * agl-telematics-demo-platform  (telematics demo image)
+    * agl-telematics-demo-platform-crosssdk  (sdk for ^^)
+
+
+
+**Note:** For update details on this page please refer
+
+<https://git.automotivelinux.org/AGL/meta-agl/tree/templates/base/conf-notes.txt>

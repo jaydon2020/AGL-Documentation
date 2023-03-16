@@ -22,7 +22,7 @@ The `meta-agl-demo` layer has the following base dependencies:
 - Yocto Project Release:
 
     - URI: git://git.yoctoproject.org/poky
-    - Branch: "thud"
+    - Branch: "kirkstone"
     - Tested Revision: See the
       [`default.xml`](https://github.com/leon-anavi/AGL-repo/blob/master/default.xml)
       manifest file for the `AGL-repo` repository for revision information.
@@ -50,7 +50,7 @@ The `meta-agl-demo` layer has the following base dependencies:
   [OpenEmbedded Layer Index](https://layers.openembedded.org/layerindex/branch/master/layers/):
 
     - URI: https://github.com/meta-qt5/meta-qt5.git
-    - Branch: "thud"
+    - Branch:   "kirkstone"
     - Tested Revision: See the
       [`default.xml`](https://github.com/leon-anavi/AGL-repo/blob/master/default.xml)
       manifest file for the `AGL-repo` repository for revision information.
@@ -87,17 +87,17 @@ dependencies:
 - Here Technologies' `meta-updater` Layer:
 
     - URI: https://github.com/advancedtelematic/meta-updater/
-    - Branch: "thud"
+    - Branch: "kirkstone"
 
 - Here Technologies' `meta-updater-qemux86-64` Layer:
 
     - URI: https://github.com/advancedtelematic/meta-updater-qemux86-64/
-    - Branch: "thud"
+    - Branch: "kirkstone"
 
 - OpenEmbedded's `meta-openembedded` Layer:
 
     - URI: https://github.com/openembedded/meta-openembedded
-    - Branch: "thud"
+    - Branch: "kirkstone"
     - Tested Revision: See the
       [`default.xml`](https://github.com/leon-anavi/AGL-repo/blob/master/default.xml)
       manifest file for the `AGL-repo` repository for revision information.
@@ -115,44 +115,19 @@ dependencies:
     - URI: https://gerrit.automotivelinux.org/gerrit/gitweb?p=AGL/meta-agl.git
     - Branch: "master"
 
+## Maintenance
 
-## Packagegroups
+All patches must be submitted via the AGL Gerrit instance at
+<https://gerrit.automotivelinux.org>.  See this wiki page for
+details:
 
-AGL DEMO Platform's [packagegroups](https://www.yoctoproject.org/docs/3.1.4/dev-manual/dev-manual.html#usingpoky-extend-customimage-customtasks)
-consist of the following:
+<https://wiki.automotivelinux.org/agl-distro/contributing>
 
-- packagegroup-agl-demo-platform
+Layer maintainers:
 
-    This packagegroup is used for generating the `agl-demo-platform` image,
-    which is the full image for the AGL distributions IVI profile. You can see the
-    recipe (i.e. `agl-demo-platform.bb`) that installs the
-    `packagegroup-agl-demo-platform` packagegroup [here](https://git.automotivelinux.org/AGL/meta-agl-demo/tree/recipes-platform/images/agl-demo-platform.bb).
+* Jan-Simon Möller <jsmoeller@linuxfoundation.org>
 
-    As meta-agl's design of packagegroups, the `agl-demo-platform.bb` recipe installs
-    only `packagegroup-agl-demo-platform` and the packages of the DEMO applications.
 
-    ``agl-demo-platform`` contains the following three packagegroups:
+**Note:** For update details on this page please refer
 
-      * `packagegroup-agl-image-minimal`
-      * `packagegroup-agl-image-ivi`
-      * `packagegroup-agl-demo-platform`
-
-- packagegroup-agl-appfw*
-
-    These packagegroups contain packages for the AGL distribution's
-    Application Framework. Subsystem should maintain
-    `packagegroup-agl-appfw-[subsystem].bb`, which should hold sufficient packages
-    for the Application Framework.
-
-    Subsystems also can maintain their own packagegroups using appropriate
-    `recipes-*/`.
-
-    For example, Qt5 has two packagegroups in `meta-agl-demo`:
-    `packagegroup-agl-appfw-native-qt5` and `packagegroup-agl-demo-qt-examples`,
-    which are under `recipes-qt/`.
-
-    The `packagegroup-agl-appfw-native-qt5` is included by `packagegroup-agl-appfw-native` because Qt5 belongs to native application framework of AGL Distro.
-
-    Because the `packagegroup-agl-demo-qt-examples` is not mandatory for the AGL
-    Application Framework and the AGL DEMO, the packagegroup is added to the layer's
-    `local.conf` file only when needed.
+<https://git.automotivelinux.org/AGL/meta-agl-demo/tree/meta-agl-demo.md>

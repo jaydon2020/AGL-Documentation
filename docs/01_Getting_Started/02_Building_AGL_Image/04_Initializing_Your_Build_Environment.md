@@ -75,47 +75,49 @@ Following is a list of the available features:
 Available features:
 
    [meta-agl]                                    # CORE layer
-       agl-all-features :( agl-demo  agl-pipewire  agl-app-framework  agl-netboot )
-                                                 # For the usual demo image
+       Refer: https://git.automotivelinux.org/AGL/meta-agl/tree/templates/feature
+       agl-all-features                          # For the usual demo image
        agl-app-framework                         # Application Framework
        agl-archiver                              # Source Archiver
        agl-buildstats                            # Build Statistics
-       agl-devel :( agl-package-management )     # Developer Env (root login)
-       agl-fossdriver                            # Fossology integration
-       agl-gplv2                                 # GPLv2-only packages
-       agl-localdev                              # inclusion of local development folder
-       agl-netboot                               # network boot (e.g. CI)
+       agl-ci-change-features-nogfx              # CI: features enabled for gerrit change builds w/o  gfx
+       agl-ci-change-features                    # CI: features enabled for gerrit change builds with gfx
+       agl-ci-snapshot-features-nogfx            # CI: features enabled for nightly builds w/o  gfx
+       agl-ci-snapshot-features                  # CI: features enabled for nightly builds with gfx
+       agl-ci                                    # CI: specific settings for the CI environment
+       agl-create-spdx                           # Software Bill of Materials (SBOM) generation
+       agl-devel :( agl-package-management )     # Developer Env (root login w/o pass)
+       agl-fossdriver                            # Fossology integration, Scancode, etc.
+       agl-localdev                              # inclusion of local development folder ./meta-localdev
+       agl-netboot                               # network boot (e.g. in CI)
        agl-package-management                    # include package management (e.g. rpm)
        agl-pipewire                              # include pipewire
        agl-ptest                                 # enable ptest pckages
-       agl-refhw-h3                              # enable reference hardware
+       agl-refhw-h3                              # enable reference hardware when building h3ulcb machine
+       agl-selinux                               # Enables building with SELinux
        agl-virt                                  # EG-Virt features
        agl-virt-guest-xen                        # EG-Virt features
-       agl-virt-xen :( agl-virt )                # EG-Virt features
-       agl-weston-remoting :( agl-demo  agl-pipewire  agl-app-framework )
-       agl-weston-waltham-remoting :( agl-demo  agl-pipewire  agl-app-framework )
+       agl-virt-xen                              # EG-Virt features
+       agl-weston-remoting                       # remote streaming support
+       agl-weston-waltham-remoting               # remote streaming support w/ waltham
 
    [meta-agl-demo]                                    # DEMO layer
-       agl-cluster-demo-support :( agl-weston-remoting  agl-demo  agl-pipewire  agl-app-framework )
-                                                      # sample IVI demo
-       agl-demo :( agl-pipewire  agl-app-framework )  # default IVI demo
-       agl-demo-preload                               # Add Tokens and sample files
+       Refer: https://git.automotivelinux.org/AGL/meta-agl-demo/tree/templates/feature
+       agl-demo-cluster-support                       # Add streaming to cluster of AGL demo system
+       agl-demo-preload                               # Add Tokens and sample files specific to AGL demo system
+       agl-demo                                       # default IVI demo 
+       agl-kvm                                        # Enables support for building multiconfig based KVM+QEMU demo images
 
    [meta-agl-devel]                                   # Development layer
+       Refer: https://git.automotivelinux.org/AGL/meta-agl-devel/tree/templates/feature
        agl-basesystem                                 # Toyota basesystem
        agl-drm-lease                                  # DRM lease support
        agl-egvirt                                     # EG-Virt feature
        agl-flutter                                    # Flutter support
+       agl-ic-container                               # Instrument Cluster EG demo using containers
        agl-jailhouse                                  # GSoC: jailhouse enablement
-       agl-lxc :( agl-drm-lease  agl-pipewire )       # IC-EG container support
-       agl-ros2                                       # GSoC: ros2 enablement
-
-Specialized features (e.g. CI):
-       agl-ci                                                                         # Tweaks for CI
-       agl-ci-change-features :( agl-demo  agl-pipewire  agl-app-framework  agl-devel  agl-package-management  agl-netboot  agl-pipewire  agl-buildstats  agl-ptest )
-       agl-ci-change-features-nogfx :( agl-demo  agl-pipewire  agl-app-framework  agl-devel  agl-package-management  agl-netboot  agl-pipewire  agl-buildstats  agl-ptest )
-       agl-ci-snapshot-features :( agl-demo  agl-pipewire  agl-app-framework  agl-devel  agl-package-management  agl-netboot  agl-archiver  agl-pipewire  agl-buildstats  agl-ptest )
-       agl-ci-snapshot-features-nogfx :( agl-demo  agl-pipewire  agl-app-framework  agl-devel  agl-package-management  agl-netboot  agl-archiver  agl-pipewire  agl-buildstats  agl-ptest )
+       agl-offline-voice-agent                        # Feature template for meta-offline-voice-agent layer
+       agl-test                                       # Test frameword under development
 
 ```
 

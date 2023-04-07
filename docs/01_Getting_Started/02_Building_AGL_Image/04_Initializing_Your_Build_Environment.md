@@ -117,7 +117,7 @@ Available features:
        agl-ic-container                               # Instrument Cluster EG demo using containers
        agl-jailhouse                                  # GSoC: jailhouse enablement
        agl-offline-voice-agent                        # Feature template for meta-offline-voice-agent layer
-       agl-test                                       # Test frameword under development
+       agl-test                                       # Test framework under development
 
 ```
 

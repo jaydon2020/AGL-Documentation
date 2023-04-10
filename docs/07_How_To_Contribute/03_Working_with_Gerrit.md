@@ -47,7 +47,7 @@ To work on something, whether a new feature or a bugfix:
 
     ```sh
      $ cd documentation
-     $ git.config --global user.name "Your Full Name"
+     $ git config --global user.name "Your Full Name"
      $ git config --global user.email "your@email.com"
     ```
 
@@ -55,7 +55,7 @@ To work on something, whether a new feature or a bugfix:
 
     ```sh
      $ cd documentation
-     $ git.config user.name "Your Full Name"
+     $ git config user.name "Your Full Name"
      $ git config user.email "your@email.com"
     ```
 

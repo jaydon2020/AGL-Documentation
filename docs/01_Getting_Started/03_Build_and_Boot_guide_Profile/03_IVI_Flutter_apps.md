@@ -45,8 +45,8 @@ $ $AGL_TOP/master/meta-agl/scripts/aglsetup.sh
 Run the script:
 
 ```bash
-$ cd $AGL_TOP
-$ source master/meta-agl/scripts/aglsetup.sh -b build-flutter-dashboard -m qemux86-64 agl-demo agl-devel
+$ cd $AGL_TOP/master
+$ source meta-agl/scripts/aglsetup.sh -b build-flutter-dashboard -m qemux86-64 agl-demo agl-devel
 ```
 
 - Here `-b` is used to specify the build directory and `-m` is used to specify the target platform.
@@ -57,7 +57,7 @@ $ source master/meta-agl/scripts/aglsetup.sh -b build-flutter-dashboard -m qemux
 ## 5. Using BitBake
 
 ```bash
-$ cd $AGL_TOP/build-flutter-dashboard
+$ cd $AGL_TOP/master/build-flutter-dashboard
 $ source agl-init-build-env
 $ bitbake agl-ivi-demo-platform-flutter
 ```
@@ -66,7 +66,7 @@ $ bitbake agl-ivi-demo-platform-flutter
 Boot the image using QEMU
 
 ```bash
-$ cd $AGL_TOP/build-flutter-dashboard
+$ cd $AGL_TOP/master/build-flutter-dashboard
 $ source agl-init-build-env
 $ runqemu kvm serialstdio slirp publicvnc
 ```

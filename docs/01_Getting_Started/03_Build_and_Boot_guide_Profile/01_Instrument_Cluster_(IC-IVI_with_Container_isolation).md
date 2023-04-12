@@ -71,12 +71,12 @@ export MACHINE=m3ulcb-kf
 ## 6. Run the aglsetup.sh Script
 ```bash
 cd $AGL_TOP
-source meta-agl/scripts/aglsetup.sh -f -m $MACHINE -b $MACHINE agl-lxc
+source meta-agl/scripts/aglsetup.sh -f -m $MACHINE -b $MACHINE agl-ic-container
 ```
 
 ## 7. Using BitBake
 ```bash
-bitbake lxc-host-image-demo
+bitbake agl-cluster-demo-lxc-host
 ```
 - The build process puts the resulting image in the Build Directory
 ($AGL_TOP/m3ulcb-kf/tmp/deploy/images/m3ulcb)

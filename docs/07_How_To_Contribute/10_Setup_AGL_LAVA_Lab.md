@@ -1,6 +1,10 @@
 ---
-title: Setup_AGL_LAVA_Lab
+title: Setting AGL LAVA Lab
 ---
+
+## Overview
+
+LAVA (Linaro Automated Validation Architecture) Lab is an open source automated testing framework. LAVA is a continuous integration system for deploying operating systems onto physical and virtual hardware for running tests. Tests can be simple boot testing, bootloader testing and system level testing, although extra hardware may be required for some system tests. Results are tracked over time and data can be exported for further analysis. For more information refer [AGL LAVA site](https://lava.automotivelinux.org/)
 
 ## Prerequisites ##
 

@@ -151,7 +151,7 @@ This can be useful, for example, when switching between graphical applications:
 Application start-up, activation and application switching are sometimes
 conflated into a single operation but underneath some of these are distinct
 steps, and a bit flaky in some circumstances.
-The [AGL compositor](../../06_Component_Documentation/02_agl_compositor/) has
+The [AGL compositor](../02_agl_compositor.md) has
 some additional events which one can use when creating an application
 start-up & switching scheme in different run-times.
 
@@ -203,7 +203,7 @@ the following application state events:
 The `started` event can be used in correlation with the `StartApplication`
 method from `applaunchd` such that upon received the `started` even, it can
 explicitly activate that particular appid in order for the compositor to
-display it. See [AGL compositor](../../06_Component_Documentation/02_agl_compositor/)
+display it. See [AGL compositor](../02_agl_compositor.md)
 about how activation should be handled.
 
 *Note: These can only be received if by the client shell which binds to the
@@ -229,7 +229,7 @@ they are a 1:1 match.
 Here's the state diagram for the Qt homescreen implementation of the
 application start-up:
 
-![Application_start](../images/start_and_activation.png)
+![Application_start](images/start_and_activation.png)
 
 ### Application switching
 
@@ -241,7 +241,7 @@ application would basically call `StartApplication`. That would eventually reach
 the run-time/shell-client and have a handler that would ultimately activate the
 application ID.
 
-![Application_switching](../images/application_switching.png)
+![Application_switching](images/application_switching.png)
 
 *Note: In practice, the run-time/shell-client would subscribe to both `applaunchd`
 and to the AGL compositor, either Wayland native events, or using the gPRC-proxy

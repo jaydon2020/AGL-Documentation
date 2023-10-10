@@ -5,7 +5,7 @@ title: Application Startup with D-Bus
 *Note: The that the D-Bus interface is in deprecation phase and for the time
 being only available for application & services that still rely on them. Once
 we migrate everything to gRPC, we will remove D-Bus IPC support. Please see 
-[Application Startup with gRPC](../02_Application_Startup/) for the latest
+[Application Startup with gRPC](02_Application_Startup.md) for the latest
 information*
 
 # Introduction
@@ -23,7 +23,7 @@ simple reference implementation for this function.
 In order to provide a language-independent interface for applications and service to
 use, AGL includes `applaunchd`, a user service part of the default session.
 
-*Note: as mentioned [previously](../01_Introduction/), services are managed using `systemd`
+*Note: as mentioned [previously](01_Introduction.md), services are managed using `systemd`
 and are therefore not in the scope of this document.*
 
 # Application launcher service
@@ -79,7 +79,7 @@ any valid string, it is highly recommended to use the "reverse DNS" convention i
 to avoid potential name collisions and ease D-Bus integration.
 
 The application ID is set in the desktop entry file itself for
-[graphical applications](/04_Developer_Guides/03_Creating_a_New_Application_Dbus/#graphical-applications):
+[graphical applications](04_Creating_a_New_Application_Dbus.md#graphical-applications):
 it is the value of the `StartupWMClass` field, which must be identical to the `app-id`
 advertised through the Wayland XDG toplevel protocol. In case this field is missing
 (as is usually the case for non-graphical application), the application ID will be the

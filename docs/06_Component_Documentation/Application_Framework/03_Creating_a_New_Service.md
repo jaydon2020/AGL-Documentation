@@ -40,7 +40,7 @@ WantedBy=agl-session.target
 ```
 
 The `WantedBy=agl-session.target` indicates the service is part of the default AGL
-user session, as mentioned in the [Application Framework](../01_Application_Framework/01_Introduction/#user-session-management)
+user session, as mentioned in the [Application Framework](01_Introduction.md#user-session-management)
 documentation.
 
 The `Restart=on-failure` directive ensures the service will be automatically

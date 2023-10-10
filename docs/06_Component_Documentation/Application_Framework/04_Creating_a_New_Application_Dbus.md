@@ -12,7 +12,7 @@ Applications are:
 -  Graphical interface allowing user to interact with.
 
 Applications are executed by `applaunchd`, the AGL
-[application launcher service](../01_Application_Framework/02_Application_Startup_Dbus/).
+[application launcher service](02_Application_Startup_Dbus.md).
 
 # Basic requirements
 
@@ -64,7 +64,7 @@ refer to the [graphical applications](#graphical-applications) section for more 
 
 # D-Bus activation
 
-Similarly to [services](../02_Creating_a_New_Service/#d-bus-activation), applications can
+Similarly to [services](03_Creating_a_New_Service.md#d-bus-activation), applications can
 also be activated through D-Bus.
 
 Such applications must name their `.desktop` file after the D-Bus name they register. In addition,

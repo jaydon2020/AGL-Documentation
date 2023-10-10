@@ -64,7 +64,7 @@ the [freedesktop.org](https://www.freedesktop.org) umbrella. Those include:
   the one would list out applications and handling start-up.
 
 AGL also provides reference implementations whenever possible and relevant,
-located in the [meta-agl](/04_Developer_Guides/02_AGL_Layers/02_meta_agl/)
+located in the [meta-agl](../../04_Developer_Guides/02_AGL_Layers/02_meta_agl.md)
 layer under `meta-app-framework`. At the moment, the Application Framework
 contains 2 such components:
 
@@ -92,7 +92,7 @@ allowing for improved reliability and security.
 
 Each service should be represented by a `systemd` unit file installed to the
 appropriate location. More details can be obtained from the [Creating a New
-Service](../03_Creating_a_New_Service/) document.
+Service](03_Creating_a_New_Service.md) document.
 
 # User session management
 
@@ -183,4 +183,4 @@ D-bus (deprecated)/gRPC interface for services and applications to:
 - be notified when applications are started or terminated
 
 `applaunchd` with the D-Bus interface is described with more details in
-[the following document](../02_Application_Startup_Dbus/).
+[the following document](02_Application_Startup_Dbus.md).

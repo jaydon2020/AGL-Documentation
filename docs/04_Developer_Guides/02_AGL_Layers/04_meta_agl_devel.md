@@ -24,15 +24,15 @@ The `meta-agl-devel` layer contains the following files and sub-layers:
 ├── meta-agl-lxc
 ├── meta-agl-ros2
 ├── meta-oem-production-readiness
-├── meta-speech-framework
+├── meta-offline-voice-agent
 ├── README.md
 └── templates
 ```
 
 The following list provides a summary of these sub-layers:
 
-* `meta-speech-framework`: Provides libraries and software packages needed by
-  for speech recognition.
+* `meta-offline-voice-agent`: Provides libraries and software packages needed
+  for voice recognition, intent extraction, and voice command execution.
 
 * `meta-agl-jailhouse`: Provides Jailhouse partitioning hypervisor and
   supporting packages.

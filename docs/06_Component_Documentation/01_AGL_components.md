@@ -22,6 +22,6 @@ title: AGL Components
 - [Rule based arbitrator](04_Rule_Based_Arbitrator.md)
 
 
-### Lifecycle management
+### Application Lifecycle and Services
 
 - [Application Framework](Application_Framework/01_Introduction.md)

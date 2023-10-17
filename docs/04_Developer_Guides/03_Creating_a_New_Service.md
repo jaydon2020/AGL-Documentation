@@ -22,8 +22,8 @@ location, determined by the service type (system or user):
 
 - `/usr/lib/systemd/user/` for user services
 
-Below is an example of a simple user service, running in a graphical session and
-therefore requiring a compositor to be already running before the service starts:
+Below is an example of a simple system service that requires the compositor to be
+already running before the service starts:
 
 ```
 [Unit]
@@ -34,14 +34,7 @@ After=agl-compositor.service
 Type=simple
 ExecStart=/usr/bin/homescreen
 Restart=on-failure
-
-[Install]
-WantedBy=agl-session.target
 ```
-
-The `WantedBy=agl-session.target` indicates the service is part of the default AGL
-user session, as mentioned in the [Application Framework](01_Introduction.md#user-session-management)
-documentation.
 
 The `Restart=on-failure` directive ensures the service will be automatically
 restarted by `systemd` in case it crashes.

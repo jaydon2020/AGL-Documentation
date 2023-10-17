@@ -4,75 +4,79 @@ title: Introduction
 
 # Foreword
 
-The AGL Application Framework is nothing new. However, the implementation used
-up until the `lamprey` release has been retired starting with the `marlin`
-release and replaced by a redesigned Application Framework one. However, this
-new implementation isn't a 1:1 replacement, and as such it doesn't provide all
-of the features of the previous Application Framework. Some of those will be
-added back over time, others have been discarded in favor of more modern and/or
-widely-used alternatives.
+AGL has worked at providing the components of an application framework for many
+years. However, the implementation used up until the `lamprey` release was retired
+starting with the `marlin` release, and replaced with a redesigned one.
+However, this new implementation does not aim to be a 1:1 replacement, and as such
+it does not provide all of the features of the previous framework. Some of those
+will be added back over time, while others have been discarded in favor of more
+modern and/or widely-used alternatives.
 
-With the `needlefish` release, further changes have been added, including a
-[gRPC IPC](https://grpc.io/about), alongside a deprecated D-Bus one, as well as
-using as using systemd units as opposed on using
-[Desktop Entry specification](https://www.freedesktop.org/wiki/Specifications/desktop-entry-spec/)
-to list applications, and relies entirely on systemd to start application,
-rather than spawning them directly.
+With the `needlefish` release, further evolution of the replacement framework included:
 
-Once all platforms transitioned to gRPC, the D-Bus functionality will be
-removed entirely, mentioning it in only in documentation for history purposes.
+- Using [gRPC IPC](https://grpc.io/about) for the application launcher API.
+  The interim D-Bus based API was deprecated at this time, and removed in the
+  `pike` release.
+- Using only systemd unit metadata in the application launcher instead of using
+  [Desktop Entry specification](https://www.freedesktop.org/wiki/Specifications/desktop-entry-spec/)
+  to list applications, and relying entirely on systemd for the application
+  lifecycle, rather than spawning them directly.
 
 # Introduction
 
-As a provider of an integrated solution to build up on, AGL needs to define a
-reliable and well-specified method for managing the deployment and integration
-of applications and services, as well as the way they can interact with the
-rest of the system.
+With a goal of being the provider of an integrated solution to build up on, it
+is useful for AGL to define a reliable and well-specified method for managing
+the deployment and integration of applications and services, as well as the way
+they can interact with the rest of the system.
 
 This is achieved by providing a common set of rules and components, known as
-the Application Framework. By ensuring conformity to those rules, application
-developers can have a good understanding of the requirements for creating and
-packaging applications targeting AGL-based systems. Likewise, system developers
-and integrators have a clear path for including such applications in AGL-based
-products.
+the application framework. By documenting those rules, application developers can
+have a good understanding of the requirements for creating and packaging applications
+targeting AGL-based systems that leverage the upstream application framework components.
+Likewise, system developers and integrators have a clear path for including such
+applications in AGL-based products.
 
-The Application Framework's scope extends to the following areas:
+The application framework's scope extends to the following areas:
+
 - system services integration and lifecycle management
-- user session management, including user-level applications and services
-  lifecycle management
+- user-level application lifecycle management
 - inter-process communication
 
 In order to be as simple as possible and avoid any unneeded custom
-implementation, the Application Framework relies mainly on third-party
-technologies and/or software components, most of those being maintained under
-the [freedesktop.org](https://www.freedesktop.org) umbrella. Those include:
-
+implementation, the application framework relies mainly on third-party
+technologies and/or software components. They include:
 
 - [systemd](https://www.freedesktop.org/wiki/Software/systemd/): system
   services and user session services management
 
-
-- [D-Bus](https://www.freedesktop.org/wiki/Software/dbus/): inter-process
-  communication, with `needlefish' release deprecated phase.
-
 - [gRPC](https://grpc.io/about): inter-process communication, new recommmended
   system-wide IPC, which should be used instead of D-Bus.
 
+Note that while there are many open source software projects in the desktop Linux
+space using [D-Bus](https://www.freedesktop.org/wiki/Software/dbus/) for inter-process
+communication, AGL has decided to avoid using it for new development projects for the
+following reasons:
 
-- [Desktop Entry specification](https://www.freedesktop.org/wiki/Specifications/desktop-entry-spec/):
-  application enumeration and startup, now in deprecated phase, systemd being
-  the one would list out applications and handling start-up.
+- It has proven challenging in the past to manage dependencies between and the
+  start-up of system and per-user D-Bus services in AGL.
+- Managing the security of D-Bus APIs involves the use of PolicyKit, which is
+  somewhat heavyweight and not widely understood. As well, providing D-Bus
+  access to applications running inside containers or other sandbox schemes can
+  be significantly more complicated than e.g. using gRPC with authorization token
+  access control.
+- D-Bus is not widely used in application development ecosystems outside of desktop
+  Linux. This matters when engaging with application developers in newer ecosystems
+  such as web applications or Flutter.
 
 AGL also provides reference implementations whenever possible and relevant,
 located in the [meta-agl](../../04_Developer_Guides/02_AGL_Layers/02_meta_agl.md)
-layer under `meta-app-framework`. At the moment, the Application Framework
-contains 2 such components:
+layer under `meta-app-framework`. At the moment, the application framework
+contains two such components:
 
 - `agl-session`: `systemd` unit files for user sessions management
-
 - `applaunchd`: application launcher service
 
-# Services management
+# Service Management
 
 Both system and user services are managed by `systemd`, which provides a number
 of important features, such as dependency management or service monitoring:
@@ -86,62 +90,38 @@ downtime.
 and other security-related options.
 
 It is also well integrated with D-Bus and can be used for a more fine-grained
-control over D-Bus activated services: by delegating the actual service startup
-to `systemd`, developers can take advantage of some of its advanced features,
-allowing for improved reliability and security.
+control over D-Bus activated services.  By delegating the actual service start-up
+to `systemd`, developers can take advantage of its advanced features, allowing
+for improved reliability and security.
 
 Each service should be represented by a `systemd` unit file installed to the
 appropriate location. More details can be obtained from the [Creating a New
-Service](03_Creating_a_New_Service.md) document.
+Service](../../04_Developer_Guides/03_Creating_a_New_Service.md) document.
 
-# User session management
+# User Session Management
 
 Similarly, user sessions and the services they rely on are also managed by
-`systemd`.
+`systemd`.  Prior to the `pike` release, AGL used a user session for the
+`agl-driver` user for the running of user facing applications, including the
+compositor. This has been replaced with using system units that use the
+`User` directive. The reason for this is two-fold:
 
-AGL provides 2 `systemd` units:
+- Several useful systemd sandboxing features are unavailable to user session
+  units, or would require the use of unprivileged namespace mounting.  The
+  latter is not necessarily available in vendor BSP kernels, and the security
+  characteristics of it are still a matter of some debate.
+- Encoding dependencies between user session and system units is sometimes
+  not straightforward or impossible.
 
+# Inter-process Communication
 
-1\. `agl-session@.service` is a template system service for managing user
-sessions; it takes a username or UID as a parameter, creating a session for the
-desired user.  Instanciating this service can be achieved by enabling
-`agl-session@USER.service`, for example by executing the following command on a
-running system:
-
-```
-$ systemctl enable agl-session@USER.service
-```
-
-By default, AGL enables this service as `agl-session@agl-driver.service`,
-running as user `agl-driver`.
-
-*Note: while you can create sessions for as many users as needed, only one
-instance of `agl-session@.service` is allowed per user.*
-
-
-2\. `agl-session.target` is a user target for managing user services and their
-dependencies. It is started by `agl-session@.service`.
-
-By default, `agl-compositor` is part of this target. It is therefore
-automatically started for user `agl-driver`.
-
-Any other service needed as part of the user session should similarly depend on
-this target by appending the following lines to their unit file:
-
-```
-[Install]
-WantedBy=agl-session.target
-```
-
-# Inter-process communication
-
-In order to provide a "standard", language-independent IPC mechanism and avoid
+In order to provide a language-independent, "standard", IPC mechanism and avoid
 the need for maintaining custom bindings for each programming language to be
-used on top of AGL, the Application Framework used to promote the use of
+used on top of AGL, the application framework previously promoted the use of
 [D-Bus](https://www.freedesktop.org/wiki/Software/dbus/) as the preferred way
 for applications to interact with services. Starting with `needlefish` release,
-we instead switched to using [gRPC](https://grpc.io) for our system-wide IPC,
-with D-Bus being kept to provide functionality to services and application
+this has changed to recommending [gRPC](https://grpc.io) for our system-wide IPC,
+with D-Bus being kept to provide functionality to services and applications
 which haven't transitioned yet to using gRPC.
 
 Most services already included in AGL provide one or several D-Bus interfaces,
@@ -160,27 +140,25 @@ others:
 - [GeoClue](https://gitlab.freedesktop.org/geoclue/geoclue/-/wikis/home):
   geolocation
 
-Similarly, we're in the phase of expanding various services to expose a
+Similarly, ongoing work involves expanding various services to expose a
 gRPC interface.
 
-# Application launcher service
+# Application Launcher Service
 
 The Application Framework used to follow the guidelines of the [Desktop Entry
 specification](https://www.freedesktop.org/wiki/Specifications/desktop-entry-spec/)
-for application enumeration and startup, but with the `needlefish` release
+for application enumeration and start-up, but with the `needlefish` release
 instead it relies on systemd to provide that functionality, indirectly, by
 using the `applaunchd` application.
 
 As no simple reference implementation exists for this part of the
 specification, AGL provides an application launcher service named `applaunchd`.
 This service is part of the default user session, and as such is automatically
-started on session startup. It can therefore be considered always available.
+started on session start-up. It can therefore be considered always available.
 
 `applaunchd` enumerates applications installed on the system and provides a
-D-bus (deprecated)/gRPC interface for services and applications to:
-- query the list of available applications
-- request the startup and/or activation of a specific application
-- be notified when applications are started or terminated
+gRPC interface for services and applications to:
 
-`applaunchd` with the D-Bus interface is described with more details in
-[the following document](02_Application_Startup_Dbus.md).
+- query the list of available applications
+- request the start-up of a specific application
+- be notified when applications are started or terminated

@@ -1,7 +1,6 @@
 ---
 title: AGL Demo Control Panel
 ---
-
 # AGL Demo Control Panel
 
 ## Introduction
@@ -11,23 +10,31 @@ This document describes the design and usage of the **AGL Demo Control Panel**,
 
 To use the control panel, you need to connect the main machine that runs the control panel to the target machine that runs the AGL image(s) using a **LAN/ethernet cable**. You also need to configure the IP address of the Kuksa server and set your preferences in the tool’s settings menu.
 
-![Layers_And_Extensions](images/AGL-Deom-Control-Panel/Application-Logic.png)
+![Layers_And_Extensions](images/AGL-Demo-Control-Panel/Application-Logic.png)
+## Installation  
 
-## # Installation  
+  
 
-Clone the repository
-
+- _Note_:
+	If errors occur in Debian based/Rasbian OS during installation, follow the steps mentioned below and skip to step 2:
 ```bash
-git clone "https://gerrit.automotivelinux.org/gerrit/src/agl-demo-control-panel" && cd ./AGL_Demo_Control_Panel
+$ nano requirements.txt
+# -> Comment pyqt5 dependency using "#"
+$ sudo apt install python3-pyqt5 python3-qtpy pyqt5-dev-tools python3-pyqt5.qtsvg -y
 ```
 
-Install the Python dependencies
-
+- Step 1
+```bash
+$ python3 -m venv control-panel
+$ source control-panel/bin/activate
 ```
-pip install -r requirements.txt
-```
 
-## # Setup
+- Step 2
+```bash
+$ pip3 install -r requirements.txt
+$ pyrcc5 assets/res.qrc -o res_rc.py
+```
+## Setup
 
 Before using the  `AGL Demo Control Panel`, we need to make sure to run the Kuksa.val server  and also have our `can0` interface set up (Optional).
 
@@ -65,58 +72,69 @@ To set up the CAN interface between the Host system and the target machine(s) we
 
 	You should now be able to send and receive CAN messages between the two machines using the vcan interface and cannelloni.
 
-### 3. Kuksa-val-server
+### 3. Configuration for Kuksa-val-server/ Kuksa databroker
 
-Restart AGL's `kuksa-val-server`
+Run the `kuksa-val-server`/`databroker` on `0.0.0.0` by either restarting the server, editing `/etc/default/kuksa-databroker` or add the `agl-demo-preload` as a feature to your build of AGL.  The server should be started using the `--address 0.0.0.0` argument.
 
-```bash
-$ pkill kuksa
-$ kuksa-val-server --address 0.0.0.0
-```
-
-_Note_: if you are testing on a local build (or) docker image of kuksa.val server, make sure to remove  `cacertificate` and `tls_server_name` arguments from `extras/config.py`.
+Now, you can create a custom configuration to save your specific preferences for the settings page by creating the `*.ini*` files in the,
+-  `/etc/agl-demo-control-panel.ini`
+- `$HOME/.local/share/agl-demo-control-panel/config.ini`
 	
 ```python
-KUKSA_CONFIG = {
-"ip": '<default-kuksa-ip>',
-"port": "8090",
-'protocol': 'ws',
-'insecure': False,
-}
+[default]
+preferred-config=AGL-kuksa-val-server
+
+# [cutom-config-template]
+# ip=<ip address>
+# port=<port number>
+# protocol=<ws|grpc>       # ws/grpc -> kuksa-val-server, grpc -> databroker
+# insecure=<true|false>    
+# cacert=<default|/path/to/CA.pem>
+# token=<default|/path/to/token>      
+# tls_server_name=<name>
+
+[kuksa-val-server]
+ip=localhost
+port=8090
+protocol=ws
+insecure=false
+token=default
+tls_server_name=
 ```
 
 ### 4. Start AGL Demo Control Panel
 
-1. To use the control panel
+1. To start the control panel
 	```
-	cd /Path/to/agl-demo-control-panel
-	python -u main.py
+	$ cd /Path/to/agl-demo-control-panel
+	$ source control-panel/bin/activate
+	$ python -u main.py
 	```
 
-![Layers_And_Extensions](images/AGL-Deom-Control-Panel/Dashboard.png)
+![Layers_And_Extensions](images/AGL-Demo-Control-Panel/Dashboard.png)
 
 2. Go to settings
-	- Start (load default config)
-	-  Configure
-		- Ip-Address ("local" if running kuksa server on host)
-		- JWT Token path 
-		- CA certificate path
-		- Insecure mode (default off)
-	- Reconnect (Status will be updated accordingly)
+	- Start (load default config from drop-down menu)
+	-  Configure: make changes as required
+		- IP-Address
+		- Port
+		- Secure Mode: if toggled **"on"**, specify the `CA.pem File`
+		- Protocol: websocket ← ? → gRPC
+		- TLS Server Name
+		- JWT/Auth Token path 
+		- CA.pem certificate path
+	- Start/Stop
+	- Reconnect
 	- Page settings: Configure the visibility of pages and switch between CAN and Kuksa messages by using the toggle for the same.
 
-![Layers_And_Extensions](images/AGL-Deom-Control-Panel/Settings_Page.png)
+![Layers_And_Extensions](images/AGL-Demo-Control-Panel/Settings_Page.png)
 
-3. Navigate to the desired page using the provided buttons at the bottom
+1. Navigate to the desired page using the provided buttons at the bottom
 
 |  |
 |---|
-| ![Layers_And_Extensions](images/AGL-Deom-Control-Panel/IC.png) |
+| ![Layers_And_Extensions](images/AGL-Demo-Control-Panel/IC.png) |
 
 |  |  |
 |---|---|
-| ![Layers_And_Extensions](images/AGL-Deom-Control-Panel/HVAC.png) | ![Layers_And_Extensions](images/AGL-Deom-Control-Panel/SC.png) |
-
-
-
-
+| ![Layers_And_Extensions](images/AGL-Demo-Control-Panel/HVAC.png) | ![Layers_And_Extensions](images/AGL-Demo-Control-Panel/SC.png) |

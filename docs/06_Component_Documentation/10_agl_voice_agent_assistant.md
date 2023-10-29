@@ -18,13 +18,12 @@ $ bitbake agl-ivi-demo-platform-flutter
 
 After the build is complete, you can run the final image using QEMU. Once the image is running, you can start the voice agent service by running the following command:
 ```shell
-$ voiceagent-service run-server --config
+$ voiceagent-service run-server --default
 ```
 
-The `--config` flag loads the voice agent service with default configuration. This file can be easily modified and is located in `/usr/lib/python3.10/site-packages/agl_service_voiceagent/config.ini` on the target image. The default configuration file looks like this:
+The `--default` flag loads the voice agent service with default configuration. The default configuration file looks like this:
 ```ini
 [General]
-service_version = 0.3.0
 base_audio_dir = /usr/share/nlu/commands/
 stt_model_path = /usr/share/vosk/vosk-model-small-en-us-0.15/
 wake_word_model_path = /usr/share/vosk/vosk-model-small-en-us-0.15/
@@ -34,11 +33,12 @@ sample_rate = 16000
 bits_per_sample = 16
 wake_word = hello auto
 server_port = 51053
-server_address = 0.0.0.0
+server_address = 127.0.0.1
 rasa_model_path = /usr/share/nlu/rasa/models/
 rasa_server_port = 51054
+rasa_detached_mode = 0
 base_log_dir = /usr/share/nlu/logs/
-store_voice_commands = 1
+store_voice_commands = 0
 
 [Kuksa]
 ip = 127.0.0.1
@@ -55,6 +55,8 @@ vss_signals_spec = /usr/share/nlu/mappings/vss_signals_spec.json
 Most of the above configuration variable are self explanatory, however, I'll dive deeper into the ones that might need some explanation.
 
 - **`store_voice_commands`**: This variable is used to enable/disable the storage of voice commands. If this variable is set to `1`, then the voice commands will be stored in the `base_audio_dir` directory. The voice commands are stored in the following format: `base_audio_dir/<timestamp>.wav`. The `timestamp` is the time at which the voice command was received by the voice agent service.
+
+- **`rasa_detached_mode`**: This variable is used to enable/disable the detached mode for the RASA NLU engine. If this variable is set to `1`, then the RASA NLU engine will be run in detached mode, i.e. the voice agent service won't run it and will assume that RASA is already running. This is useful when you want to run the RASA NLU engine on a separate machine. If this variable is set to `0`, then the RASA NLU engine will be run as a sub process of the voice agent service.
 
 - **`intents_vss_map`**: This is the path to the file that actually maps the intent output from our intent engine to the VSS signal specification. This file is in JSON format and contains the mapping for all the intents that we want to support. The default file looks like this:
 
@@ -131,6 +133,14 @@ Most of the above configuration variable are self explanatory, however, I'll div
     ```
     Notice that `Vehicle.Cabin.Infotainment.Media.Volume` is the VSS signal that whose specification we want to define. The `default_value` is the default value of the signal to use if the user doesn't specify a value in their command. The `default_change_factor` is the default change factor of the signal, i.e the value to increment or decrement the current value with if user didn't specify any specific change factor. The `actions` object defines the actions that can be performed on the signal, currently, only "increase", "decrease", and "set" are supported. The `values` object defines the range of values that can be mapped onto the signal. The `value_set_intents` object defines the intent (or the `slot` to be more precise) that contains the specific value of the signal defined by the user in their command. Here `numeric_value` is the slot that contains the value of the signal as defined during the training of the intent engine. The `datatype` is the type of the value, i.e. `number`, `string`, `boolean`, etc. The `unit` is the unit of the value, i.e. `percent`, `degree`, `celsius`, etc.
 
+
+If you want to change the default configuration, you can do so by creating a new configuration file and then passing it to the voice agent service using the `--config` flag. For example:
+```shell
+$ voiceagent-service run-server --config path/to/config.ini
+```
+
+One thing to note here is that all the directory paths in the configuration file should be absolute and always end with a `/`.
+
 # High Level Architecture
 ![Voice_Agent_Architecture](images/agl-voice-agent/AGL_Offline_VoiceAgent_(High_Level_Architecture).png)
 
@@ -173,16 +183,16 @@ Then run the following command to re-train the model:
 $ snips-sdk train path/to/dataset.json path/to/model
 ```
 
-Finally, you can use the [`snips-inference-agl`](https://github.com/malik727/snips-inference-agl) module to process commands and extract the associated intents.
+Finally, you can use the [`snips-inference-agl`](https://gerrit.automotivelinux.org/gerrit/gitweb?p=src/snips-inference-agl.git;a=summary) module to process commands and extract the associated intents.
 
 ### Usage
 To set up and run the Snips NLU Intent Engine, follow these steps:
 
-1. Train your model by following the steps laid earlier or just clone a pre-existing model from [here](https://github.com/malik727/snips-model-agl).
+1. Train your model by following the steps laid earlier or just clone a pre-existing model from [here](https://gerrit.automotivelinux.org/gerrit/gitweb?p=src/snips-model-agl.git;a=summary).
 
-2. Install and set up the [`snips-inference-agl`](https://github.com/malik727/snips-inference-agl) module on your local machine. This module is an extension of the original Snips NLU with upgraded Python support and is specifically designed for inference purposes only.
+2. Install and set up the [`snips-inference-agl`](https://gerrit.automotivelinux.org/gerrit/gitweb?p=src/snips-inference-agl.git;a=summary) module on your local machine. This module is an extension of the original Snips NLU with upgraded Python support and is specifically designed for inference purposes only.
 
-3. Once you have the [`snips-inference-agl`](https://github.com/malik727/snips-inference-agl) module installed, you can load the pre-trained model located in the model/ folder. This model contains the trained data and parameters necessary for intent extraction. You can use the following command to process commands and extract the associated intents:
+3. Once you have the [`snips-inference-agl`](https://gerrit.automotivelinux.org/gerrit/gitweb?p=src/snips-inference-agl.git;a=summary) module installed, you can load the pre-trained model located in the model/ folder. This model contains the trained data and parameters necessary for intent extraction. You can use the following command to process commands and extract the associated intents:
     ```shell
     $ snips-inference parse path/to/model -q "your command here"
     ```
@@ -257,7 +267,7 @@ $ rasa train nlu --config config.yml --nlu path/to/dataset.yml --out path/to/mod
 ### Usage
 To set up and run the RASA NLU Intent Engine, follow these steps:
 
-1. Train your model by following the steps laid earlier or just clone a pre-existing model from [here](https://github.com/malik727/rasa-model-agl).
+1. Train your model by following the steps laid earlier or just clone a pre-existing model from [here](https://gerrit.automotivelinux.org/gerrit/gitweb?p=src/rasa-model-agl.git;a=summary).
 
 2. Once you have RASA (v3.6.4) installed, you can load the pre-trained model located in the model/ folder. This model contains the trained data and parameters necessary for intent extraction. You can use the following command to process commands and extract the associated intents:
     ```shell

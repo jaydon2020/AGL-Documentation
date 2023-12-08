@@ -34,7 +34,13 @@ $ git clone "ssh://<LFID>@gerrit.automotivelinux.org:29418/AGL/documentation" &&
     $ sudo pip install -r requirements.txt
     ```
 
-3. Serve locally (default rendered at [127.0.0.1:8000/](127.0.0.1:8000/)):
+3. If pip is not already installed then install it 
+    ```sh
+    $ sudo apt-install python3-pip
+    ```
+
+
+4. Serve locally (default rendered at [127.0.0.1:8000/](127.0.0.1:8000/)):
 
     ```sh
     $ sudo mkdocs serve

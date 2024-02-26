@@ -34,7 +34,7 @@ provide a fix, we would welcome that gladly! Please assign the JIRA issue to
 yourself, then you can submit a change request (CR).
 
 **NOTE:** If you need help with submitting your first CR, we have created a
-brief [tutorial](../04_Submitting_Changes) for you.
+brief [tutorial](04_Submitting_Changes.md) for you.
 
 ## Fixing issues and working stories
 
@@ -132,7 +132,7 @@ merged.
    description of the change. Each change MUST include the JIRA identifier
    corresponding to the change (e.g. [SPEC-1234]). This can be in the title but
    should also be in the body of the commit message. See the [complete
-   requirements](../04_Submitting_Changes) for an acceptable change request.
+   requirements](04_Submitting_Changes.md) for an acceptable change request.
 
    **NOTE:** That Gerrit will automatically create a hyperlink to the JIRA item.
 

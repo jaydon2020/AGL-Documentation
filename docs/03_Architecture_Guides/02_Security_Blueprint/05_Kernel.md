@@ -78,7 +78,7 @@ Kernel-General-MAC-7 | CONFIG_SECURITY_SMACK   | y
 Kernel-General-MAC-8 | CONFIG_TMPFS_XATTR      | y
 
 Please also refer to the [Mandatory Access Control documentation in
-Platform](5_Platform.md). You can also find useful documentation and
+Platform](06_Platform.md). You can also find useful documentation and
 links on wikipedia about
 [**MAC**](https://en.wikipedia.org/wiki/Mandatory_access_control) and about
 [**SMACK**](https://en.wikipedia.org/wiki/Simplified_Mandatory_Access_Control_Kernel).

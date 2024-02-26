@@ -191,7 +191,7 @@ handle any window management interaction on its own.
 Further more, with this protocol update we also includes some events already
 present in the agl-shell-desktop protocol like  deactivate and terminate.
 
-### agl-shell-desktop
+### agl-shell-desktop (deprecated, will be removed in future, see gRPC proxy)
 
 This extension is targeted at keeping some of the functionally already
 established in AGL as to a) allow applications display/activate other
@@ -240,6 +240,158 @@ application based on their xdg-shell app_id. In case the application is
 present/running, it will attempt to make the surface backing that application
 the current activate one, with each output having independently active
 surfaces.
+
+## gRPC proxy for window management
+
+The gRPC proxy is an alternative to allow management of windows,
+without the need for clients to "speak" native Wayland C code.  Most major
+languages have RPC bindings, and in AGL clients do not touch Wayland code
+natively, using most of the time toolkits. It seemed reasonably to use gRPC
+as a way to interact with the compositor. The way this works is that
+there's proxy daemon started by the compositor which translates the gRPC
+calls to Wayland ones, using agl-shell protocol. Events coming from the
+compositor are handled by subscribing to RPC stream events, such that
+clients can act upon as well, so it is not just one way interaction.
+
+With respect to window management: placement, movement, and surface role
+changes all should, and can be done with RPC. Some of the calls, specifically
+background set-up or activation area, are still required to happen prior or
+require wayland primitives which can't be passed between processes, so those
+can't be used with RPC proxy.
+
+In terms of API, the following are available: activation/deactivation,
+role management, and events. All the message arguments are self-explanatory,
+requiring always an app_id, in form of string and possibly an output, in
+form a string as well. Toolkits can set/retrieve this information so refer
+to the respective toolkit. At the wayland level, the app_id is set/get
+with [xdg-shell](https://wayland.app/protocols/xdg-shell#xdg_toplevel:request:set_app_id)
+whereas output from [wl_output interface](https://wayland.app/protocols/wayland#wl_output:event:name)
+
+Activation and deactivation of applications:
+
+```
+rpc ActivateApp(ActivateRequest)         returns (ActivateResponse) {}
+rpc DeactivateApp(DeactivateRequest)     returns (DeactivateResponse) {}
+```
+With the following message arguments:
+
+```
+message ActivateRequest {
+       string app_id = 1;
+       string output_name = 2;
+}
+
+message ActivateResponse {
+};
+
+
+message DeactivateRequest {
+       string app_id = 1;
+};
+
+message DeactivateResponse {
+};
+```
+
+Management of surface roles can be done with these requests:
+
+
+```
+rpc SetAppSplit(SplitRequest)            returns  (SplitResponse) {}
+rpc SetAppFloat(FloatRequest)            returns  (FloatResponse) {}
+rpc SetAppFullscreen(FullscreenRequest)  returns  (FullscreenResponse) {}
+rpc AppStatusState(AppStateRequest)      returns  (stream AppStateResponse) {}
+rpc GetOutputs(OutputRequest)            returns  (ListOutputResponse) {}
+rpc SetAppNormal(NormalRequest)          returns  (NormalResponse) {}
+rpc SetAppOnOutput(AppOnOutputRequest)   returns  (AppOnOutputResponse) {}
+rpc SetAppPosition(AppPositionRequest)   returns  (AppPositionResponse) {}
+rpc SetAppScale(AppScaleRequest)         returns  (AppScaleResponse) {}
+```
+
+Message arguments are:
+
+```
+message SplitRequest {
+       string app_id = 1;
+       int32 tile_orientation = 2;
+       int32 width = 3;
+       int32 sticky = 4;
+       string output_name = 5;
+}
+
+message SplitResponse {
+};
+
+message FloatRequest {
+       string app_id = 1;
+       int32 x_pos = 2;
+       int32 y_pos = 3;
+};
+
+message FloatResponse {
+};
+
+message NormalRequest {
+        string app_id = 1;
+};
+
+message NormalResponse {
+};
+
+message FullscreenRequest {
+        string app_id = 1;
+};
+
+message FullscreenResponse {
+};
+
+message AppOnOutputRequest {
+        string app_id = 1;
+        string output = 2;
+};
+
+message AppOnOutputResponse {
+};
+
+message AppPositionRequest {
+       string app_id = 1;
+       int32 x = 2;
+       int32 y = 3;
+};
+
+message AppPositionResponse {
+};
+
+message AppScaleRequest {
+       string app_id = 1;
+       int32 width = 2;
+       int32 height = 3;
+};
+
+message AppScaleResponse {
+};
+```
+
+Events which clients can subscribe to:
+
+```
+rpc AppStatusState(AppStateRequest) returns (stream AppStateResponse) {}
+```
+
+With the message arguments:
+
+```
+message AppStateRequest {
+};
+
+message AppStateResponse {
+        int32 state = 1;
+        string app_id = 2;
+};
+```
+
+A C++ client implementation the gRPC API can be found in [agl-shell-activator](https://gerrit.automotivelinux.org/gerrit/gitweb?p=src/agl-shell-activator.git;a=tree;h=refs/heads/master;hb=refs/heads/master)
+or in [window-management-client-grpc](https://gerrit.automotivelinux.org/gerrit/gitweb?p=src/window-management-client-grpc.git;a=tree;h=refs/heads/master;hb=refs/heads/master).
 
 ## Explicit output
 

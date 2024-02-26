@@ -191,6 +191,81 @@ handle any window management interaction on its own.
 Further more, with this protocol update we also includes some events already
 present in the agl-shell-desktop protocol like  deactivate and terminate.
 
+#### V4 updates
+
+Version 4 of the agl-shell protocol brings a new request,
+"set_activate_region". This is a hint for the compositor to use a custom area
+for activation, rather than inferring the activation area from the panels.
+This is a work-around designed for toolkits which can't handle multiple
+surfaces at the same, such that it can this achieve the same functionality as
+having multiple surfaces, but instead have just a single main surface to
+handle. The compositor will place other applications in the designated
+activation region, and will activate/deactivate surfaces only that in region.
+With a custom activation area that leaves portions of the output available to
+the toolkit this means it can achieve a similar graphical outcome as if there
+are panels. All the toolkits, including Qt are now using this approach, with only
+CI using distinct surfaces with panels.
+
+#### V5 updates
+
+Version 5 of the agl-shell protocol brings a new request, "deactivate_app".
+Similar to the activate request, this will hide the current active application.
+Depending on the window role, this request will either display the previously
+active window (or the background in case there's no previously active surface)
+or temporarily (or until a 'activate_app' is called upon) hide the surface.
+
+#### V6 updates
+
+Version 6 of the agl-shell protocol, brings two new request, "set_app_float" and
+"set_app_normal". The first one is a method to change the surface role, either
+on the fly, or at start-up to behave like a dialog/pop-up window, which can be
+positioned anywhere on the output. The later one, is useful to return the main
+original surface role, as maximized.
+
+#### V7 updates
+
+Version 7 of the agl-shell protocol, brings one new request, "set_app_fullscreen".
+This is similar to "set_app_float", but it changes the surface role to fullscreen.
+Going back to the orignal, maximized role should be with "set_app_normal".
+
+#### V8 updates
+
+Version 8 of the agl-shell protocol, adds a new request, "set_app_output", and
+a new event, "app_on_output". This request/event is useful to migrate
+applications from one output to another and signal out when that happens.
+
+#### V9 updates
+
+Version 9 of the agl-shell protocol, adds a new request, "set_app_position". This
+request only makes sense for float type of surface, which was previously set with
+"set_app_float".
+
+#### V10 updates
+
+Version 10 of the agl-shell protocol, adds a new request, "set_app_scale".
+Similar to the "set_app_position", the surface role must be a floating type,
+before using this request. The app scale request is actually a resize
+hint for the client to change its dimensions to the one specified in the
+request arguments. The client should use [wp_viewporter
+interface](https://wayland.app/protocols/viewporter#wp_viewporter) to perform
+cropping and scaling.
+
+#### V11 updates
+
+Version 11 of the agl-shell protocol, adds a new request "set_app_split".  This
+request only handles a single level of tiling for practical reasons as to keep
+implementation simple and straight forward. Apart from the usual, tile
+horizontally, and vertically, two arguments can be used to customize handling.
+One defines the width of the split window, such that clients can specify, in
+absolute values, the size of the split window. The other is about keeping the
+split window always present when activating other windows.
+
+By default when activating a new windows, the split window roles are destroyed
+and new activated window will be put in front. Making the split window sticky
+would avoid doing that. Obviously trying to activate a window already active,
+which has the sticky role won't be possible (it is already displayed).
+
+
 ### agl-shell-desktop (deprecated, will be removed in future, see gRPC proxy)
 
 This extension is targeted at keeping some of the functionally already

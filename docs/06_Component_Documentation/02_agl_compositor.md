@@ -315,11 +315,14 @@ Further more, to cope with situations where the output is just a
 panel/display, without some kind of compositor driving it, the necessity of
 handling input events is an important feature to have, giving the user to
 possibility to manipulate the application/environment as he or she seems fit.
+
 The compositor loads a plug-in that streams out the buffers to an output
-remotely, with [another plug-in](03_waltham_receiver_transmitter.md)
-handling the input events. The events, which are sent back from the display to
-the compositor, are generated with the help of wayland-eque protocol that works
-over the network, called [Waltham](https://github.com/waltham/waltham).
+remotely, with another plug-in was used to handle the input events. The events,
+which are sent back from the display to the compositor, are generated with
+the help of wayland-eque protocol that works over the network, called
+[Waltham](https://github.com/waltham/waltham). This solution was deprecated
+and removed a while back, with an alternative in the works to achieve
+the same functionality.
 
 Together, they provide proper means to achieve a seamless integration with
 other display devices in the car cabin.

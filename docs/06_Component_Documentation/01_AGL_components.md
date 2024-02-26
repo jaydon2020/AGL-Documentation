@@ -7,7 +7,6 @@ title: AGL Components
 ### Graphics
 
 - [The AGL compositor](02_agl_compositor.md)
-- [Waltham receiver/transmitter configuration](03_waltham_receiver_transmitter.md)
 - [DRM lease manager](05_drm_lease_manager.md)
 
 

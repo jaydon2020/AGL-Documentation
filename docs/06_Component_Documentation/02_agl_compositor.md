@@ -265,7 +265,6 @@ and new activated window will be put in front. Making the split window sticky
 would avoid doing that. Obviously trying to activate a window already active,
 which has the sticky role won't be possible (it is already displayed).
 
-
 ### agl-shell-desktop (deprecated, will be removed in future, see gRPC proxy)
 
 This extension is targeted at keeping some of the functionally already
@@ -522,6 +521,48 @@ stack, until it reaches the lower layers in Chromium where the Wayland
 communication and interaction takes place. Support for the private extension
 was done at the Ozone interface abstraction, which Chromium projects uses now
 to handle the display/graphical interaction with the lower stack levels.
+
+## How to integrate or incorporate your own UI
+
+The Minimum Viable Product (MV) to be able to switch/change/replace the current
+UI, depending on toolkit is to call `set_background()` and `set_ready()` requests
+from the agl-shell client protocol.
+
+This means that the toolkits need to provides access to Wayland primitives,
+exposing them in a such that they can reach the client code. For instance,
+Qt uses [QPA](https://wiki.qt.io/Qt_Platform_Abstraction), while
+GTK can also expose it through similar ways.
+Chromium/CEF and flutter platform do not explicitly expose the windowing system
+(and implictly Wayland) and have that implemented at a lower level.
+
+Further more, depending on the needs, one would also need to either use the
+gRPC proxy API or just agl-shell protocol on its own. For instance for Qt and
+flutter we now use a combination of both. In Qt, we use QPA and Wayland native
+code to set the [background surface](https://gerrit.automotivelinux.org/gerrit/gitweb?p=apps/homescreen.git;a=blob;f=homescreen/src/main.cpp;h=a98a15bb0113f3b28c1766e79c5d3f2d0b20fac4;hb=refs/heads/master#l255),
+while activation/deactivation and anything else is handled using gRPC API,
+but in the [same application](https://gerrit.automotivelinux.org/gerrit/gitweb?p=apps/homescreen.git;a=blob;f=homescreen/src/main.cpp;h=a98a15bb0113f3b28c1766e79c5d3f2d0b20fac4;hb=refs/heads/master#l355).
+
+In flutter because we can't reach Wayland code
+from within the client, we handle the Wayland part in the
+[flutter embedder](https://github.com/toyota-connected/ivi-homescreen/blob/agl/shell/wayland/window.cc#L95-L121)
+whereas the activation is handled in [flutter-ics-homescreen](https://gerrit.automotivelinux.org/gerrit/gitweb?p=apps/flutter-ics-homescreen.git;a=blob;f=lib/data/data_providers/app_launcher.dart;h=8762643dba7f5a6e3ad2051749e30239743e759a;hb=HEAD)
+
+Similarly, CEF/Chromium has the same thing, the background and ready to present
+request is handled at the lower levels.
+
+### Simple shell client examples
+
+An alternative to using toolkits is to avoid using any of them and
+instead use native Wayland C code to create a simple shell client. This
+means the client needs to manage everything, including redrawing the
+background surface.
+
+An example of that is
+[native-shell-client](https://gerrit.automotivelinux.org/gerrit/gitweb?p=src/native-shell-client.git;a=summary)
+that is being used in the kvm images as a barebone shell client. Because that
+just sets a black background matching the entire output you can have a
+dedicated client that basically displays or mimics being fullscreen
+(although technically it's set to maximized).
 
 ## Streaming buffers and receiving events to and from remote outputs
 

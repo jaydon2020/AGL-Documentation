@@ -31,7 +31,7 @@ For adding a custom linux software/service like cannelloni you have to do the fo
   
     ```
 	devtool build packagename
-	devtool build-image agl-demo-platform
+	devtool build-image agl-ivi-demo-qt
     ```
 
 	If that is working you could add it to git/gerrit. You have to add your recipe to a layer.

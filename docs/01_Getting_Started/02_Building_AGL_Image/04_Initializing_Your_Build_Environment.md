@@ -103,8 +103,6 @@ Available features:
 
    [meta-agl-demo]                                    # DEMO layer
        Refer: https://git.automotivelinux.org/AGL/meta-agl-demo/tree/templates/feature
-       agl-demo-cluster-support                       # Add streaming to cluster of AGL demo system
-       agl-demo-preload                               # Add Tokens and sample files specific to AGL demo system
        agl-demo                                       # default IVI demo 
        agl-kvm                                        # Enables support for building multiconfig based KVM+QEMU demo images
 
@@ -115,7 +113,6 @@ Available features:
        agl-egvirt                                     # EG-Virt feature
        agl-flutter                                    # Flutter support
        agl-ic-container                               # Instrument Cluster EG demo using containers
-       agl-jailhouse                                  # GSoC: jailhouse enablement
        agl-offline-voice-agent                        # Feature template for meta-offline-voice-agent layer
        agl-test                                       # Test framework under development
 
@@ -166,7 +163,7 @@ Following are brief descriptions of the AGL features you can specify on the
   as part of the build.
 
 * **agl-demo**: Enables the layers meta-agl-demo and meta-qt5.
-  You need agl-demo if you are going to build the agl-demo-platform.
+  You need agl-demo if you are going to build the agl-ivi-demo-qt.
 
 * **agl-pipewire**: Enables AGLs pipewire support.
 
@@ -205,21 +202,31 @@ aglsetup.sh: Done
  Shell environment set up for builds.
 You can now run 'bitbake target'
 Common targets are:
-  - meta-agl:          (core system)
-    agl-image-minimal
-    agl-image-minimal-qa
+- meta-agl layer:
+  - included by default
+    * agl-image-boot                (just enough to boot)
+    * agl-image-minimal             (minimal filesystem with APIs)
+    * agl-image-minimal-crosssdk    (crosssdk for ^^)
 
-    agl-image-ivi
-    agl-image-ivi-qa
-    agl-image-ivi-crosssdk
+    * agl-image-weston              (minimal filesystem with weston)
+    * agl-image-compositor          (minimal filesystem with AGL compositor)
 
-    agl-image-weston
+- meta-agl-demo:                    (IVI demo with UI)
+  - with 'agl-demo'
+    * agl-ivi-image                 (base for IVI targets)
+    * agl-ivi-image-crosssdk        (sdk for ^^)
 
-  - meta-agl-demo:     (demo with UI)
-    agl-demo-platform  (* default demo target)
-    agl-demo-platform-qa
-    agl-demo-platform-crosssdk
-    agl-demo-platform-html5
+    * agl-ivi-demo-qt               (IVI Qt demo image)
+    * agl-ivi-demo-qt-crosssdk      (sdk for ^^)
+    * agl-ivi-demo-flutter          (IVI Flutter demo image)
+    * agl-ivi-demo-html5            (IVI HTML5 demo image)
+
+    * agl-cluster-demo-qt           (cluster Qt demo image)
+    * agl-cluster-demo-flutter      (cluster Flutter demo image)
+
+    * agl-telematics-demo           (telematics demo image)
+
+    * agl-gateway-demo              (gateway demo image)
 ```
 
 Running the script creates the Build Directory if it does not already exist.

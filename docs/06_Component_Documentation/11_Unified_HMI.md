@@ -26,7 +26,7 @@ After adding the feature, execute the command:
 ```
 $ bitbake <image_name>
 ```
-**Note**: The operation has been confirmed with the **agl-demo-platform**. If you wish to specify a different `<image_name>` other than agl-demo-platform, create a file named `<image_name>.bbappend` in the directory
+**Note**: The operation has been confirmed with the **agl-ivi-demo-qt**. If you wish to specify a different `<image_name>` other than agl-ivi-demo-qt, create a file named `<image_name>.bbappend` in the directory
 ```
 $AGL_TOP/master/meta-agl-devel/meta-uhmi/meta-rvgpu/recipes-platform/images
 ```
@@ -92,7 +92,7 @@ qemu-system-x86_64 -enable-kvm -m 2048 \
 ```
 Save the file and run the following to start QEMU.
 ```
-sudo <WORKDIR>/run_qemu_bridge.sh <build_directory>/tmp/deploy/images/qemux86-64/bzImage <build_directory>/tmp/deploy/images/qemux86-64/agl-demo-platform-qemux86-64.ext4
+sudo <WORKDIR>/run_qemu_bridge.sh <build_directory>/tmp/deploy/images/qemux86-64/bzImage <build_directory>/tmp/deploy/images/qemux86-64/agl-ivi-demo-qt-qemux86-64.ext4
 ```
 When QEMU boot, assign an IP address. For example:
 ```
@@ -158,7 +158,7 @@ $ weston-editor
 **Note**: There are known issues with mouse, such as the cursor becoming invisible and occasional flickering of a green screen.
 
 **Appendix**  
-- By building the RVGPU on Ubuntu, it is possible to enable bidirectional remote rendering between the agl-demo-platform and Ubuntu.  
+- By building the RVGPU on Ubuntu, it is possible to enable bidirectional remote rendering between the agl-ivi-demo-qt and Ubuntu.  
 For the build procedure on Ubuntu, see the following URL: https://github.com/unified-hmi/remote-virtio-gpu  
 The figure below shows an example where Ubuntu is used as the Sender and AGL as the Receiver, running RVGPU.
 

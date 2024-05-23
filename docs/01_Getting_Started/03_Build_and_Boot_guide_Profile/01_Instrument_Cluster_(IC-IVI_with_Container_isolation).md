@@ -205,13 +205,12 @@ $ source meta-agl/scripts/aglsetup.sh -f -m raspberrypi4 -b build-ivi-rpi4 agl-c
 #### 2nd step: Build target images.
 
 Type 3b integration need to build 3 image, these image are
-agl-ivi-demo-platform, agl-ivi-demo-platform-flutter and
-agl-ivi-demo-platform-html5.
+agl-ivi-demo-qt, agl-ivi-demo-flutter and agl-ivi-demo-html5.
 
 ```bash
-$ bitbake agl-ivi-demo-platform
-$ bitbake agl-ivi-demo-platform-flutter
-$ bitbake agl-ivi-demo-platform-html5
+$ bitbake agl-ivi-demo-qt
+$ bitbake agl-ivi-demo-flutter
+$ bitbake agl-ivi-demo-html5
 ```
 
 #### 3rd step: Set deploy path of AGL IVI Demo to IC side config.
@@ -297,7 +296,7 @@ image write to SD card, you need to use xzcat ant dd command in build
 PC.
 
 ```bash
-$ sudo bash -c "xzcat /path/to/image/directory/agl-instrument-cluster-container-demo-XXXXX.wic.xz | dd of=/dev/sdXXX bs=128M"
+$ sudo bash -c "xzcat /path/to/image/directory/agl-instrument-cluster-container-demo-XXXXX.rootfs.wic.xz | dd of=/dev/sdXXX bs=128M"
 ```
 
 **If you are missing to set SD card device "/dev/sdXXX", it cause

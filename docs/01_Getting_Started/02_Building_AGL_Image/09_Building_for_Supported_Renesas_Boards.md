@@ -251,17 +251,17 @@ CPU and and Internet connection speeds.
 The build also takes approximately 100G-bytes of free disk space.
 
 **Qt based IVI demo :**
-For this example, the target is "agl-demo-platform":
+For this example, the target is "agl-ivi-demo-qt":
 
 ```sh
-bitbake agl-demo-platform
+bitbake agl-ivi-demo-qt
 ```
 
 **HTML5 based IVI demo :**
-The target is `agl-demo-platform-html5`.
+The target is `agl-ivi-demo-html5`.
 
 ```sh
-$ time bitbake agl-demo-platform-html5
+$ time bitbake agl-ivi-demo-html5
 ```
 
 **Instrument Cluster with Container isolation demo :**
@@ -349,7 +349,7 @@ card with a new image.
 
     ```sh
     cd $AGL_TOP/build/tmp/deploy/images/$MACHINE
-    bmaptool copy ./agl-demo-platform-$MACHINE.wic.xz <boot_device_name>
+    bmaptool copy ./agl-ivi-demo-qt-$MACHINE.rootfs.wic.xz <boot_device_name>
     ```
 
     Alternatively, you can leave the image in an uncompressed state and write it
@@ -357,7 +357,7 @@ card with a new image.
 
     ```sh
     sudo umount <boot_device_name>
-    xzcat ./agl-demo-platform-$MACHINE.wic.xz | sudo dd of=<boot_device_name> bs=4M
+    xzcat ./agl-ivi-demo-qt-$MACHINE.rootfs.wic.xz | sudo dd of=<boot_device_name> bs=4M
     sync
     ```
 

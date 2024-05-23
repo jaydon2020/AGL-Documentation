@@ -13,21 +13,21 @@ quickstart the service and application development process.
 
       - **x86** : [qemux86-64](https://download.automotivelinux.org/AGL/snapshots/master/latest/qemux86-64/deploy/sdk/)
 
-        **Note:** .sh file will be with name 	"poky-agl-glibc-x86_64-agl-demo-platform-crosssdk-corei7-64-qemux86-64-toolchain-$(version number).sh" where version number is regularly updated on the site.
+        **Note:** .sh file will be with name 	"poky-agl-glibc-x86_64-agl-ivi-demo-qt-crosssdk-corei7-64-qemux86-64-toolchain-$(version number).sh" where version number is regularly updated on the site.
 
 
       - **ARM 32 bit** : [qemuarm](https://download.automotivelinux.org/AGL/snapshots/master/latest/qemuarm/deploy/sdk/)
 
-        **Note:** .sh file will be with name 	"	poky-agl-glibc-x86_64-agl-demo-platform-crosssdk-armv7vet2hf-neon-vfpv4-qemuarm-toolchain-$(version number).sh" where version number is regularly updated on the site.
+        **Note:** .sh file will be with name 	"	poky-agl-glibc-x86_64-agl-ivi-demo-qt-crosssdk-armv7vet2hf-neon-vfpv4-qemuarm-toolchain-$(version number).sh" where version number is regularly updated on the site.
 
 
       - **AARCH64 - ARM 64bit** : [qemuarm64](https://download.automotivelinux.org/AGL/snapshots/master/latest/qemuarm64/deploy/sdk/)
 
-        **Note:** .sh file will be with name 	"	poky-agl-glibc-x86_64-agl-demo-platform-crosssdk-aarch64-qemuarm64-toolchain-$(version number).sh" where version number is regularly updated on the site.
+        **Note:** .sh file will be with name 	"	poky-agl-glibc-x86_64-agl-ivi-demo-qt-crosssdk-aarch64-qemuarm64-toolchain-$(version number).sh" where version number is regularly updated on the site.
 
 
         *Henceforth,* **qemux86-64** *is used in these guides, unless specified
-        otherwise. We also use the 'agl-demo-platform-crosssdk' as example.*
+        otherwise. We also use the 'agl-ivi-demo-qt-crosssdk' as example.*
 
 2. Create application development directory and copy SDK into them :
 
@@ -35,7 +35,7 @@ quickstart the service and application development process.
 
     ```sh
     $ mkdir ~/agl-app
-    $ cp ~/Downloads/poky-agl-glibc-x86_64-agl-demo-platform-crosssdk-*.sh ~/agl-app/
+    $ cp ~/Downloads/poky-agl-glibc-x86_64-agl-ivi-demo-qt-crosssdk-*.sh ~/agl-app/
     $ cd ~/agl-app
     ```
 
@@ -45,9 +45,9 @@ quickstart the service and application development process.
 
 
     ```sh
-    $ chmod 777 poky-agl-glibc-x86_64-agl-demo-platform-crosssdk-*.sh
+    $ chmod 777 poky-agl-glibc-x86_64-agl-ivi-demo-qt-crosssdk-*.sh
     $ mkdir agl-sdk/
-    $ ./poky-agl-glibc-x86_64-agl-demo-platform-crosssdk-*.sh
+    $ ./poky-agl-glibc-x86_64-agl-ivi-demo-qt-crosssdk-*.sh
     ```
     Select target directory for SDK : `~/agl-app/agl-sdk`
 

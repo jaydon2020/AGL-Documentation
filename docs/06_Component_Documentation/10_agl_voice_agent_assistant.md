@@ -13,7 +13,7 @@ Before we dive into the detailed components documentation, let's first take a lo
 ```shell
 $ source master/meta-agl/scripts/aglsetup.sh -m qemux86-64 -b build-master agl-demo agl-devel agl-offline-voice-agent
 $ source agl-init-build-env
-$ bitbake agl-ivi-demo-platform-flutter
+$ bitbake agl-ivi-demo-flutter
 ```
 
 After the build is complete, you can run the final image using QEMU. Once the image is running, you can start the voice agent service by running the following command:

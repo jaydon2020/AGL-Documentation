@@ -30,7 +30,7 @@ Community supported Boards [BBE, i. MX 6, i. MX 8](./01_Supported_Hardware_Overv
     * Building target image :
 
         ```sh
-        $ time bitbake agl-demo-platform
+        $ time bitbake agl-ivi-demo-qt
         ```
 
 * HTML5 Based :
@@ -47,7 +47,7 @@ Community supported Boards [BBE, i. MX 6, i. MX 8](./01_Supported_Hardware_Overv
     * Building target image :
 
         ```sh
-        $ time bitbake agl-demo-platform-html5
+        $ time bitbake agl-ivi-demo-html5
         ```
 
 

@@ -59,7 +59,7 @@ $ source meta-agl/scripts/aglsetup.sh -b build-flutter-dashboard -m qemux86-64 a
 ```bash
 $ cd $AGL_TOP/master/build-flutter-dashboard
 $ source agl-init-build-env
-$ bitbake agl-ivi-demo-platform-flutter
+$ bitbake agl-ivi-demo-flutter
 ```
 
 ## 6. Deploying the AGL Demo Image

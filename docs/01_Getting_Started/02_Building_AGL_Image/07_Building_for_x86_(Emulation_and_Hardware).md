@@ -71,33 +71,33 @@ CPU and and Internet connection speeds.
 The build also takes approximately 100G-bytes of free disk space.
 
 **Sample Qt based IVI demo :**
-The target is `agl-demo-platform`.
+The target is `agl-ivi-demo-qt`.
 
 ```sh
-$ time bitbake agl-demo-platform
+$ time bitbake agl-ivi-demo-qt
 ```
 
 By default, the build process puts the resulting image in the Build Directory and further exporting that as `$IMAGE_NAME`:
 
 ```sh
-<build_directory>/tmp/deploy/images/qemux86-64/agl-demo-platform-qemux86-64.vmdk.xz
+<build_directory>/tmp/deploy/images/qemux86-64/agl-ivi-demo-qt-qemux86-64.vmdk.xz
 
-$ export IMAGE_NAME=agl-demo-platform-qemux86-64.vmdk.xz
+$ export IMAGE_NAME=agl-ivi-demo-qt-qemux86-64.vmdk.xz
 ```
 
 **Sample HTML5 based IVI demo :**
-The target is `agl-demo-platform-html5`.
+The target is `agl-ivi-demo-html5`.
 
 ```sh
-$ time bitbake agl-demo-platform-html5
+$ time bitbake agl-ivi-demo-html5
 ```
 
 By default, the build process puts the resulting image in the Build Directory and further exporting that as `$IMAGE_NAME`:
 
 ```sh
-<build_directory>/tmp/deploy/images/qemux86-64/agl-demo-platform-html5-qemux86-64.vmdk.xz
+<build_directory>/tmp/deploy/images/qemux86-64/agl-ivi-demo-html5-qemux86-64.vmdk.xz
 
-$ export IMAGE_NAME=agl-demo-platform-html5-qemux86-64.vmdk.xz
+$ export IMAGE_NAME=agl-ivi-demo-html5-qemux86-64.vmdk.xz
 ```
 
 **IVI-EG Flutter based demo :**
@@ -121,7 +121,7 @@ $ time bitbake agl-image-flutter
 
 Deploying the image consists of decompressing the image and then
 booting it using either QEMU, VirtualBox or physical system.
-The examples below are usually for the 'agl-demo-platform' target.
+The examples below are usually for the 'agl-ivi-demo-qt' target.
 Please adapt accordingly to your target image.
 
 **3.1 QEMU**
@@ -145,7 +145,7 @@ $ source $AGL_TOP/<release-branch-name>/<build-dir>/
 And further use `runqemu` to boot the image :
 
 ```sh
-$ runqemu tmp/deploy/images/qemux86-64/agl-demo-platform-qemux86-64.qemuboot.conf kvm serialstdio slirp publicvnc audio
+$ runqemu tmp/deploy/images/qemux86-64/agl-ivi-demo-qt-qemux86-64.qemuboot.conf kvm serialstdio slirp publicvnc audio
 ```
 
 If you need to run it outside of the bitbake environment or need special settings for
@@ -229,7 +229,7 @@ Once VirtualBox is installed, follow these steps to boot the image:
     ![vbox-step-1](images/vbox-1.png)
     - Select Memory size. Recommended is `2048 MB`, click on `Next`.
     ![vbox-step-2](images/vbox-2.png)
-    - Click on `Use an existing virtual hard disk file`, and select the extracted `agl-demo-platform-qemux86-64.vmdk.xz` or `<html5-image?>` file, click on `Create`.
+    - Click on `Use an existing virtual hard disk file`, and select the extracted `agl-ivi-demo-qt-qemux86-64.vmdk.xz` or `<html5-image?>` file, click on `Create`.
     ![vbox-step-3](images/vbox-3.png)
     - Go to `Settings`, and into `System`. Select `Chipset : IHC9`. Check on `Enable EFI (special OSes only)` and click on `OK`.
     ![vbox-step-4](images/vbox-4.png)
@@ -248,7 +248,7 @@ Once VirtualBox is installed, follow these steps to boot the image:
     $ cd tmp/deploy/images/qemux86-64
     $ lsblk
     $ sudo umount <usb_device_name>
-    $ xzcat agl-demo-platform-qemux86-64.wic.xz | sudo dd of=<usb_device_name> bs=4M
+    $ xzcat agl-ivi-demo-qt-qemux86-64.wic.xz | sudo dd of=<usb_device_name> bs=4M
     $ sync
     ```
 

@@ -80,35 +80,35 @@ CPU and and Internet connection speeds.
 The build also takes approximately 100G-bytes of free disk space.
 
 **Qt Based IVI demo :**
-The target is `agl-demo-platform`.
+The target is `agl-ivi-demo-qt`.
 
 ```sh
-$ time bitbake agl-demo-platform
+$ time bitbake agl-ivi-demo-qt
 ```
 
 By default, the build process puts the resulting image in the Build Directory and further exporting that as `$IMAGE_NAME`.
 Here is example for the Raspberry Pi 4 board for Qt Based demo:
 
 ```sh
-<build_dir>/tmp/deploy/images/raspberrypi4/agl-demo-platform-raspberrypi4.wic.xz
+<build_dir>/tmp/deploy/images/raspberrypi4/agl-ivi-demo-qt-raspberrypi4.rootfs.wic.xz
 
-$ export IMAGE_NAME=agl-demo-platform-raspberrypi4.wic.xz
+$ export IMAGE_NAME=agl-ivi-demo-qt-raspberrypi4.rootfs.wic.xz
 ```
 
 **HTML5 Based IVI demo :**
-The target is `agl-demo-platform-html5`.
+The target is `agl-ivi-demo-html5`.
 
 ```sh
-$ time bitbake agl-demo-platform-html5
+$ time bitbake agl-ivi-demo-html5
 ```
 
 By default, the build process puts the resulting image in the Build Directory and further exporting that as `$IMAGE_NAME`.
 Here is example for the Raspberry Pi 4 board for HTML5 Based demo:
 
 ```sh
-<build_dir>/tmp/deploy/images/raspberrypi4/agl-demo-platform-html5-raspberrypi4-64.wic.xz
+<build_dir>/tmp/deploy/images/raspberrypi4/agl-ivi-demo-html5-raspberrypi4-64.rootfs.wic.xz
 
-$ export IMAGE_NAME=agl-demo-platform-html5-raspberrypi4-64.wic.xz
+$ export IMAGE_NAME=agl-ivi-demo-html5-raspberrypi4-64.rootfs.wic.xz
 ```
 
 ## 4. Deploying the AGL Demo Image

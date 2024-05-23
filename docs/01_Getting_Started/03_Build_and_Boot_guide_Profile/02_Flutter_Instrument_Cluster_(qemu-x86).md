@@ -67,7 +67,7 @@ $ source master/meta-agl/scripts/aglsetup.sh -b build-flutter-cluster -m qemux86
 ```bash
 $ cd $AGL_TOP/master/build-flutter-cluster
 $ source agl-init-build-env
-$ bitbake agl-cluster-demo-platform-flutter
+$ bitbake agl-cluster-demo-flutter
 ```
 
 ## 6. Deploying the AGL Demo Image

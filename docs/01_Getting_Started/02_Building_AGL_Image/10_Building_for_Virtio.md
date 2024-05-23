@@ -49,10 +49,10 @@ $ bitbake agl-image-minimal
 ```
 
 **Qt Based IVI demo :**
-The target is `agl-demo-platform`.
+The target is `agl-ivi-demo-qt`.
 
 ```sh
-$ bitbake agl-demo-platform
+$ bitbake agl-ivi-demo-qt
 ```
 
 ## 3. Deploying the AGL Demo Image

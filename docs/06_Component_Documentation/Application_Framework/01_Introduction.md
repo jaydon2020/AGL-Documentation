@@ -16,7 +16,7 @@ With the `needlefish` release, further evolution of the replacement framework in
 
 - Using [gRPC IPC](https://grpc.io/about) for the application launcher API.
   The interim D-Bus based API was deprecated at this time, and removed in the
-  `pike` release.
+  `ricefish` release.
 - Using only systemd unit metadata in the application launcher instead of using
   [Desktop Entry specification](https://www.freedesktop.org/wiki/Specifications/desktop-entry-spec/)
   to list applications, and relying entirely on systemd for the application
@@ -101,7 +101,7 @@ Service](../../04_Developer_Guides/03_Creating_a_New_Service.md) document.
 # User Session Management
 
 Similarly, user sessions and the services they rely on are also managed by
-`systemd`.  Prior to the `pike` release, AGL used a user session for the
+`systemd`.  Prior to the `ricefish` release, AGL used a user session for the
 `agl-driver` user for the running of user facing applications, including the
 compositor. This has been replaced with using system units that use the
 `User` directive. The reason for this is two-fold:

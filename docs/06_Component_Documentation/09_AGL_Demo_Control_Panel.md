@@ -5,23 +5,16 @@ title: AGL Demo Control Panel
 
 ## Introduction
 
-This document describes the design and usage of the **AGL Demo Control Panel**, a **Qt5-based** tool that allows you to control and interact with various **Automotive Grade Linux (AGL)** demo applications. The tool uses **Kuksa.val** and **CAN frame messages** to communicate with the target machine that runs the AGL image(s). You can use the tool to perform tasks such as starting and stopping scripts, changing the vehicle speed and engine RPM, adjusting the HVAC settings, and providing Steering Inputs. The tool is designed to **demonstrate** the capabilities and features of AGL in a **user-friendly** and **interactive** way.
+This document describes the design and usage of the **AGL Demo Control Panel**, a **Qt6-based** tool that allows you to control and interact with various **Automotive Grade Linux (AGL)** demo applications. The tool uses **Kuksa.val** and **CAN frame messages** to communicate with the target machine that runs the AGL image(s). You can use the tool to perform tasks such as starting and stopping scripts, changing the vehicle speed and engine RPM, adjusting the HVAC settings, and providing Steering Inputs. The tool is designed to **demonstrate** the capabilities and features of AGL in a **user-friendly** and **interactive** way.
+
+It also supports file playback from CARLA based CAN messages. Refer to the [CARLA with AGL](13_CARLA_with_AGL.md) for more information.
+
 ### Application Overview
 
 To use the control panel, you need to connect the main machine that runs the control panel to the target machine that runs the AGL image(s) using a **LAN/ethernet cable**. You also need to configure the IP address of the Kuksa server and set your preferences in the tool’s settings menu.
 
 ![Layers_And_Extensions](images/AGL-Demo-Control-Panel/Application-Logic.png)
 ## Installation  
-
-  
-
-- _Note_:
-	If errors occur in Debian based/Rasbian OS during installation, follow the steps mentioned below and skip to step 2:
-```bash
-$ nano requirements.txt
-# -> Comment pyqt5 dependency using "#"
-$ sudo apt install python3-pyqt5 python3-qtpy pyqt5-dev-tools python3-pyqt5.qtsvg -y
-```
 
 - Step 1
 ```bash
@@ -32,7 +25,7 @@ $ source control-panel/bin/activate
 - Step 2
 ```bash
 $ pip3 install -r requirements.txt
-$ pyrcc5 assets/res.qrc -o res_rc.py
+$ pyside6-rcc assets/res.qrc -o res_rc.py
 ```
 ## Setup
 
@@ -40,8 +33,9 @@ Before using the  `AGL Demo Control Panel`, we need to make sure to run the Kuks
 
 ### 1. Connect the Machines
 
-First, we need to connect the machines, i.e. the host machine (Running the control panel) and the target machine (running the AGL image) via LAN or a bridged network (QEMU or VM) 
-### 2. CAN interface (WIP)
+First, we need to connect the machines, i.e. the host machine (Running the control panel) and the target machine (running the AGL image) via LAN or a bridged network (QEMU or VM).
+
+### 2. CAN interface
 
 To set up the CAN interface between the Host system and the target machine(s) we use [cannelloni](https://github.com/mguentner/cannelloni),
 

@@ -1,6 +1,6 @@
 # Persistent Storage API for the Automotive Grade Linux demo
 
-The [AGL Persistent Storage API](https://github.com/LSchwiedrzik/agl-persistent-storage-api)
+The AGL Persistent Storage API 
 is a grpc API for [AGL](https://www.automotivelinux.org/) 
 that serves as persistent storage API for the demo. The API is written 
 in Rust and makes use of [tonic](https://crates.io/crates/tonic-build) for grpc
@@ -24,10 +24,17 @@ The AGL Persistent Storage API is constructed using a layered architecture:
   the business logic
 - Facade layer: implements RocksDB.
 
+By default, the API can be accessed through port 50054. This can be changed in main.rs.
+The RocksDB database files are stored in directory "AGLPersistentStorageAPI", 
+located in the home directory of your system. This can be changed in service.rs.
+
 ## API Specification
 
-**Namespaces**
+### Namespaces
+
 The rpcs described below interact with keys belonging to specific namespaces. This feature enables applications to maintain private namespaces within the same database. Not specifying a namespace when calling the API will result in the default namespace "" being used. Alternatively, a specific namespace (e.g. "AppName") can be chosen. With the exception of DestroyDB, which acts on the entire database, all rpcs can only interact with one namespace at a time.
+
+### Remote procedure calls
 
 - `DestroyDB() -> StandardResponse(success: boolean, message: string)`
 
@@ -103,7 +110,7 @@ The rpcs described below interact with keys belonging to specific namespaces. Th
   - Consumer wants to delete all keys located in the subtree with root *key*, within the given *namespace* (default is ""), e.g.
     'Vehicle.Infotainment'
   - `key = ''` returns `ERROR`
-  - This rpc assumes that keys follow a VSS-like tree structure.
+  - This rpc assumes that keys follow a VSS-like tree structure. *key* must be the full name of an existing node.
 
     ```text
     DeleteNodes('Vehicle.Infotainment') -> Response //deletes ('Vehicle.Infotainment', 'Vehicle.Infotainment.Radio.CurrentStation', 'Vehicle.Infotainment.Radio.Volume', 'Vehicle.Infotainment.HVAC.OutdoorTemperature')
@@ -124,10 +131,10 @@ The rpcs described below interact with keys belonging to specific namespaces. Th
   - Consumer wants to list all nodes located in the subtree with root *node* exactly *layers*
     layers deep, within the given *namespace* (default is "") , e.g. 'Vehicle.Infotainment'
 
-    - `layers = 0` lists all keys that start in *node* any number of *layers* deep
-    - `layers` default value is 1
-    - `node = ''` returns top-level root node(s)
-    - This rpc assumes that keys follow a VSS-like tree structure.
+  - `layers = 0` lists all keys that start in *node* any number of *layers* deep
+  - `layers` default value is 1
+  - `node = ''` returns top-level root node(s)
+  - This rpc assumes that keys follow a VSS-like tree structure. *node* must be the full name of an existing node.
 
     ```text
     ListNodes('Vehicle.Infotainment', 1) -> ('Vehicle.Infotainment.Radio', 'Vehicle.Infotainment.HVAC')
@@ -177,35 +184,33 @@ Note: nodes marked by \* are keys (and therefore have a value)
 
 ## Setup instructions
 
-1. Install rust
+1. Install [rust](https://rustup.rs/).
 
-2. Download or install protobuf (e.g. from
-   [here](https://github.com/protocolbuffers/protobuf/releases)) and set the
-   `PROTOC` environment variable:
-   `echo -n "export PROTOC=/path/to/protoc.exe" >> ~/.bashrc`
+2. Install the Protobuf Compiler, e.g. by downloading the latest pre-built binary for your system [here](https://github.com/protocolbuffers/protobuf/releases) and following the installation instructions included in the readme. Be sure to add your Protobuf installation to your PATH. See also the general [Protobuf installation instructions](https://github.com/protocolbuffers/protobuf?tab=readme-ov-file#protobuf-compiler-installation).
+
+3. Install a clang compiler, e.g. by downloading the latest pre-built LLVM binary for your system [here](https://github.com/llvm/llvm-project/releases) and adding the LIBCLANG_PATH variable to your environment.
    
-3. Build application
+4. Build application.
 
    ```bash
    cargo build
    ```
 
-4. Run tests
+5. Run tests.
 
    ```bash
    cargo test
    ```
 
-5. Start server
+6. Start server.
 
    ```bash
    cargo run --release --bin server
    ```
 
-## rpc Usage
+## Remote Procedure Call Usage
 
-Insomnia usage for manual testing is describd in
-https://konghq.com/blog/engineering/building-grpc-apis-with-rust
+To ensure your API is working as expected, you can use [Insomnia](https://insomnia.rest/) to manually send remote procedure calls to the API, following the instructions provided in the [Insomnia documentation](https://docs.insomnia.rest/insomnia/requests#send-a-grpc-request). For each procedure call, an example is given below:
 
 ```text
 DestroyDB: {}
@@ -220,6 +225,5 @@ Search: { "key": "foo", "namespace": "bar" }
 
 DeleteNodes: { "key": "foo", "namespace": "bar" }
 
-ListNodes: { "key": "foo", "layers": 1, "namespace": "bar" }
-
+ListNodes: { "node": "foo", "layers": 1, "namespace": "bar" }
 ```

@@ -357,6 +357,13 @@ UI.
 
 Please refer to Appendix 3.
 
+## Frequently Asked Questions
+
+| Questions | Answer |
+|:---|:---|
+| Why not show map in default screen of Momi IVI. | When you want show map, you need extra step.  Please fallow [this page](../../06_Component_Documentation/Demo_Application/01_Momi_Navi.md).|
+
+
 ## Appendix.1.  Typical Hardware set.
 
 ### AGL Reference Hardware.

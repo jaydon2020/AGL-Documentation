@@ -24,3 +24,8 @@ title: AGL Components
 ### Application Lifecycle and Services
 
 - [Application Framework](Application_Framework/01_Introduction.md)
+
+### Application for Demo
+
+- [Momi Navi](Demo_Application/01_Momi_Navi.md)
+

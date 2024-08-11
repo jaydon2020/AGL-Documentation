@@ -314,48 +314,67 @@ card device is /dev/mmcblkX may be.
 
 ## 7. How to use container exchange UI.
 
-### 7a. Momi Web
+IC container integration has three method for container exchange.
 
-The Momi web is a web interface for container exchange.  When you want
-to use Momi web, you must connect network between board and
-PC/Tablet/Phone.
+| No. | Method | Refer to |
+|:---|:---|:---|
+| 1 | Command line interface | Sub section 7a. |
+| 2 | Web UI | Appendix 3. |
+| 3 | Key board UI | Appendix 4. |
 
-**The Momi web is completely demo feature, that open many security hole.
- You shall not use out of standalone demo.**
 
-#### 1st step: Check IP address in your board.
+### 7a. How to change guest using command line interface
 
-After booting, you check IP address in your board.
+The cmcontrol is a command line interface for the container manager.  It supports container listing, shutdown, reboot, force reboot, and active guest change. 
 
 ```bash
-root@raspberrypi4-64:\~# ifconfig\
-eth0      Link encap:Ethernet  HWaddr E4:XX:YY:ZZ:WW:VV\
-           inet addr:192.168.10.128  Bcast:192.168.10.255
-  Mask:255.255.255.0
+$ cmcontrol
+usage: [options]
+
+ --help                   print help strings.
+ --get-guest-list         get guest container list from container manager.
+ --get-guest-list-json    get guest container list from container manager by json.
+ --shutdown-guest-name=N  shutdown request to container manager. (N=guest name)
+ --shutdown-guest-role=R  shutdown request to container manager. (R=guest role)
+ --reboot-guest-name=N    reboot request to container manager. (N=guest name)
+ --reboot-guest-role=R    shutdown request to container manager. (R=guest role)
+ --force-reboot-guest-name=N    reboot request to container manager. (N=guest name)
+ --force-reboot-guest-role=R    shutdown request to container manager. (R=guest role)
+ --change-active-guest-name=N    change active guest request to container manager. (N=guest name)
 ```
 
-In this case, this board set IP address by 192.168.10.128.
+You can get installed container guests in the system using --get-guest-list option.
 
-#### 2nd step: Connect to board using web browser.
+```bash
+$ cmcontrol --get-guest-list
+HEADER:                             name,        role,      status
+                            cluster-demo,     cluster,     started
+                    agl-flutter-ivi-demo,         ivi,     disable
+                       agl-momi-ivi-demo,         ivi,     started
+                         agl-qt-ivi-demo,         ivi,     disable
+```
 
-Open "[http://a.b.c.d:8080](http://a.b.c.d:8080)".  When
-a board is set IP address 192.168.10.128, you open
-"[http://192.168.10.128:8080](http://192.168.10.128:8080)".
+The name is a guest name.  The role is a guest role (cluster or ivi).  The status is a status of guest.  Current inactive guest status is disable.
 
-When you success to connect to board, your web browser show these web
-UI.
 
-#### PC View
+If you want to change guest from agl-momi-ivi-demo to agl-flutter-ivi-demo, it uses these command.
 
-![](images/image4.png)
+```bash
+$ cmcontrol --change-active-guest-name=agl-flutter-ivi-demo
+$ cmcontrol --shutdown-guest-role=ivi
+```
 
-#### Mobile View
+If you want to reboot IVI guest with shutdown process, it uses these command.
 
-![](images/image5.png)
+```bash
+$ cmcontrol --reboot-guest-role=ivi
+```
 
-### 7b. Keyboard Interface
+If you want to force reboot IVI guest without shutdown process, it uses these command.
 
-Please refer to Appendix 3.
+```bash
+$ cmcontrol --force-reboot-guest-role=ivi
+```
 
 ## Frequently Asked Questions
 
@@ -402,15 +421,51 @@ Please refer to Appendix 3.
 
 ![](images/image9.jpeg)
 
-### HTML5 IVI
-
-![](images/image10.jpeg)
-
 ### Momi IVI
 
 ![](images/image11.jpeg)
 
-## Appendix 3. How to configure Special Keyboard.
+## Appendix 3. How to use Web UI (Momi Web).
+
+The Momi web is a web interface for container exchange.  When you want
+to use Momi web, you must connect network between board and
+PC/Tablet/Phone.
+
+**The Momi web is completely demo feature, that open many security hole.
+ You shall not use out of standalone demo.**
+
+### 1st step: Check IP address in your board.
+
+After booting, you check IP address in your board.
+
+```bash
+root@raspberrypi4-64:\~# ifconfig\
+eth0      Link encap:Ethernet  HWaddr E4:XX:YY:ZZ:WW:VV\
+           inet addr:192.168.10.128  Bcast:192.168.10.255
+  Mask:255.255.255.0
+```
+
+In this case, this board set IP address by 192.168.10.128.
+
+### 2nd step: Connect to board using web browser.
+
+Open "[http://a.b.c.d:8080](http://a.b.c.d:8080)".  When
+a board is set IP address 192.168.10.128, you open
+"[http://192.168.10.128:8080](http://192.168.10.128:8080)".
+
+When you success to connect to board, your web browser show these web
+UI.
+
+### PC View
+
+![](images/image4.png)
+
+### Mobile View
+
+![](images/image5.png)
+
+
+## Appendix 4. How to configure Special Keyboard.
 
 ### How to get configuration tool.
 

@@ -31,13 +31,10 @@ table2.
 
 | Board type | Support integration type | status |
 |:---:|:---:|:---:|
-| AGL RefHW | 1,2a,3a,3b | Tested |
+| AGL RefHW | 1,2a,3a,3b | Tested. |
 | R-CarH3 Starter Kit with Kingfisher board | 1,2a,3a,3b | Not tested. |
-| R-CarM3 Starter Kit with Kingfisher board | 1,2a,3a,3b | EOL Board. Not tested. |
-| R-CarH3 Starter Kit | 1,2a | End of Supported in latest release. |
-| R-CarM3 Starter Kit | 1,2a | EOL Board. End of  support in latest release. |
-| Raspberry Pi4 (4G or 8G) | 1,2a,3a,3b | Tested. |
-
+| Raspberry Pi4 (4G or 8G) | 1,2a,3a,3b | Not tested. |
+| NanoPC-T6 (4G or 8G or 16G) | 1,3a,3b | TODO. |
 
 We recommend to choice AGL RefHW or Raspberry Pi4 (4G or 8G).
 
@@ -99,7 +96,9 @@ If your board is Raspberry Pi4, please skip this step.
 
 #### 7-1: Downloading Proprietary Drivers from [Renesas-automotive-products](https://www.renesas.com/us/en/products/automotive-products/automotive-system-chips-socs/r-car-h3-m3-documents-software).
 
-In case of Optimistic Octopus and master, please download this.
+In case of master, please download this.
+
+***Note.  Latest AGL use same binary as kirkstone.***
 
 ![](images/image3.png)
 
@@ -210,7 +209,6 @@ agl-ivi-demo-qt, agl-ivi-demo-flutter and agl-ivi-demo-html5.
 ```bash
 $ bitbake agl-ivi-demo-qt
 $ bitbake agl-ivi-demo-flutter
-$ bitbake agl-ivi-demo-html5
 ```
 
 #### 3rd step: Set deploy path of AGL IVI Demo to IC side config.
@@ -260,7 +258,7 @@ Renesas propriety license limitation.
 Download IVI guest images from this link.
 
 [[Prebuild AGL Demo IVI container images for Raspberry Pi
-4.]](https://drive.google.com/file/d/1uXel0K9_IK7SAEc8msKyXvNWhFRWgF4C/view?usp=sharing)
+4.]]()
 
 Extract download tar.bz2 archive to any directory.
 

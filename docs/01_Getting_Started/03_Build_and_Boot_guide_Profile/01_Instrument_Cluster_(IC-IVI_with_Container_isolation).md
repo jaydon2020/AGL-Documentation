@@ -33,7 +33,7 @@ table2.
 |:---:|:---:|:---:|
 | AGL RefHW | 1,2a,3a,3b | Tested. |
 | R-CarH3 Starter Kit with Kingfisher board | 1,2a,3a,3b | Not tested. |
-| Raspberry Pi4 (4G or 8G) | 1,2a,3a,3b | Not tested. |
+| Raspberry Pi4 (4G or 8G) | 1,2a,3a,3b | Tested. |
 | NanoPC-T6 (4G or 8G or 16G) | 1,3a,3b | TODO. |
 
 We recommend to choice AGL RefHW or Raspberry Pi4 (4G or 8G).

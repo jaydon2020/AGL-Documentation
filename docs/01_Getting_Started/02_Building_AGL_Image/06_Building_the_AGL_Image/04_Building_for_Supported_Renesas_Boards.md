@@ -145,7 +145,7 @@ Internet.
 ### 1.4. Making Sure Your Build Environment is Correct
 
 The
-"[Initializing Your Build Environment](./04_Initializing_Your_Build_Environment.md)"
+"[Initializing Your Build Environment](../04_Initializing_Your_Build_Environment.md)"
 section presented generic information for setting up your build environment
 using the `aglsetup.sh` script.
 If you are building an image for a supported Renesas board,
@@ -233,7 +233,7 @@ Finally, the AGL features are provided to support building the AGL Demo image
 for the Renesas board.
 
 You can learn more about the AGL Features in the
-"[Initializing Your Build Environment](./04_Initializing_Your_Build_Environment.md)"
+"[Initializing Your Build Environment](../04_Initializing_Your_Build_Environment.md)"
 section.
 
 ## 2. Using BitBake

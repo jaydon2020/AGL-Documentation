@@ -16,7 +16,7 @@ AGL demo image for the Raspberry Pi 4 board.
 ## 1. Making Sure Your Build Environment is Correct
 
 The
-"[Initializing Your Build Environment](./04_Initializing_Your_Build_Environment.md)"
+"[Initializing Your Build Environment](../04_Initializing_Your_Build_Environment.md)"
 section presented generic information for setting up your build environment
 using the `aglsetup.sh` script.
 If you are building the AGL demo image for a Raspberry Pi 4 board, you need to specify some
@@ -49,7 +49,7 @@ the AGL demo image suited for Raspberry Pi 4.
 
 Before launching the build, it is good to be sure your build
 configuration is set up correctly (`/build/conf/local.conf` file).
-The "[Customizing Your Build](./05_Customizing_Your_Build.md)"
+The "[Customizing Your Build](../05_Customizing_Your_Build.md)"
 section highlights some common configurations that are useful when
 building any AGL image.
 

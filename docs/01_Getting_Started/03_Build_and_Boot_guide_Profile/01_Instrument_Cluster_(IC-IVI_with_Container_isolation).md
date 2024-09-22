@@ -33,10 +33,10 @@ table2.
 |:---:|:---:|:---:|
 | AGL RefHW | 1,2a,3a,3b | Tested. |
 | R-CarH3 Starter Kit with Kingfisher board | 1,2a,3a,3b | Not tested. |
-| Raspberry Pi4 (4G or 8G) | 1,2a,3a,3b | Tested. |
-| NanoPC-T6 (4G or 8G or 16G) | 1,3a,3b | TODO. |
+| NanoPC-T6 (4G or 8G or 16G) | 1,3a,3b | Tested by 16G board. |
+| Raspberry Pi4/5 (4G or 8G) | 1,2a,3a,3b | Tested. |
 
-We recommend to choice AGL RefHW or Raspberry Pi4 (4G or 8G).
+We recommend to choice AGL RefHW or Raspberry Pi4 (4G or 8G) or NanoPC-T6 (4G or 8G or 16G) . 
 
 **Typical Hardware Set is shown in Appendix.1. **
 
@@ -135,10 +135,21 @@ When your board is R- CarH3 Starter Kit with Kingfisher board.
 $ source meta-agl/scripts/aglsetup.sh -f -m h3ulcb-kf -b build-ic-h3kf agl-ic-container
 ```
 
+When your board is NanoPC T6
+```bash
+$ source meta-agl/scripts/aglsetup.sh -f -m nanopc-t6 -b build-ic-nanopc-t6 agl-ic-container
+```
+
 When your board is Raspberry Pi 4
 ```bash
 $ source meta-agl/scripts/aglsetup.sh -f -m raspberrypi4 -b build-ic-rpi4 agl-ic-container
 ```
+
+When your board is Raspberry Pi 5
+```bash
+$ source meta-agl/scripts/aglsetup.sh -f -m raspberrypi5 -b build-ic-rpi5 agl-ic-container
+```
+
 
 ### 2nd step: Build target image.
 
@@ -196,9 +207,19 @@ When your board is R- CarH3 Starter Kit with Kingfisher board.
 $ source meta-agl/scripts/aglsetup.sh -f -m h3ulcb-kf -b build-ivi-h3kf agl-container-guest-demo agl-demo
 ```
 
+When your board is NanoPC T6
+```bash
+$ source meta-agl/scripts/aglsetup.sh -f -m nanopc-t6 -b build-ic-nanopc-t6 agl-container-guest-demo agl-demo
+```
+
 When your board is Raspberry Pi 4
 ```bash
 $ source meta-agl/scripts/aglsetup.sh -f -m raspberrypi4 -b build-ivi-rpi4 agl-container-guest-demo agl-demo
+```
+
+When your board is Raspberry Pi 5
+```bash
+$ source meta-agl/scripts/aglsetup.sh -f -m raspberrypi5 -b build-ivi-rpi5 agl-container-guest-demo agl-demo
 ```
 
 #### 2nd step: Build target images.
@@ -225,19 +246,31 @@ OUT_OF_TREE_CONTAINER_IMAGE_DEPLOY_DIR = "/path/to/deploy/"
 
 ex.  When your board is AGL RefHW and your home directory is "/home/user/".
 ```bash
-OUT_OF_TREE_CONTAINER_IMAGE_DEPLOY_DIR = "/home/user/AGL/octopus/build-ivi-refhw/tmp/deploy"
+OUT_OF_TREE_CONTAINER_IMAGE_DEPLOY_DIR = "/home/user/AGL/master/build-ivi-refhw/tmp/deploy"
 ```
 
 ex.  When your board is R- CarH3 Starter Kit with Kingfisher board and your home directory is "/home/user/".
 
 ```bash
-OUT_OF_TREE_CONTAINER_IMAGE_DEPLOY_DIR = "/home/user/AGL/octopus/build-ivi-h3kf/tmp/deploy"
+OUT_OF_TREE_CONTAINER_IMAGE_DEPLOY_DIR = "/home/user/AGL/master/build-ivi-h3kf/tmp/deploy"
+```
+
+ex.  When your board is NanoPC T6 board and your home directory is "/home/user/".
+
+```bash
+OUT_OF_TREE_CONTAINER_IMAGE_DEPLOY_DIR = "/home/user/AGL/master/build-ivi-nanopc-t6/tmp/deploy"
 ```
 
 ex.  When your board is Raspberry Pi 4 and your home directory is "/home/user/".
 
 ```bash
-OUT_OF_TREE_CONTAINER_IMAGE_DEPLOY_DIR = "/home/user/AGL/octopus/build-ivi-rpi4/tmp/deploy"
+OUT_OF_TREE_CONTAINER_IMAGE_DEPLOY_DIR = "/home/user/AGL/master/build-ivi-rpi4/tmp/deploy"
+```
+
+ex.  When your board is Raspberry Pi 5 and your home directory is "/home/user/".
+
+```bash
+OUT_OF_TREE_CONTAINER_IMAGE_DEPLOY_DIR = "/home/user/AGL/master/build-ivi-rpi5/tmp/deploy"
 ```
 
 #### 4th step: Build all in one image (3b).
@@ -486,7 +519,6 @@ Upstream:
 | C | Crash IVI guest |
 | D | Qt IVI |
 | G | Flutter IVI |
-| H | HTML5 IVI |
 
 # Reference webpages
  1. [eLinux](https://elinux.org/R-Car/AGL)

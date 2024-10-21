@@ -25,6 +25,8 @@ $ source control-panel/bin/activate
 - Step 2
 ```bash
 $ pip3 install -r requirements.txt
+$ /usr/lib64/qt6/libexec/rcc -g python assets/res.qrc | sed '0,/PySide6/s//PyQt6/' > res_rc.py
+# OR
 $ pyside6-rcc assets/res.qrc -o res_rc.py
 ```
 ## Setup
@@ -66,7 +68,7 @@ To set up the CAN interface between the Host system and the target machine(s) we
 
 	You should now be able to send and receive CAN messages between the two machines using the vcan interface and cannelloni.
 
-### 3. Configuration for Kuksa-val-server/ Kuksa databroker
+### 3. Configuring the Demo Control Panel
 
 Run the `kuksa-val-server`/`databroker` on `0.0.0.0` by either restarting the server, editing `/etc/default/kuksa-databroker` or add the `agl-demo-preload` as a feature to your build of AGL.  The server should be started using the `--address 0.0.0.0` argument.
 
@@ -76,27 +78,46 @@ Now, you can create a custom configuration to save your specific preferences for
 	
 ```python
 [default]
-preferred-config=AGL-kuksa-val-server
+fullscreen-mode = true			# launches app in fullscreen mode
+hvac-enabled = true
+steering-wheel-enabled = true
+file-playback-enabled = true	# if not, vcar simulator will be used instead
+file-playback-path =			# Add path to can_messages.txt file generated (Refer Step 4. Playback)
+dbc-file-path =
+can-interface =
 
-# [cutom-config-template]
-# ip=<ip address>
-# port=<port number>
-# protocol=<ws|grpc>       # ws/grpc -> kuksa-val-server, grpc -> databroker
-# insecure=<true|false>    
-# cacert=<default|/path/to/CA.pem>
-# token=<default|/path/to/token>      
-# tls_server_name=<name>
+[keypad-feature]
+enabled = true					# If false, keypad UI is not shown
+keypad-only = false				# only Keypad page is shown
+ip =
+port =
+keys-to-hide = 3				# hide keys by specifying 1,2,3,4
 
-[kuksa-val-server]
-ip=localhost
-port=8090
-protocol=ws
-insecure=false
-token=default
-tls_server_name=
+[vss-server]
+ip = localhost
+port = 55555
+protocol = grpc
+insecure = False
+token = default
+cacert = default
+tls_server_name = Server
 ```
 
-### 4. Start AGL Demo Control Panel
+### 4. Playback (Demo mode)
+
+This mode is configured via the `config.ini` file as shown above, using the `file-playback-enabled` and `file-playback-enabled` fields.
+
+![Playback Demo](images/AGL-Demo-Control-Panel/PlaybackDemo.gif)
+
+The playback Mode runs in two ways:
+
+1. CARLA File Playback: In this mode, a pre-recorded sequence of CAN messages is used to feed values into the Demo apps.
+
+Follow the [CARLA with AGL](13_CARLA_with_AGL.md) steps to generate the **can_messages.txt** file, which is populated during a CARLA session.
+
+_Note_: While generating the playback file, it is recommended to run both **record_playback** and **carla_to_CAN** scripts with a python version supported by CARLA.
+
+### 5. Start AGL Demo Control Panel
 
 1. To start the control panel
 	```
@@ -121,14 +142,10 @@ tls_server_name=
 	- Reconnect
 	- Page settings: Configure the visibility of pages and switch between CAN and Kuksa messages by using the toggle for the same.
 
-![Layers_And_Extensions](images/AGL-Demo-Control-Panel/Settings_Page.png)
-
 1. Navigate to the desired page using the provided buttons at the bottom
-
-|  |
-|---|
-| ![Layers_And_Extensions](images/AGL-Demo-Control-Panel/IC.png) |
 
 |  |  |
 |---|---|
-| ![Layers_And_Extensions](images/AGL-Demo-Control-Panel/HVAC.png) | ![Layers_And_Extensions](images/AGL-Demo-Control-Panel/SC.png) |
+| ![Layers_And_Extensions](images/AGL-Demo-Control-Panel/IC1.png) | ![Layers_And_Extensions](images/AGL-Demo-Control-Panel/IC2.png) |
+| ![Layers_And_Extensions](images/AGL-Demo-Control-Panel/HVAC.png) | ![Layers_And_Extensions](images/AGL-Demo-Control-Panel/Keypad.png) |
+| ![Layers_And_Extensions](images/AGL-Demo-Control-Panel/SC.png) | ![Layers_And_Extensions](images/AGL-Demo-Control-Panel/Settings_Page.png) |

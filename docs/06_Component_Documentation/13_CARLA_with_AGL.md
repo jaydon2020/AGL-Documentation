@@ -1,13 +1,21 @@
 ---
 title: CARLA with AGL
 ---
-# CARLA with AGL (WIP)
+# CARLA with AGL
+
+![Playback Demo](images/AGL-Demo-Control-Panel/CARLA_CAN.gif)
+
+As part of the [agl-demo-control-panel](https://gerrit.automotivelinux.org/gerrit/admin/repos/src/agl-demo-control-panel,general) application, `carla_to_CAN` and `record_playback.py` scripts provide a way to record CAN messages generated during a CARLA simulation. The `can_messages.txt` playback file generated, can then be used to to playback the messages via CLI or GUI.
+
+![Playback Demo](images/AGL-Demo-Control-Panel/PlaybackDemo.gif)
 
 ## Setting up CARLA
 
 You can follow the steps provided in the [CARLA documentation](https://carla.readthedocs.io/en/latest/start_quickstart/#carla-installation) for installing CARLA.
 
-We recommend using the [latest release](https://github.com/carla-simulator/carla/releases/), and using the supported Python version to run the `carla_to_CAN.py` Script.
+We recommend using the [CARLA V0.9.15](https://github.com/carla-simulator/carla/releases/tag/0.9.15), and using the supported Python version to run the `carla_to_CAN.py` script (Other releases have not been validated).
+
+_Note_: Use a version of python compatible with CARLA to create the venv **(Python 3.9 tested with CARLA V0.9.15)**
 
 1. Running the CARLA Server
 
@@ -43,6 +51,29 @@ We recommend using the [latest release](https://github.com/carla-simulator/carla
 	# Start the manual_control.py script
 	$ python3 manual_control.py
 	```
+_Tip_: If facing issues running the `manual_control.py` script, you may try removing `numpy` version from `requirements.txt` and comment out line `385` from the script.
+```python
+.
+.
+.
+
+class KeyboardControl(object):
+    """Class that handles keyboard input."""
+    def __init__(self, world, start_in_autopilot):
+        self._autopilot_enabled = start_in_autopilot
+        self._ackermann_enabled = False
+        self._ackermann_reverse = 1
+        if isinstance(world.player, carla.Vehicle):
+            self._control = carla.VehicleControl()
+            self._ackermann_control = carla.VehicleAckermannControl()
+            self._lights = carla.VehicleLightState.NONE
+            # world.player.set_autopilot(self._autopilot_enabled)    <<------ # disable autopilot
+            world.player.set_light_state(self._lights)
+        elif isinstance(world.player, carla.Walker):
+.
+.
+.
+```
 
 ## Converting CARLA data into CAN
 
@@ -56,13 +87,14 @@ To access these scripts, clone the [AGL Demo Control Panel](https://gerrit.autom
 
 ```bash
 # Move to the Scripts directory
-$ cd /path/to//agl-demo-control-panel/Scripts
+$ cd /path/to/agl-demo-control-panel/
 
 # Fetch the agl-vcar.dbc file
-$ wget -nd -c "https://git.automotivelinux.org/src/agl-dbc/plain/agl-vcar.dbc"
+$ wget -nd -c -P Scripts "https://git.automotivelinux.org/src/agl-dbc/plain/agl-vcar.dbc"
+$ cd Scripts/
 ```
 
-Create a Python virtual environment and resolve dependencies
+Create a Python (3.9) virtual environment and resolve dependencies.
 ```bash
 $ python3 -m venv carlavenv
 $ source carlavenv/bin/activate
@@ -75,9 +107,9 @@ $ ./vcan.sh
 1. Converting CARLA Data into CAN
 
 	```bash
-	$ python -u carla_to_CAN.py
+	$ python -u carla_to_CAN.py --interface vcan0
 	# OR
-	$ python -u carla_to_CAN.py --host <carla_server_ip> --port <carla_server_port>
+	$ python -u carla_to_CAN.py --interface vcan0 --host <carla_server_ip> --port <carla_server_port>
 	```
 
 2. Recording and Playback of CAN messages
@@ -93,7 +125,6 @@ $ ./vcan.sh
 	- 1: Captures CAN messages and writes them into 'can_messages.txt' 
 	- 2: Replays captured CAN messages
 	- 3: Exit
-
 
 ## CAN interface to AGL Demo Platform
 

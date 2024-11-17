@@ -18,11 +18,9 @@ which integration type.  Those type show in table1. 
 | No. | Type name | Detail of type | Required storage (SD card) size - board. | Build time AMD R9 5900HX /64GByte RAM | Required storage size-build. |  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | 1 | Simple container host | This integration aim to core package definition for container host using LXC.  This integration is not include demo package. This integration aim to define starting point for downstream product development. | 1G Byte |  | 150GByte | Console only. |
-| 2a | Instrument cluster with simple demo IVI install to one partition. | This integration aim to get most simple integration with demo feature.  This container runtime and management is constructed with LXC package only.  On the other hand, it has limitation for supported use case.  This integration support two demo guest run in one board (instrument cluster guest and momi IVI guest). This integration aim to learn drm lease and LXC container by developer. | 2GByte | 2h | 300GByte | ![](images/image1.png) |
-| 3a | Instrument cluster with demo IVI install to one by one partition. | This integration aim to get simple integration with demo feature.  This container runtime and management is constructed with container management daemon with liblxc.  This integration will improve to support many embedded use case.  This integration support two demo guest run in one board (instrument cluster guest and momi IVI guest). This integration aim to learn and develop AGL IC container integration by developer. | 16GByte (Including pre-allocated partition for 3 guests.) | 2h | 300GByte | ![](images/image1.png) |
-| 3b | Instrument cluster with four demo IVI install to one by one partition. | This integration aim to get full demo integration with AGL demo IVI.  This integration is extend from 3a integration.  This integration support instrument cluster guest and four IVI guest (momi, qt, flutter, html5).   This integration aim to use AGL demonstration in each event by developer. | 16GByte | 3a+6h | 600GByte | ![](images/image2.png) |
+| 2a | Instrument cluster with demo IVI install to one by one partition. | This integration aim to get simple integration with demo feature.  This container runtime and management is constructed with container management daemon with liblxc.  This integration will improve to support many embedded use case.  This integration support two demo guest run in one board (instrument cluster guest and momi IVI guest). This integration aim to learn and develop AGL IC container integration by developer. | 16GByte (Including pre-allocated partition for 2 guests.) | 2h | 300GByte | ![](images/image1.png) |
+| 2b | Instrument cluster with AGL demo IVI install to one by one partition. | This integration aim to get full demo integration with AGL demo IVI.  This integration is extend from 2a integration.  This integration support instrument cluster guest and four IVI guest (momi, qt, flutter).   This integration aim to use AGL demonstration in each event by developer. | 16GByte | 2a+6h | 600GByte | ![](images/image2.png) |
 
-We recommend to choice 3a.  It can extend to 3b.
 
 AGL IC container integration supported two board.  Those board show in
 table2.
@@ -31,10 +29,10 @@ table2.
 
 | Board type | Support integration type | status |
 |:---:|:---:|:---:|
-| AGL RefHW | 1,2a,3a,3b | Tested. |
-| R-CarH3 Starter Kit with Kingfisher board | 1,2a,3a,3b | Not tested. |
-| NanoPC-T6 (4G or 8G or 16G) | 1,3a,3b | Tested by 16G board. |
-| Raspberry Pi4/5 (4G or 8G) | 1,2a,3a,3b | Tested. |
+| AGL RefHW | 1,2a,2b | Tested. |
+| R-CarH3 Starter Kit with Kingfisher board | 1,2a,2b | Not tested. |
+| NanoPC-T6 (4G or 8G or 16G) | 1,2a,2b | Tested by 16G board. |
+| Raspberry Pi4/5 (4G or 8G) | 1,2a,2b | Tested. |
 
 We recommend to choice AGL RefHW or Raspberry Pi4 (4G or 8G) or NanoPC-T6 (4G or 8G or 16G) . 
 
@@ -153,7 +151,7 @@ $ source meta-agl/scripts/aglsetup.sh -f -m raspberrypi5 -b build-ic-rpi5 agl-ic
 
 ### 2nd step: Build target image.
 
-In this time, you can build 1,2a and 3a.  If you want to build 3b,
+In this time, you can build 1 and 2a.  If you want to build 2b,
 please do extra step in next section.
 
 When you choice integration type 1.
@@ -165,26 +163,20 @@ $ bitbake lxc-host-image-minimal
 When you choice integration type 2a.
 
 ```bash
-$ bitbake agl-cluster-demo-lxc-host
-```
-
-When you choice integration type 3a.
-
-```bash
 $ bitbake agl-instrument-cluster-container-demo
 ```
 
-## 4. Extra step for type 3b build.
+## 4. Extra step for type 2b build.
 
-This extra step can select 4a or 4b.  When you want to build AGL demo
-IVI container guest in myself, please select 4a work flow.  When you
-want to create AGL IC container demo quicly, please select 4b work flow.
+This extra step can select 4.1 or 4.2.  When you want to build AGL demo
+IVI container guest in myself, please select 4.1 work flow.  When you
+want to create AGL IC container demo quicly, please select 4.2 work flow.
 
-Typically 4a step require long build time about 6h.  When you want to
-build AGL Ref HW/ SK+ Kinfgisher software, you can\'t select select 4b
+Typically 4.1 step require long build time about 6h.  When you want to
+build AGL Ref HW/ SK+ Kinfgisher software, you can\'t select select 4.2
 work flow that depend to Renesas propriety license limitation.
 
-### 4a. Extra step for type 3b build myself.
+### 4.1. Extra step for type 2b build myself.
 
 #### 1st step: Configure 2nd build tree.
 
@@ -209,7 +201,7 @@ $ source meta-agl/scripts/aglsetup.sh -f -m h3ulcb-kf -b build-ivi-h3kf agl-cont
 
 When your board is NanoPC T6
 ```bash
-$ source meta-agl/scripts/aglsetup.sh -f -m nanopc-t6 -b build-ic-nanopc-t6 agl-container-guest-demo agl-demo
+$ source meta-agl/scripts/aglsetup.sh -f -m nanopc-t6 -b build-ivi-nanopc-t6 agl-container-guest-demo agl-demo
 ```
 
 When your board is Raspberry Pi 4
@@ -224,8 +216,8 @@ $ source meta-agl/scripts/aglsetup.sh -f -m raspberrypi5 -b build-ivi-rpi5 agl-c
 
 #### 2nd step: Build target images.
 
-Type 3b integration need to build 3 image, these image are
-agl-ivi-demo-qt, agl-ivi-demo-flutter and agl-ivi-demo-html5.
+Type 2b integration need to build 3 image, these image are
+agl-ivi-demo-qt and agl-ivi-demo-flutter.
 
 ```bash
 $ bitbake agl-ivi-demo-qt
@@ -234,7 +226,7 @@ $ bitbake agl-ivi-demo-flutter
 
 #### 3rd step: Set deploy path of AGL IVI Demo to IC side config.
 
-Type 3b integration refer to IVI pre build image.  Please set IVI side
+Type 2b integration refer to IVI pre build image.  Please set IVI side
 deploy directory in ic side local.conf (or site.conf).
 
 At $AGL_TOP/build-ic-XXXX/conf/local.conf
@@ -273,7 +265,7 @@ ex.  When your board is Raspberry Pi 5 and your home directory is "/home/user/".
 OUT_OF_TREE_CONTAINER_IMAGE_DEPLOY_DIR = "/home/user/AGL/master/build-ivi-rpi5/tmp/deploy"
 ```
 
-#### 4th step: Build all in one image (3b).
+#### 4th step: Build all in one image (2b).
 
 Back to terminal for ic build.
 
@@ -281,9 +273,9 @@ Back to terminal for ic build.
 $ bitbake agl-instrument-cluster-container-demo
 ```
 
-### 4b. Extra step for type 3b using pre build image.
+### 4.2. Extra step for type 2b using pre build image.
 
-The 4b can select Raspberry Pi 4 board only, this limitation depend to
+The 4.2 can select Raspberry Pi 4 board only, this limitation depend to
 Renesas propriety license limitation.
 
 #### 1st step: Download stable prebuild image from AGL site.
@@ -309,7 +301,7 @@ local.conf (or site.conf).
 OUT_OF_TREE_CONTAINER_IMAGE_DEPLOY_DIR="/path/to/directory/prebuild/"
 ```
 
-#### 3rd step: Build all in one image (3b).
+#### 3rd step: Build all in one image (2b).
 
 Back to terminal for ic build.
 
@@ -319,7 +311,7 @@ $ bitbake agl-instrument-cluster-container-demo
 
 ## 5. Write image to SD card.
 
-The 3a and 3b image is constructed by wic image, that include partition
+The 2a and 2b image is constructed by wic image, that include partition
 table and each partition data into one image file.
 
 In default setting, that wic image is compressed xz.  When that wic

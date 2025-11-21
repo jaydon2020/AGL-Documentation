@@ -10,15 +10,7 @@ Momi Navi is a example application for navigation.  It run on simple ivi demo (t
 
 ## How to use
 
-When you build the instrument cluster integration without momi navi specific setting, it will not show map.  You need momi navi specific setting.
-
-The momi navi uses mapbox gl plugin fo Qt location.  It requires own access token to download map.  You can create own mapbox access token following [this page](https://docs.mapbox.com/help/getting-started/access-tokens/).
-
-After creation, please set environment variable to local.conf (or site.conf).
-
-```
-MOMIMAP_MAPBOX_ACCESS_TOKEN = "Your access token."
-```
+The momi navi uses osm plugin of Qt location.
 
 ## Extra configuration
 
@@ -28,8 +20,6 @@ When you set environment variable to local.conf (or site.conf), you can customiz
 
 | Environment variable | Customizing parametor |
 |:---|:---|
-| MOMIMAP_MAPBOX_STYLE | Map style |
 | MOMIMAP_INITIAL_LATITUDE | Default location |
 | MOMIMAP_INITIAL_LONGITUDE | Default location |
 
-How to create map style, please check [this page](https://docs.mapbox.com/studio-manual/guides/map-styling/).

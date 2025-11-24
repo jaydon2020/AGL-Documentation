@@ -84,7 +84,7 @@ $ cd $AGL_TOP
 $ mkdir master
 $ export AGL_TOP=$HOME/AGL/master
 $ cd $AGL_TOP
-$ repo init -u https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo
+$ repo init -b master -u https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo
 $ repo sync
 ```
 

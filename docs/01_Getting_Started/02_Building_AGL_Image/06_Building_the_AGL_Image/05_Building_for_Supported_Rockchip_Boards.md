@@ -75,9 +75,9 @@ By default, the build process puts the resulting image in the Build Directory an
 Here is example for the NanoPC T6 board for Qt Based demo:
 
 ```sh
-<build_dir>/tmp/deploy/images/rockchip-rk3588-nanopc-t6/agl-ivi-demo-flutter-rockchip-rk3588-nanopc-t6.rootfs.wic.xz
+<build_dir>/tmp/deploy/images/rockchip-rk3588-nanopc-t6/agl-ivi-demo-qt-rockchip-rk3588-nanopc-t6.rootfs.wic.xz
 
-$ export IMAGE_NAME=agl-ivi-demo-flutter-rockchip-rk3588-nanopc-t6.rootfs.wic.xz
+$ export IMAGE_NAME=agl-ivi-demo-qt-rockchip-rk3588-nanopc-t6.rootfs.wic.xz
 ```
 
 ## 4. Deploying the AGL Demo Image

@@ -8,7 +8,7 @@ AGL provides a number of pre-built ready-made images of various versions.
 
 ### 1. QEMU (Emulation)
 
-1. Download the [compressed prebuilt image](https://download.automotivelinux.org/AGL/snapshots/master/latest/qemux86-64/deploy/images/qemux86-64/agl-ivi-demo-qt-crosssdk-qemux86-64.ext4.xz).
+1. Download the [compressed prebuilt image](https://download.automotivelinux.org/AGL/snapshots/master/latest/qemux86-64/deploy/images/qemux86-64/agl-ivi-demo-qt-qemux86-64.ext4.xz).
 
 2. Download the [compressed kernel image](https://download.automotivelinux.org/AGL/snapshots/master/latest/qemux86-64/deploy/images/qemux86-64/bzImage).
 
@@ -28,7 +28,7 @@ AGL provides a number of pre-built ready-made images of various versions.
 
     ```sh
     $ mkdir ~/agl-demo/
-    $ cp ~/Downloads/agl-ivi-demo-qt-crosssdk-qemux86-64.ext4.xz ~/agl-demo/
+    $ cp ~/Downloads/agl-ivi-demo-qt-qemux86-64.ext4.xz ~/agl-demo/
     $ cp ~/Downloads/bzImage ~/agl-demo/
     $ cd ~/agl-demo
     $ sync
@@ -37,7 +37,7 @@ AGL provides a number of pre-built ready-made images of various versions.
 6. Extract prebuilt compressed image :
 
     ```sh
-    $ xz -v -d agl-ivi-demo-qt-crosssdk-qemux86-64.ext4.xz
+    $ xz -v -d agl-ivi-demo-qt-qemux86-64.ext4.xz
     ```
 
 7. Launch QEMU with vinagre (for scaling), remove `- snapshot \` if you want to save changes to the image files :

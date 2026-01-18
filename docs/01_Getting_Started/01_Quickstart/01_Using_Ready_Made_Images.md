@@ -4,9 +4,21 @@ title: Using Ready Made Images
 
 AGL provides a number of pre-built ready-made images of various versions.
 
-## x86 (Emulation and Hardware)
+## Pre-built ready environment
 
-### 1. QEMU (Emulation)
+- [x86-64](#x86-64)  
+-- [QEMU x86-64](#qemu-x86-64)  
+-- [Virtual Box](#virtual-box)  
+-- [x86-64 physical system](#x86-64-physical-system)
+
+- [ARM 64bit](#arm-64bit)  
+-- [QEMU aarch64](#qemu-aarch64)  
+-- [Raspberry Pi 4](#raspberry-pi-4)  
+
+
+## x86-64
+
+### QEMU x86-64
 
 1. Download the [compressed prebuilt image](https://download.automotivelinux.org/AGL/snapshots/master/latest/qemux86-64/deploy/images/qemux86-64/agl-ivi-demo-qt-qemux86-64.ext4.xz).
 
@@ -45,7 +57,7 @@ AGL provides a number of pre-built ready-made images of various versions.
   ```sh
     $ ( sleep 5 && vinagre --vnc-scale localhost ) > /tmp/vinagre.log 2>&1 &
     $ qemu-system-x86_64 -device virtio-net-pci,netdev=net0,mac=52:54:00:12:35:02 -netdev user,id=net0,hostfwd=tcp::2222-:22 \
-      -drive file=agl-ivi-demo-qt-crosssdk-qemux86-64.ext4,if=virtio,format=raw -show-cursor -usb -usbdevice tablet -device virtio-rng-pci \
+      -drive file=agl-ivi-demo-qt-qemux86-64.ext4,if=virtio,format=raw -show-cursor -usb -usbdevice tablet -device virtio-rng-pci \
       -snapshot -vga virtio \
       -vnc :0 -soundhw hda -machine q35 -cpu kvm64 -cpu qemu64,+ssse3,+sse4.1,+sse4.2,+popcnt -enable-kvm \
       -m 2048 -serial mon:vc -serial mon:stdio -serial null -kernel bzImage \
@@ -55,7 +67,7 @@ AGL provides a number of pre-built ready-made images of various versions.
   - Login into AGL :
 
     ```sh
-    Automotive Grade Linux 11.0.0+snapshot qemux86-64 ttyS1
+    Automotive Grade Linux xx.x.x qemux86-64 ttyS1
 
     qemux86-64 login: root
     ```
@@ -66,23 +78,23 @@ AGL provides a number of pre-built ready-made images of various versions.
     ```sh
     $ ( sleep 5 && vncviewer ) &
        qemu-system-x86_64 -device virtio-net-pci,netdev=net0,mac=52:54:00:12:35:02 -netdev user,id=net0,hostfwd=tcp::2222-:22 \
-       -drive file=agl-ivi-demo-qt-crosssdk-qemux86-64.ext4,if=virtio,format=raw -show-cursor -usb -usbdevice tablet -device virtio-rng-pci \
+       -drive file=agl-ivi-demo-qt-qemux86-64.ext4,if=virtio,format=raw -show-cursor -usb -usbdevice tablet -device virtio-rng-pci \
        -snapshot -vga virtio \
        -vnc :0 -soundhw hda -machine q35 -cpu kvm64 -cpu qemu64,+ssse3,+sse4.1,+sse4.2,+popcnt -enable-kvm \
        -m 2048 -serial mon:vc -serial mon:stdio -serial null -kernel bzImage \
        -append 'root=/dev/vda rw console=tty0 mem=2048M ip=dhcp oprofile.timer=1 console=ttyS0,115200n8 verbose fstab=no'
     ```
 
-### 2. Virtual Box (Emulation)
+### Virtual Box
 
 **NOTE :** Please note [https://www.virtualbox.org/ticket/19873](https://www.virtualbox.org/ticket/19873) as this affects the VMs resolution.
 The AGL demo images do require 1920x1080. The instructions below have been adapted.
 
-  1. Download the [compressed vbox disk image](https://download.automotivelinux.org/AGL/snapshots/master/latest/qemux86-64/deploy/images/qemux86-64/agl-ivi-demo-qt-crosssdk-qemux86-64.wic.vmdk.xz).
+  1. Download the [compressed vbox disk image](https://download.automotivelinux.org/AGL/snapshots/master/latest/qemux86-64/deploy/images/qemux86-64/agl-ivi-demo-qt-qemux86-64.wic.vmdk.xz).
 
   2. Install and set up [Virtual Box](https://www.virtualbox.org/wiki/Linux_Downloads).
 
-  3. Extract the vmdk file : `$ xz -v -d agl-ivi-demo-qt-crosssdk-qemux86-64.wic.vmdk.xz`
+  3. Extract the vmdk file : `$ xz -v -d agl-ivi-demo-qt-qemux86-64.wic.vmdk.xz`
 
   4. Configure virtual box for AGL :
     - Click on `New` or `Add`.
@@ -92,7 +104,7 @@ The AGL demo images do require 1920x1080. The instructions below have been adapt
     ![vbox-step-1](images/vbox-1.png)
     - Select Memory size. Recommended is `2048 MB`, click on `Next`.
     ![vbox-step-2](images/vbox-2.png)
-    - Click on `Use an existing virtual hard disk file`, and select the extracted `agl-ivi-demo-qt-crosssdk-qemux86-64.wic.vmdk` file, click on `Create`.
+    - Click on `Use an existing virtual hard disk file`, and select the extracted `agl-ivi-demo-qt-qemux86-64.wic.vmdk` file, click on `Create`.
     ![vbox-step-3](images/vbox-3.png)
     - Go to `Settings`, and into `System`. Select `Chipset : IHC9`. Check on `Enable EFI (special OSes only)` and click on `OK`.
     ![vbox-step-4](images/vbox-4.png)
@@ -106,125 +118,29 @@ The AGL demo images do require 1920x1080. The instructions below have been adapt
     - Return to the UI and click on `Start`.
     - For troubleshooting, you can refer [here](https://lists.automotivelinux.org/g/agl-dev-community/message/8474).
 
-### 3. x86 physical system
+### x86-64 physical system
 
   **NOTE :** UEFI enabled system is required.
 
-  1. Download the [compressed prebuilt image](https://download.automotivelinux.org/AGL/snapshots/master/latest/qemux86-64/deploy/images/qemux86-64/agl-ivi-demo-qt-crosssdk-qemux86-64.wic.xz).
+  1. Download the [compressed prebuilt image](https://download.automotivelinux.org/AGL/snapshots/master/latest/qemux86-64/deploy/images/qemux86-64/agl-ivi-demo-qt-qemux86-64.wic.xz).
 
   2. Extract the image into USB drive :
 
      ```sh
      $ lsblk
      $ sudo umount <usb_device_name>
-     $ xzcat agl-ivi-demo-qt-crosssdk-qemux86-64.wic.xz | sudo dd of=<usb_device_name> bs=4M
+     $ xzcat agl-ivi-demo-qt-qemux86-64.wic.xz | sudo dd of=<usb_device_name> bs=4M
      $ sync
      ```
 
 
   3. Boot from USB drive on the x86 system.
 
-## ARM 32 bit (Emulation and Hardware)
+## ARM 64bit
 
-### 1. QEMU (Emulation)
+### QEMU aarch64
 
-1. Download the [compressed prebuilt image](https://download.automotivelinux.org/AGL/snapshots/master/latest/qemuarm/deploy/images/qemuarm/agl-ivi-demo-qt-crosssdk-qemuarm.ext4.xz).
-
-2. Download the [compressed kernel image](https://download.automotivelinux.org/AGL/snapshots/master/latest/qemuarm/deploy/images/qemuarm/zImage).
-
-3. Install [QEMU](https://www.qemu.org/download/) :
-
-    ```sh
-    $ apt-get install qemu
-    ```
-
-4. Install [vinagre](https://wiki.gnome.org/Apps/Vinagre) :
-
-    ```sh
-    $ sudo apt install vinagre
-    ```
-
-5. Create boot directory and copy compressed images (prebuilt & kernel) into them :
-
-    ```sh
-    $ mkdir ~/agl-demo/
-    $ cp ~/Downloads/agl-ivi-demo-qt-crosssdk-qemuarm.ext4.xz ~/agl-demo/
-    $ cp ~/Downloads/zImage ~/agl-demo/
-    $ cd ~/agl-demo
-    $ sync
-    ```
-
-6. Extract prebuilt compressed image :
-
-    ```sh
-    $ xz -v -d agl-ivi-demo-qt-crosssdk-qemuarm.ext4.xz
-    ```
-
-7. Launch QEMU with vinagre (for scaling), remove `- snapshot` if you want to save changes to the image files :
-
-  ```sh
-    $ ( sleep 5 && vinagre --vnc-scale localhost ) > /tmp/vinagre.log 2>&1 &
-        qemu-system-arm -cpu cortex-a15 -machine virt-2.11 -nographic \
-        -net nic,model=virtio,macaddr=52:54:00:12:34:58 \
-        -net user -m 2048 -monitor none -soundhw hda -device usb-ehci \
-        -device virtio-rng-pci -device VGA,vgamem_mb=64,edid=on -vnc :0 \
-        -device qemu-xhci -device usb-tablet -device usb-kbd \
-        -kernel zImage -append "console=ttyAMA0,115200 root=/dev/vda verbose systemd.log_color=false" \
-        -drive format=raw,file=agl-ivi-demo-qt-crosssdk-qemuarm.ext4 \
-        -snapshot
-  ```
-
-  - Login into AGL :
-
-    ```sh
-    Automotive Grade Linux 11.0.0+snapshot qemux86-64 ttyS1
-
-    qemux86-64 login: root
-    ```
-
-
-  - Shutdown QEMU : `$ poweroff`, otherwise QEMU will run in the background.
-  - To use vnc-viewer instead of vinagre :
-    ```sh
-    $ ( sleep 5 && vncviewer ) &
-        qemu-system-arm -cpu cortex-a15 -machine virt-2.11 -nographic \
-        -net nic,model=virtio,macaddr=52:54:00:12:34:58 \
-        -net user -m 2048 -monitor none -soundhw hda -device usb-ehci \
-        -device virtio-rng-pci -device VGA,vgamem_mb=64,edid=on -vnc :0 \
-        -device qemu-xhci -device usb-tablet -device usb-kbd \
-        -kernel zImage -append "console=ttyAMA0,115200 root=/dev/vda verbose systemd.log_color=false" \
-        -drive format=raw,file=agl-ivi-demo-qt-crosssdk-qemuarm.ext4 \
-        -snapshot
-    ```
-
-### 2. BeagleBone Enhanced (BBE)
-
-  1. Download the [compressed prebuilt image](https://download.automotivelinux.org/AGL/snapshots/master/latest/bbe/deploy/images/bbe/agl-telematics-demo-bbe.wic.xz).
-
-  2. Extract the image into the SD card of BeagleBone Enhanced :
-
-    ```sh
-    $ lsblk
-    $ sudo umount <sdcard_device_name>
-    $ xzcat agl-telematics-demo-bbe.wic.xz | sudo dd of=<sdcard_device_name> bs=4M
-    $ sync
-    ```
-
-    **IMPORTANT NOTE:** Before re-writing any device on your Build Host, you need to
-        be sure you are actually writing to the removable MicroSD card and not some other
-        device.
-        Each computer is different and removable devices can change from time to time.
-        Consequently, you should repeat the previous operation with the MicroSD card to
-        confirm the device name every time you write to the card.
-
-      To summarize this example so far, we have the following:
-        The first SATA drive is `/dev/sda` and `/dev/sdc` corresponds to the MicroSD card, and is also marked as a removable device.You can see this in the output of the `lsblk` command where "1" appears in the "RM" column for that device.
-
-## AARCH64 - ARM 64bit
-
-### 1. QEMU (Emulation)
-
-1. Download the [compressed prebuilt image](https://download.automotivelinux.org/AGL/snapshots/master/latest/qemuarm64/deploy/images/qemuarm64/agl-ivi-demo-qt-crosssdk-qemuarm64.ext4.xz).
+1. Download the [compressed prebuilt image](https://download.automotivelinux.org/AGL/snapshots/master/latest/qemuarm64/deploy/images/qemuarm64/agl-ivi-demo-qt-qemuarm64.ext4.xz).
 
 2. Download the [compressed kernel image](https://download.automotivelinux.org/AGL/snapshots/master/latest/qemuarm64/deploy/images/qemuarm64/Image).
 
@@ -244,7 +160,7 @@ The AGL demo images do require 1920x1080. The instructions below have been adapt
 
     ```sh
     $ mkdir ~/agl-demo/
-    $ cp ~/Downloads/agl-ivi-demo-qt-crosssdk-qemuarm64.ext4.xz ~/agl-demo/
+    $ cp ~/Downloads/agl-ivi-demo-qt-qemuarm64.ext4.xz ~/agl-demo/
     $ cp ~/Downloads/zImage ~/agl-demo/
     $ cd ~/agl-demo
     $ sync
@@ -253,7 +169,7 @@ The AGL demo images do require 1920x1080. The instructions below have been adapt
 6. Extract prebuilt compressed image :
 
     ```sh
-    $ xz -v -d agl-ivi-demo-qt-crosssdk-qemuarm64.ext4.xz
+    $ xz -v -d agl-ivi-demo-qt-qemuarm64.ext4.xz
     ```
 
 7. Launch QEMU with vinagre (for scaling), remove `- snapshot \` if you want to save changes to the image files :
@@ -266,16 +182,16 @@ The AGL demo images do require 1920x1080. The instructions below have been adapt
         -device virtio-rng-pci -device VGA,vgamem_mb=64,edid=on \
         -device qemu-xhci -device usb-tablet -device usb-kbd -vnc :0 \
         -kernel Image -append "console=ttyAMA0,115200 root=/dev/vda verbose systemd.log_color=false " \
-        -drive format=raw,file=agl-ivi-demo-qt-crosssdk-qemuarm64.ext4 \
+        -drive format=raw,file=agl-ivi-demo-qt-qemuarm64.ext4 \
         -snapshot
   ```
 
   - Login into AGL :
 
     ```sh
-    Automotive Grade Linux 11.0.0+snapshot qemux86-64 ttyS1
+    Automotive Grade Linux xx.x.x qemuarm64 ttyS1
 
-    qemux86-64 login: root
+    qemuarm64 login: root
     ```
 
 
@@ -289,20 +205,20 @@ The AGL demo images do require 1920x1080. The instructions below have been adapt
         -device virtio-rng-pci -device VGA,vgamem_mb=64,edid=on \
         -device qemu-xhci -device usb-tablet -device usb-kbd -vnc :0 \
         -kernel Image -append "console=ttyAMA0,115200 root=/dev/vda verbose systemd.log_color=false " \
-        -drive format=raw,file=agl-ivi-demo-qt-crosssdk-qemuarm64.ext4 \
+        -drive format=raw,file=agl-ivi-demo-qt-qemuarm64.ext4 \
         -snapshot
     ```
 
-### 2. Raspberry Pi 4
+### Raspberry Pi 4
 
-  1. Download the [compressed prebuilt image](https://download.automotivelinux.org/AGL/snapshots/master/latest/raspberrypi4/deploy/images/raspberrypi4-64/agl-ivi-demo-qt-crosssdk-raspberrypi4-64.wic.xz).
+  1. Download the [compressed prebuilt image](https://download.automotivelinux.org/AGL/snapshots/master/latest/raspberrypi4/deploy/images/raspberrypi4-64/agl-ivi-demo-qt-raspberrypi4-64.wic.xz).
 
   2. Extract the image into the SD card of Raspberry Pi 4 :
 
     ```sh
     $ lsblk
     $ sudo umount <sdcard_device_name>
-    $ xzcat agl-ivi-demo-qt-crosssdk-raspberrypi4-64.wic.xz | sudo dd of=<sdcard_device_name> bs=4M
+    $ xzcat agl-ivi-demo-qt-raspberrypi4-64.wic.xz | sudo dd of=<sdcard_device_name> bs=4M
     $ sync
     ```
 
@@ -351,32 +267,6 @@ The AGL demo images do require 1920x1080. The instructions below have been adapt
 
     6. Use your favorite tool for serial communication between your build host
       and your Raspberry Pi.
-      For example, if your build host is a native Linux machine (e.g. Ubuntu)
-      you could use `screen` as follows from a terminal on the build host:
-
-      ```sh
-      $ sudo screen /dev/ttyUSB0 115200
-      ```
-
-### 3. R-Car H3SK (H3ULCB board)
-
-**NOTE :** The prebuilt image does support **non-accelerated** graphics mode (software rendering). For **accelerated** graphics support, a local build with the neccesary graphics driver is required.
-
-
-  1. Update the [firmware](https://elinux.org/R-Car/Boards/H3SK#Flashing_firmware) using files from [here](https://download.automotivelinux.org/AGL/snapshots/master/latest/h3ulcb-nogfx/deploy/images/h3ulcb/).
-
-  2. Download the [compressed prebuilt image](https://download.automotivelinux.org/AGL/snapshots/master/latest/h3ulcb-nogfx/deploy/images/h3ulcb/agl-ivi-demo-qt-crosssdk-h3ulcb.wic.xz).
-
-  3. Extract the image into the boot device :
-
-     ```sh
-     $ lsblk
-     $ sudo umount <boot_device_name>
-     $ xzcat agl-ivi-demo-qt-crosssdk-h3ulcb.wic.xz | sudo dd of=<boot_device_name> bs=4M
-     $ sync
-     ```
-
-  3. [Serial](https://elinux.org/R-Car/Boards/H3SK) into the board for debugging.
       For example, if your build host is a native Linux machine (e.g. Ubuntu)
       you could use `screen` as follows from a terminal on the build host:
 

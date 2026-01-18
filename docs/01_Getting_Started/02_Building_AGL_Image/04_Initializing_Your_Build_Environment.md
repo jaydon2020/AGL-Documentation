@@ -33,32 +33,39 @@ Following is a list of the available machines (level of support varies!):
 ```sh
 Available machines:
    [meta-agl]
-       bbe                        # BeagleBoneEnhanced
-       beaglebone                 # BeagleBone
-       cubox-i                    # multiple i.MX6 boards
-       dragonboard-410c           # Qualcomm Dragonboard 410c
-       dragonboard-820c           # Qualcomm Dragonboard 820c
+       am62xx-evm
+       aws-ec2-arm64
+       aws-ec2-x86-64
+       beaglebone-ai64
+       beagleplay
        ebisu                      # Renesas RCar Ebisu
+       generic-arm64
        h3-salvator-x              # Renesas RCar Salvator/H3
        h3ulcb                     # Renesas RCar H3
        h3ulcb-kf                  # Renesas RCar H3 w Kingfisher Board
        h3ulcb-nogfx               # Renesas RCar H3 w/o gfx blobs
-       hsdk                       # ARC HS
-       imx6qdlsabreauto           # i.MX6 sabreauto
        imx8mqevk                  # i.MX8 w etnaviv
-       imx8mqevk-viv              # i.MX8 w vivante
        intel-corei7-64            # x86-64 (Intel flavour)
-       j7-evm                     # TI Jacinto 7 EVM
+       j721e-evm
+       jetson-agx-orin-devkit
        m3-salvator-x              # Renesas RCar Salvator/M3
        m3ulcb                     # Renesas RCar M3
        m3ulcb-kf                  # Renesas RCar M3 w Kingfisher Board
-       m3ulcb-nogfx               # Renesas RCAR M3 w/o gfx blobs
-       nitrogen6x                 # i.MX6 nitrogen board
+       m3ulcb-nogfx               # Renesas RCar M3 w/o gfx blobs
+       nanopc-t6                  # Friendly Elec NanoPC-T6 (Rockchip RK3588)
        qemuarm                    # Qemu ARM
        qemuarm64                  # Qemu AArch 64 (ARM 64bit)
-     * qemux86-64                 # Qemu x86-64
+       qemuriscv64                # Qemu RISC-V 64
+       qemux86-64                 # Qemu x86-64
        raspberrypi4               # Raspberry Pi 4
-       virtio-aarch64             # Virtio Guest
+       raspberrypi5               # Raspberry Pi 5
+       raspberrypi500             # Raspberry Pi 500
+       s4sk
+       sparrow-hawk               # Retronix Sparrow Hawk (Renesas RCar V4H)
+       spider
+       unmatched                  # RISC-V unmatched
+       virtio-aarch64             # ARM64 Virtio Guest
+       visionfive2                # RISC-V Vision Five 2
 
 ```
 

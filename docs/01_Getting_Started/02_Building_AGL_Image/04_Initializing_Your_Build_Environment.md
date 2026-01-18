@@ -80,7 +80,6 @@ Following is a list of the available features:
 
 ```sh
 Available features:
-
    [meta-agl]                                    # CORE layer
        Refer: https://git.automotivelinux.org/AGL/meta-agl/tree/templates/feature
        agl-all-features                          # For the usual demo image
@@ -94,34 +93,38 @@ Available features:
        agl-ci                                    # CI: specific settings for the CI environment
        agl-create-spdx                           # Software Bill of Materials (SBOM) generation
        agl-devel :( agl-package-management )     # Developer Env (root login w/o pass)
+       agl-drm-lease                             # Display (DRM master) sharing
+       agl-flutter                               # Flutter support
        agl-fossdriver                            # Fossology integration, Scancode, etc.
+       agl-ic                                    # Core feature for instrument cluster
+       agl-kuksa-val                             # Kuksa-val
        agl-localdev                              # inclusion of local development folder ./meta-localdev
        agl-netboot                               # network boot (e.g. in CI)
        agl-package-management                    # include package management (e.g. rpm)
        agl-pipewire                              # include pipewire
+       agl-prhash-public
        agl-ptest                                 # enable ptest pckages
        agl-refhw-h3                              # enable reference hardware when building h3ulcb machine
        agl-selinux                               # Enables building with SELinux
        agl-virt                                  # EG-Virt features
-       agl-virt-guest-xen                        # EG-Virt features
-       agl-virt-xen                              # EG-Virt features
-       agl-weston-remoting                       # remote streaming support
-       agl-weston-waltham-remoting               # remote streaming support w/ waltham
 
-   [meta-agl-demo]                                    # DEMO layer
+   [meta-agl-demo]                               # DEMO layer
        Refer: https://git.automotivelinux.org/AGL/meta-agl-demo/tree/templates/feature
-       agl-demo                                       # default IVI demo 
-       agl-kvm                                        # Enables support for building multiconfig based KVM+QEMU demo images
+       agl-container-guest-demo                  # Enable container guest support in eache IVI demo images
+       agl-demo                                  # default IVI demo 
+       agl-kvm                                   # Enables support for building multiconfig based KVM+QEMU demo images
 
-   [meta-agl-devel]                                   # Development layer
+   [meta-agl-devel]                              # Development layer
        Refer: https://git.automotivelinux.org/AGL/meta-agl-devel/tree/templates/feature
-       agl-basesystem                                 # Toyota basesystem
-       agl-drm-lease                                  # DRM lease support
-       agl-egvirt                                     # EG-Virt feature
-       agl-flutter                                    # Flutter support
-       agl-ic-container                               # Instrument Cluster EG demo using containers
-       agl-offline-voice-agent                        # Feature template for meta-offline-voice-agent layer
-       agl-test                                       # Test framework under development
+       agl-cef
+       agl-egvirt                                # EG-Virt feature
+       agl-ic-container                          # AGL Instrument Cluster Container Integration feature
+       agl-offline-voice-agent                   # Feature template for meta-offline-voice-agent layer
+       agl-rdp
+       agl-ros2
+       agl-test                                  # Test framework under development
+       agl-uhmi                                  # Unified HMI
+       agl-uhmi-demo                             # Unified HMI demo
 
 ```
 

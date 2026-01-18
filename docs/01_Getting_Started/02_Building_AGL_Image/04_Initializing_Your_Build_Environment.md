@@ -136,107 +136,80 @@ For example, specifying the "agl-demo" feature makes sure that the
 `aglsetup.sh` script creates configuration files needed to build the
 image for the AGL demo.
 
-Following are brief descriptions of the AGL features you can specify on the
-`aglsetup.sh` command line:
+Typical combination for AGL features.
 
-* **agl-all-features**: A set of AGL default features.
-  Do not think of this set of features as all the AGL features.
+* **agl-demo**: Setup AGL demo IVI building environment.
 
-* **agl-app-framework**: Application Framework
+* **agl-demo agl-devel**: Setup AGL demo IVI building environment for development.
 
-* **agl-archiver**: Enables the archiver class for releases.
+* **agl-demo agl-ic**: Setup AGL demo IVI building environment with Instrument Cluster feature.
 
-* **agl-ci**: Flags used for Continuous Integration (CI).
-  Using this feature changes the value of the
-  [`IMAGE_FSTYPES`](https://yoctoproject.org/docs/3.1.4/ref-manual/ref-manual.html#var-IMAGE_FSTYPES)
-  variable.
+* **agl-ic-container**: Setup AGL Instrument Cluster Container Integration building environment. Ref. to Build_and_Boot_guide_Profile.
 
-* **agl-ci-change-features**: Enables features for CI builds for Gerrit changes.
+* **agl-demo agl-container-guest-demo agl-demo**: Setup AGL demo IVI building environment for container guest. Ref. to Build_and_Boot_guide_Profile.
 
-* **agl-ci-change-features-nogfx**: Enables features for CI builds for Gerrit changes
-  for targets that use binary graphics drivers (i.e. builds without graphics).
+* **agl-kvm**: Setup AGL kvm demo building environment that integrates demo IVI and demo Instrument Cluster into one environment. Ref. to Build_and_Boot_guide_Profile.
 
-* **agl-ci-snapshot-features**: Enables features for CI daily snapshot builds.
-
-* **agl-ci-snapshot-features-nogfx**: Enables features for CI daily snapshot builds for
-  targets that use binary graphics drivers (i.e. builds without graphics).
-
-* **agl-devel**: Activates development options such as an empty root password,
-  debuggers, strace, valgrind, and so forth.
-
-* **agl-netboot**: Enables network boot support through Trivial File Transfer Protocol (TFTP) and Network Block Device (NBD) protocol.
-  Netboot is needed for CI and useful for development to avoid writing
-  sdcards. Needs additional setup.
-
-* **agl-ptest**: Enables
-  [Ptest](https://docs.yoctoproject.org/dev-manual/common-tasks.html#testing-packages-with-ptest)
-  as part of the build.
-
-* **agl-demo**: Enables the layers meta-agl-demo and meta-qt5.
-  You need agl-demo if you are going to build the agl-ivi-demo-qt.
-
-* **agl-pipewire**: Enables AGLs pipewire support.
-
-* **agl-localdev**: Adds a local layer named "meta-localdev" in the
-  meta directory and a local.dev.inc configuration file when that file
-  is present.
-
-  This feature provides a shortcut for using the layer meta-localdev
-  in the top-level folder for easy modifications to your own recipes.
 
 ## Example
 
-Following is an example that initializes the build environment, selects "beaglebone"
-for the machine, and chooses the "agl-demo" feature, which also includes the
-"agl-appfw-smack", "agl-devel", and "agl-hmi-framework" features:
+Following is an example that initializes the build environment, selects "qemux86-64"
+for the machine, and chooses the "agl-demo" feature, which also includes the "agl-pipewire"
+, "agl-app-framework", "agl-selinux", "agl-kuksa-val" and "agl-flutter" features:
 
 ```sh
-$ source meta-agl/scripts/aglsetup.sh -m qemux86-64 -b qemux86-64 agl-demo agl-devel
-aglsetup.sh: Starting
+$ source meta-agl/scripts/aglsetup.sh -m qemux86-64 -b qemux86-64 agl-demo
+------------ aglsetup.sh: Starting
 Generating configuration files:
-   Build dir: /home/scottrif/workspace_agl/build
+   Build dir: /agl/master/tree/qemux86-64
    Machine: qemux86-64
-   Features: agl-appfw-smack agl-demo agl-devel
-   Running /home/scottrif/workspace_agl/poky/oe-init-build-env
-   Templates dir: /home/scottrif/workspace_agl/meta-agl/templates/base
-   Config: /home/scottrif/workspace_agl/build/conf/bblayers.conf
-   Config: /home/scottrif/workspace_agl/build/conf/local.conf
-   Setup script: /home/scottrif/workspace_agl/build/conf/setup.sh
+   Features: agl-app-framework agl-demo agl-flutter agl-kuksa-val agl-pipewire agl-selinux
+   Running /agl/master/tree/external/poky/oe-init-build-env
+   Templates dir: /agl/master/tree/meta-agl/meta-agl-core/conf/templates/base
+   Config: /agl/master/tree/qemux86-64/conf/bblayers.conf
+   Config: /agl/master/tree/qemux86-64/conf/local.conf
+   Setup script: /cross/sata/agl/master/tree/qemux86-64/conf/setup.sh
    Executing setup script ... --- beginning of setup script
- fragment /home/scottrif/workspace_agl/meta-agl/templates/base/01_setup_EULAfunc.sh
- fragment /home/scottrif/workspace_agl/meta-agl/templates/base/99_setup_EULAconf.sh
- end of setup script
+--- fragment /agl/master/tree/meta-agl/templates/base/01_setup_EULAfunc.sh
+--- fragment /agl/master/tree/meta-agl/templates/base/01_setup_pkg_revision.sh
+--- fragment /agl/master/tree/meta-agl/templates/base/99_setup_EULAconf.sh
+--- end of setup script
 OK
-Generating setup file: /home/scottrif/workspace_agl/build/agl-init-build-env ... OK
-aglsetup.sh: Done
- Shell environment set up for builds.
-You can now run 'bitbake target'
+Generating setup manifest: /agl/master/tree/qemux86-64/aglsetup.manifest ... OK
+Generating setup file: /agl/master/tree/qemux86-64/agl-init-build-env ... OK
+------------ aglsetup.sh: Done
 Common targets are:
 - meta-agl layer:
-  - included by default
-    * agl-image-boot                (just enough to boot)
-    * agl-image-minimal             (minimal filesystem with APIs)
-    * agl-image-minimal-crosssdk    (crosssdk for ^^)
+  * agl-image-boot                (just enough to boot)
+  * agl-image-minimal             (minimal filesystem with APIs)
+  * agl-image-minimal-crosssdk    (crosssdk for above)
+  * agl-image-weston              (minimal filesystem with weston)
+  * agl-image-compositor          (minimal filesystem with AGL compositor)
 
-    * agl-image-weston              (minimal filesystem with weston)
-    * agl-image-compositor          (minimal filesystem with AGL compositor)
+- meta-agl-flutter:
+  * agl-image-flutter.bb          (example/test minimal Flutter image)
+  * agl-image-flutter-debug.bb    (above with debugging support)
 
-- meta-agl-demo:                    (IVI demo with UI)
-  - with 'agl-demo'
-    * agl-ivi-image                 (base for IVI targets)
-    * agl-ivi-image-crosssdk        (sdk for ^^)
+- meta-agl-demo:
+  * agl-ivi-image                 (base for IVI targets)
+  * agl-ivi-image-crosssdk        (SDK for ^^)
+  * agl-ivi-demo-qt               (IVI Qt demo image)
+  * agl-ivi-demo-qt-crosssdk      (SDK for ^^)
+  * agl-ivi-demo-flutter          (IVI Flutter demo image)
+  * agl-cluster-demo-qt           (cluster Qt demo image)
+  * agl-cluster-demo-flutter      (cluster Flutter demo image)
+  * agl-ivi-demo-control-panel    (demo/test control panel image)
 
-    * agl-ivi-demo-qt               (IVI Qt demo image)
-    * agl-ivi-demo-qt-crosssdk      (sdk for ^^)
-    * agl-ivi-demo-flutter          (IVI Flutter demo image)
-    * agl-ivi-demo-html5            (IVI HTML5 demo image)
+  More details:
+  https://docs.automotivelinux.org/en/master/#01_Getting_Started/02_Building_AGL_Image/07_Available_Demo_Images
 
-    * agl-cluster-demo-qt           (cluster Qt demo image)
-    * agl-cluster-demo-flutter      (cluster Flutter demo image)
+- meta-agl-demo-shared:
+  * agl-instrument-cluster-standalone-demo
+    (IC EG non-container cluster test image)
 
-    * agl-telematics-demo           (telematics demo image)
+Build guide:
+https://docs.automotivelinux.org/en/master/#01_Getting_Started/02_Building_AGL_Image/01_Build_Process_Overview/
 
-    * agl-gateway-demo              (gateway demo image)
 ```
 
 Running the script creates the Build Directory if it does not already exist.

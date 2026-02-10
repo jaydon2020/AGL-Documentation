@@ -29,6 +29,11 @@ title: AGL Components
 - [Voice agent assistant](04_Misc_Service/02_agl_voice_agent_assistant.md)
 
 
+## Instrument Cluster
+
+- [Instrument Cluster](10_IC_Service/01_Instrument_Cluster_Service.md)
+
+
 ## IVI Application Framework
 
 ### Application Lifecycle and Services

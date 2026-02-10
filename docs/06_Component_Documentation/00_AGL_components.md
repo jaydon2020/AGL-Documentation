@@ -54,6 +54,10 @@ title: AGL Components
 
 - [Unified HMI](60_Unified_HMI/01_Unified_HMI.md)
 
+### Container
+
+- [Container Manager](61_Container/01_Container_Manager.md)
+
 
 ## Development Tools
 

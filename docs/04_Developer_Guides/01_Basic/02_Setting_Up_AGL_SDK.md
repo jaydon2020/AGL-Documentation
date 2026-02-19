@@ -15,12 +15,6 @@ quickstart the service and application development process.
 
         **Note:** .sh file will be with name 	"poky-agl-glibc-x86_64-agl-ivi-demo-qt-crosssdk-corei7-64-qemux86-64-toolchain-$(version number).sh" where version number is regularly updated on the site.
 
-
-      - **ARM 32 bit** : [qemuarm](https://download.automotivelinux.org/AGL/snapshots/master/latest/qemuarm/deploy/sdk/)
-
-        **Note:** .sh file will be with name 	"	poky-agl-glibc-x86_64-agl-ivi-demo-qt-crosssdk-armv7vet2hf-neon-vfpv4-qemuarm-toolchain-$(version number).sh" where version number is regularly updated on the site.
-
-
       - **AARCH64 - ARM 64bit** : [qemuarm64](https://download.automotivelinux.org/AGL/snapshots/master/latest/qemuarm64/deploy/sdk/)
 
         **Note:** .sh file will be with name 	"	poky-agl-glibc-x86_64-agl-ivi-demo-qt-crosssdk-aarch64-qemuarm64-toolchain-$(version number).sh" where version number is regularly updated on the site.
@@ -61,10 +55,4 @@ quickstart the service and application development process.
     SDK has been successfully set up and is ready to be used.
     Each time you wish to use the SDK in a new shell session, you need to source the environment setup script e.g.
     $ . /home/boron/agl-app/agl-sdk/environment-setup-corei7-64-agl-linux
-    ```
-
-4. Source the SDK environment setup, each time you wish to use the SDK in a new shell session :
-
-    ```sh
-    $ source ~/agl-app/agl-sdk/environment-setup-corei7-64-agl-linux
     ```

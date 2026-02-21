@@ -43,13 +43,21 @@ title: AGL Components
 
 ## Application for Demo
 
-### Instrument Cluster
+### For Flutter Demo IVI
 
-- [Cluster Ref GUI](40_Demo_Application/01_Cluster_Ref_GUI.md)
+- [Flutter Homescreen](40_Demo_Application/01_Flutter_Demo_IVI/01_Flutter_Homescreen.md)
 
-### Navigation
+### For Qt Demo IVI
 
-- [Momi Navi](40_Demo_Application/02_Momi_Navi.md)
+- [Qt Homescreen](40_Demo_Application/02_Qt_Demo_IVI/01_Qt_Homescreen.md)
+
+### For Instrument Cluster
+
+- [Cluster Ref GUI](40_Demo_Application/03_Instrument_Cluster/01_Cluster_Ref_GUI.md)
+
+### For Momi IVI Demo
+
+- [Momi Navi](40_Demo_Application/04_Momi_IVI_Demo/02_Momi_Navi.md)
 
 
 ## Platform extension

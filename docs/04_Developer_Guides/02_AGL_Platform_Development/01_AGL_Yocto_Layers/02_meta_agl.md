@@ -106,9 +106,3 @@ design:
 
 ### image with extra QA tooling (e.g. to run LTP)
 * meta-agl-core-test/images/agl-image-minimal-qa.bb
-
-
-
-**Note:** For update details on this page please refer
-
-<https://git.automotivelinux.org/AGL/meta-agl/tree/meta-agl.md>

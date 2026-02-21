@@ -43,9 +43,13 @@ title: AGL Components
 
 ## Application for Demo
 
+### Instrument Cluster
+
+- [Cluster Ref GUI](40_Demo_Application/01_Cluster_Ref_GUI.md)
+
 ### Navigation
 
-- [Momi Navi](40_Demo_Application/01_Momi_Navi.md)
+- [Momi Navi](40_Demo_Application/02_Momi_Navi.md)
 
 
 ## Platform extension

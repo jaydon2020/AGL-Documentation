@@ -1,5 +1,5 @@
 ---
-title: Generic devices setup
+title: Camera setup
 ---
 
 ## Camera setup on RPi4
@@ -44,38 +44,13 @@ This includes an example on how to create a xdg-toplevel surface and create a
 gstreamer pipeline, instead of relaying on waylandsink to create one for you,
 in a programmatic fashion.
 
-## Display setup on RPi4
-
-This assumes that you'll be using the Raspberry Pi 7'' display. Installation
-can be found at [Rpi Display page](https://www.raspberrypi.com/documentation/accessories/display.html).
-
-If booting over the network, the dtb should already contain the ft5406 dtb,
-while booting over sd-card the following show be in the /boot/config.txt
-file:
-
-	dtoverlay=rpi-ft5406-overlay
-
-Once the board boots up, you should get a rainbow like effect and afterwards
-booting up would display debug scrolling over. You'll need to adjust the
-orientation as the 800x480 is in portrait.  Edit /etc/xdg/weston/weston.ini and
-add a new output entry, like the following:
-
-	[output]
-	name=DSI-1
-	transform=90
-
-Note that for the Qt platform, the homescreen application, together with the
-other demo applications, is tailored specifically for a 1080p display and it
-will display incorrectly on such a smaller display.
-
 ## Testing out video camera without a real device
 
 While the above requires having a real video camera device, one can use out
 the [vivid module](https://docs.kernel.org/admin-guide/media/vivid.html?highlight=vivid#the-virtual-video-test-driver-vivid)
 to try out your custom application or just testing out camera functionality in AGL.
 
-You should normally have the module present, not loaded, for either **rpi4** or for
-**h3ulcb** boards. Load the module, like in the following command:
+You should normally have the module present, not loaded, for **rpi4** boards. Load the module, like in the following command:
 
 	modprobe vivid allocators=0x1
 

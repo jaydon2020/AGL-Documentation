@@ -9,11 +9,6 @@ to boot an AGL Distribution system.
 You use this layer as the minimal core on which to build AGL profiles.
 
 **NOTE:** The `meta-agl` layer does not include a reference UI.
-  The reference UI is included as part of the
-  [`meta-agl-demo`](03_meta_agl_demo.md) layer.
-  Furthermore, `meta-agl` does not include additional components, such
-  as security, which are part of the
-  `meta-agl-extra` layer.
 
 ## Sub-Layers
 
@@ -24,21 +19,24 @@ Following is a "tree" look at the layer:
 .
 ├── LICENSE
 ├── LICENSE.GPL-2.0-only
-├── LICENSE.MIT
 ├── README-AGL.md
 ├── README.md -> meta-agl.md
 ├── agl-layers-overview.md
 ├── docs
+├── LICENSE.MIT
 ├── meta-agl-bsp
 ├── meta-agl-core
-├── meta-agl-core-test
+├── meta-agl-drm-lease
+├── meta-agl-flutter
 ├── meta-agl-ic
 ├── meta-agl-ivi
+├── meta-agl-kuksa-val
 ├── meta-agl.md
+├── meta-app-framework
 ├── meta-netboot
 ├── meta-pipewire
 ├── scripts
-├── templates
+└── templates
 ```
 
 This list provides some overview information on the files and sub-layers
@@ -51,9 +49,12 @@ in `meta-agl`:
 * `meta-agl-bsp`: Contains adaptations for recipes and required packages
   to boot an AGL distribution on targeted hardware and emulation (i.e. QEMU).
 * `meta-agl-core`: This is the core layer with essential recipes and the distro.
-* `meta-agl-core-test`: recipes supporting qa images (separate layer due to external dependencies)
-* `meta-agl-ic`: Instrument Cluster platform
-* `meta-agl-ivi`: IVI platform
+* `meta-agl-drm-lease`: The recipes for supporting display isolating feature (DRM master sharing).
+* `meta-agl-flutter`: The recipes for AGL Flutter support.
+* `meta-agl-ic`: The recipe set for Instrument Cluster platform.
+* `meta-agl-ivi`: The recipe set for IVI platform.
+* `meta-agl-kuksa-val`: The recipes for AGL Vehicle API support using kuksa.
+* `meta-app-framework`: The recipes for AGL IVI application framework.
 * `meta-netboot`: Contains recipes and configuration adjustments to allow network
   boot through network block device (NBD) since network file system (NFS) does not
   support security labels.

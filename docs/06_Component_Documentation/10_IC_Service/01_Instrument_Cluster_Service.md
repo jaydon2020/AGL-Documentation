@@ -20,7 +20,7 @@ Version 1.0 | AGL Instrument Cluster Expert Group
 
 The **cluster-service** provides a reusable IPC mechanism for automotive instrument cluster applications running on Automotive Grade Linux (AGL). It enables applications to receive real-time vehicle data such as speed, RPM, warning indicators (telltales), trip computer information, and more.
 
-This software is a starting point and not a final product. Users can use this as a reference implementation for demos. It is open source - patches welcome.
+This software focuses to base software, not a final software. User can use reference implementation for demo. User should change for own real usage.
 
 ### Usage
 
@@ -45,6 +45,7 @@ This software is a starting point and not a final product. Users can use this as
 - **Multiple data sources**: Supports demo data generator and SocketCAN input. Plugin at build-time.
 - **Comprehensive telltales**: 50+ warning/indicator signals
 - **Alarm sound**: Play builtin sound if it necessary. Plugin at build-time.
+- **AGL CAN definition Support**: Support [AGL CAN definition](../80_DevTools/03_AGL_Virtual_Car_CAN/01_agl-vcar.md) to control instrument cluster.
 
 ### Dependency
 
@@ -257,4 +258,4 @@ The cluster-service is licensed under the Apache License 2.0.
 
 Copyright (c) 2021, Nippon Seiki Co., Ltd.
 
-Copyright (C) 2026 Automotive Grade Linux.
+Copyright (C) 2024 Automotive Grade Linux.

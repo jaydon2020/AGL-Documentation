@@ -69,3 +69,7 @@ title: AGL Components
 
 - [Demo Control Panel](80_DevTools/01_AGL_Demo_Control_Panel.md)
 - [CARLA with AGL](80_DevTools/02_CARLA_with_AGL.md)
+
+### Virtual Car CAN definition
+
+- [AGL virtual car](./80_DevTools/03_AGL_Virtual_Car_CAN/01_agl-vcar.md)

@@ -33,4 +33,4 @@ Common targets are:
 
 **Note:** For update details on this page please refer
 
-<https://git.automotivelinux.org/AGL/meta-agl/tree/templates/base/conf-notes.txt>
+<https://git.automotivelinux.org/AGL/meta-agl/tree/meta-agl-core/conf/templates/base/conf-notes.txt>

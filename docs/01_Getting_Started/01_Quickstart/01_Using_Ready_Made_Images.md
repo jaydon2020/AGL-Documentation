@@ -240,7 +240,7 @@ The AGL demo images do require 1920x1080. The instructions below have been adapt
   4. Serial Debugging :
 
     When things go wrong, you can take steps to debug your Raspberry Pi.
-    For debugging, you need a 3.3 Volt USB Serial cable to fascilitate
+    For debugging, you need a 3.3 Volt USB Serial cable to facilitate
     communication between your Raspberry Pi board and your build host.
 
     You can reference the following diagram for information on the following steps:
@@ -252,12 +252,12 @@ The AGL demo images do require 1920x1080. The instructions below have been adapt
       Do not connect the USB side of the cable to your build host at this time.
 
           **CAUTION:** No warranty is provided using the following procedure.
-          Pay particular attention to the collors of your cable as they could
+          Pay particular attention to the colors of your cable as they could
           vary depending on the vendor.
 
     2. Connect the cable's BLUE wire to pin 6 (i.e. Ground) of the UART.
 
-    3. Connect the able's GREEN RX line to pin 8 (i.e. the TXD line) of
+    3. Connect the cable's GREEN RX line to pin 8 (i.e. the TXD line) of
       the UART.
 
     4. Connect the cable's RED TX line to pin 10 (i.e. the RXD line) of

@@ -24,7 +24,7 @@ $ vim $AGL_TOP/<release-branch-name>/<build-dir>/conf/local.conf
 As mentioned in the "[Initializing Your Build Environment](./04_Initializing_Your_Build_Environment.md)" section,
 the `local.conf` file gets augmented with AGL configuration fragments based on
 how you execute the `aglsetup.sh` script.
-You can see those fragments at the end the configuration file.
+You can see those fragments at the end of the configuration file.
 
 Even though your build should work fine after running the `aglsetup.sh` script,
 you might consider editing your `local.conf` file to use one or more of the

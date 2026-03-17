@@ -67,7 +67,7 @@ the AGL demo image suited for either QEMU or VirtualBox.
 Start the build using the `bitbake` command.
 
 **NOTE:** An initial build can take many hours depending on your
-CPU and and Internet connection speeds.
+CPU and Internet connection speeds.
 The build also takes approximately 100G-bytes of free disk space.
 
 **Sample Qt based IVI demo :**
@@ -176,7 +176,7 @@ sudo apt-get install qemu-system-x86 ovmf
 export OVMF_PATH=/usr/share/ovmf/OVMF.fd
 ```
 
-If you build host is running Fedora, use the following commands:
+If your build host is running Fedora, use the following commands:
 
 ```sh
 sudo yum install qemu qemu-kvm edk2-ovmf
@@ -205,7 +205,7 @@ VirtualBox. This is indicated by the qemu command above giving the error
 message `Could not access KVM kernel module: No such file or directory` or
 the kernel log output contains the error message `kvm: no hardware support`.
 The image can be booted in such an environment by removing `-enable-kvm` from
-the qemu command line, however this will result in lower perfromance within
+the qemu command line, however this will result in lower performance within
 the AGL demo.
 
 **3.2 VirtualBox**

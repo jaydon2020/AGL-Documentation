@@ -103,14 +103,14 @@ Available features:
        agl-package-management                    # include package management (e.g. rpm)
        agl-pipewire                              # include pipewire
        agl-prhash-public
-       agl-ptest                                 # enable ptest pckages
+       agl-ptest                                 # enable ptest packages
        agl-refhw-h3                              # enable reference hardware when building h3ulcb machine
        agl-selinux                               # Enables building with SELinux
        agl-virt                                  # EG-Virt features
 
    [meta-agl-demo]                               # DEMO layer
        Refer: https://git.automotivelinux.org/AGL/meta-agl-demo/tree/templates/feature
-       agl-container-guest-demo                  # Enable container guest support in eache IVI demo images
+       agl-container-guest-demo                  # Enable container guest support in each IVI demo image
        agl-demo                                  # default IVI demo 
        agl-kvm                                   # Enables support for building multiconfig based KVM+QEMU demo images
 

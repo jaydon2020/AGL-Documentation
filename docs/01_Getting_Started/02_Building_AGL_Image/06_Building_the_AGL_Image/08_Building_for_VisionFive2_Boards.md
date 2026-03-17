@@ -44,7 +44,7 @@ This section shows the `bitbake` command used to build the AGL image.
 Start the build using the `bitbake` command.
 
 **NOTE:** An initial build can take many hours depending on your
-CPU and and Internet connection speeds.
+CPU and Internet connection speeds.
 The build also takes approximately 200G-bytes of free disk space.
 
 **Flutter Based IVI demo :**
@@ -60,7 +60,7 @@ Here is example for the VisionFive2 board for Flutter Based demo:
 ```sh
 <build_dir>/tmp/deploy/images/visionfive2/agl-ivi-demo-flutter-visionfive2.rootfs.wic.xz
 
-$ export IMAGE_NAME=aagl-ivi-demo-flutter-visionfive2.rootfs.wic.xz
+$ export IMAGE_NAME=agl-ivi-demo-flutter-visionfive2.rootfs.wic.xz
 ```
 
 **Qt Based IVI demo :**

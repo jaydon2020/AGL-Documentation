@@ -6,7 +6,7 @@ The
 [Raspberry Pi](https://www.raspberrypi.org/help/what-%20is-a-raspberry-pi/) is a small computer that is ideal for learning computing and computer languages.
 The AGL Project supports building images for the
 [Raspberry Pi 4](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/) board.
-These board comes in a variety of models.
+These boards come in a variety of models.
 See the
 [Raspberry Pi Product Page](https://www.raspberrypi.org/products/) for more information.
 
@@ -58,7 +58,7 @@ configuration step if you want to include any packages under a
 commercial license.
 
 For example, suppose you want to include an implementation of the
-[OpenMAX](https://www.khronos.org/openmax/) Intagration Library
+[OpenMAX](https://www.khronos.org/openmax/) Integration Library
 (`libomxil`) under a commercial license as part of your AGL image.
 If so, you must include the following two lines in your
 `/build/conf/local.conf` file:
@@ -76,7 +76,7 @@ This section shows the `bitbake` command used to build the AGL image.
 Start the build using the `bitbake` command.
 
 **NOTE:** An initial build can take many hours depending on your
-CPU and and Internet connection speeds.
+CPU and Internet connection speeds.
 The build also takes approximately 100G-bytes of free disk space.
 
 **Qt Based IVI demo :**
@@ -155,7 +155,7 @@ the image on the Raspberry Pi 4 board:
   4. Serial Debugging :
 
     When things go wrong, you can take steps to debug your Raspberry Pi.
-    For debugging, you need a 3.3 Volt USB Serial cable to fascilitate
+    For debugging, you need a 3.3 Volt USB Serial cable to facilitate
     communication between your Raspberry Pi board and your build host.
 
     You can reference the following diagram for information on the following steps:
@@ -167,12 +167,12 @@ the image on the Raspberry Pi 4 board:
       Do not connect the USB side of the cable to your build host at this time.
 
           **CAUTION:** No warranty is provided using the following procedure.
-          Pay particular attention to the collors of your cable as they could
+          Pay particular attention to the colors of your cable as they could
           vary depending on the vendor.
 
     2. Connect the cable's BLUE wire to pin 6 (i.e. Ground) of the UART.
 
-    3. Connect the able's GREEN RX line to pin 8 (i.e. the TXD line) of
+    3. Connect the cable's GREEN RX line to pin 8 (i.e. the TXD line) of
       the UART.
 
     4. Connect the cable's RED TX line to pin 10 (i.e. the RXD line) of

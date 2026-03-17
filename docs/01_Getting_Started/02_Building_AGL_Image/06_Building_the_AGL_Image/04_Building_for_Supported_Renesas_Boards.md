@@ -247,7 +247,7 @@ You can find these pre-built images on the
 Start the build using the `bitbake` command.
 
 **NOTE:** An initial build can take many hours depending on your
-CPU and and Internet connection speeds.
+CPU and Internet connection speeds.
 The build also takes approximately 100G-bytes of free disk space.
 
 **Qt based IVI demo :**
@@ -282,7 +282,7 @@ The build process puts the resulting image in the Build Directory:
 To boot your image on the Renesas board, you need to do three things:
 
 1. [Update all firmware on the board.](#4-troubleshooting)
-2. Prepare the MicroSD card to you can boot from it.
+2. Prepare the MicroSD card so you can boot from it.
 3. Boot the board.
 
 **NOTE:** For subsequent builds, you only have to re-write the MicroSD
@@ -406,7 +406,7 @@ Setting up the Serial Console involves the following:
 2. Connecting Your Build Host to Your Renesas Board's Serial Port
 
     You need to physically connect your build host to the Renesas board using
-    a USB cable from the host to the serial CP2102 USP port (i.e. Micro USB-A port)
+    a USB cable from the host to the serial CP2102 USB port (i.e. Micro USB-A port)
     on the Renesas board.
 
     Once you connect the board, determine the device created for the serial link.
@@ -658,7 +658,7 @@ The graphics and multimedia acceleration packages for
 the R-Car Gen3 board can be downloaded from:
 https://www.renesas.com/en-us/solutions/automotive/rcar-demoboard-2.html
 
-These 2 files from there should be store in your'/home/devel/Downloads' directory.
+These 2 files from there should be stored in your'/home/devel/Downloads' directory.
     R-Car_Gen3_Series_Evaluation_Software_Package_for_Linux-weston8-20200923.zip
     R-Car_Gen3_Series_Evaluation_Software_Package_of_Linux_Drivers-weston8-20200923.zip
 /home/working/workspace_agl_master/build_gen3

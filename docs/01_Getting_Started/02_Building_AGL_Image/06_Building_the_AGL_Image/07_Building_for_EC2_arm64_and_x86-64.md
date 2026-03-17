@@ -8,7 +8,7 @@ image without actual target hardware. In this case using an EC2 instance.
 This section describes the steps you need to take to build the
 AGL demo image for emulation using EC2 either for arm64 or x86-64.
 
-In the commanline examples below, we will focus on aws-ec2-arm64 primarily.
+In the command-line examples below, we will focus on aws-ec2-arm64 primarily.
 If you need x86-64, then replace it with aws-ec2-x86-64 likewise.
 
 ## 1. Making Sure Your Build Environment is Correct
@@ -49,7 +49,7 @@ the AGL demo image. For production use, you need to omit agl-devel and tailor yo
 Start the build using the `bitbake` command.
 
 **NOTE:** An initial build can take many hours depending on your
-CPU and and Internet connection speeds.
+CPU and Internet connection speeds.
 The build also takes approximately 100G-bytes of free disk space.
 
 **Sample Qt based IVI demo :**
@@ -85,8 +85,8 @@ $ export IMAGE_NAME=agl-ivi-demo-flutter
 ## 3. Deploying the AGL Demo Image
 
 Deploying the image consists of uploading the image to S3 and
-conversion to to an AMI image. The whole process is done using
-a script out of meta-aws . Next you need to start a new instance
+conversion to an AMI image. The whole process is done using
+a script from meta-aws. Next you need to start a new instance
 using your new image.
 The image is setup to expose its screen over rdp. This is ok for
 development, but you need to keep security in mind when configuring
@@ -104,7 +104,7 @@ The script required to upload the resulting image is part of meta-aws in the sub
 
 **Read it and set it up accordingly.**
 
-The script itself is called creat-ec2-ami.sh and takes 4 arguments:
+The script itself is called create-ec2-ami.sh and takes 4 arguments:
 * your S3 bucket name
 * the size of the AMI (don't make it too small)
 * the target image name

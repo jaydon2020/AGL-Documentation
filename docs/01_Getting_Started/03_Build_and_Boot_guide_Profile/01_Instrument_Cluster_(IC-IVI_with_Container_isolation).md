@@ -5,13 +5,13 @@ title: Instrument Cluster (IC-IVI with Container isolation)
 # Build and Boot AGL Instrument Cluster demo image (IC-IVI with Container isolation)
 
 
-This document describe how to build AGL instrument cluster with
+This document describes how to build AGL instrument cluster with
 container integration.
 
 ## 1. Select Image type and target board
 
-AGL IC container integration has various type.  Developer need to choice
-which integration type.  Those type show in table1. 
+AGL IC container integration has various type.  Developer need to choose
+which integration type.  Those types are shown in table 1. 
 
 **Table 1. Integration type.**
 
@@ -22,8 +22,8 @@ which integration type.  Those type show in table1. 
 | 2b | Instrument cluster with AGL demo IVI install to one by one partition. | This integration aim to get full demo integration with AGL demo IVI.  This integration is extend from 2a integration.  This integration support instrument cluster guest and four IVI guest (momi, qt, flutter).   This integration aim to use AGL demonstration in each event by developer. | 16GByte | 2a+6h | 600GByte | ![](images/image2.png) |
 
 
-AGL IC container integration supported two board.  Those board show in
-table2.
+AGL IC container integration supported two board.  Those boards are shown in
+table 2.
 
 **Table2. Supported board.**
 
@@ -34,7 +34,7 @@ table2.
 | NanoPC-T6 (4G or 8G or 16G) | 1,2a,2b | Tested by 16G board. |
 | Raspberry Pi4/5 (4G or 8G) | 1,2a,2b | Tested. |
 
-We recommend to choice AGL RefHW or Raspberry Pi4 (4G or 8G) or NanoPC-T6 (4G or 8G or 16G) . 
+We recommend choosing AGL RefHW or Raspberry Pi4 (4G or 8G) or NanoPC-T6 (4G or 8G or 16G). 
 
 **Typical Hardware Set is shown in Appendix.1. **
 
@@ -154,13 +154,13 @@ $ source meta-agl/scripts/aglsetup.sh -f -m raspberrypi5 -b build-ic-rpi5 agl-ic
 In this time, you can build 1 and 2a.  If you want to build 2b,
 please do extra step in next section.
 
-When you choice integration type 1.
+When you choose integration type 1.
 
 ```bash
 $ bitbake lxc-host-image-minimal
 ```
 
-When you choice integration type 2a.
+When you choose integration type 2a.
 
 ```bash
 $ bitbake agl-instrument-cluster-container-demo
@@ -169,12 +169,12 @@ $ bitbake agl-instrument-cluster-container-demo
 ## 4. Extra step for type 2b build.
 
 This extra step can select 4.1 or 4.2.  When you want to build AGL demo
-IVI container guest in myself, please select 4.1 work flow.  When you
-want to create AGL IC container demo quicly, please select 4.2 work flow.
+IVI container guest yourself, please select the 4.1 workflow.  When you
+want to create AGL IC container demo quickly, please select 4.2 workflow.
 
-Typically 4.1 step require long build time about 6h.  When you want to
-build AGL Ref HW/ SK+ Kinfgisher software, you can\'t select select 4.2
-work flow that depend to Renesas propriety license limitation.
+Typically 4.1 step requires long build time about 6h.  When you want to
+build AGL Ref HW/ SK+ Kingfisher software, you can't use the 4.2
+work flow due to Renesas proprietary license limitation.
 
 ### 4.1. Extra step for type 2b build myself.
 
@@ -315,8 +315,8 @@ The 2a and 2b image is constructed by wic image, that include partition
 table and each partition data into one image file.
 
 In default setting, that wic image is compressed xz.  When that wic
-image write to SD card, you need to use xzcat ant dd command in build
-PC.
+image to the SD card, you need to use xzcat and dd commands on your
+build PC.
 
 ```bash
 $ sudo bash -c "xzcat /path/to/image/directory/agl-instrument-cluster-container-demo-XXXXX.rootfs.wic.xz | dd of=/dev/sdXXX bs=128M"
@@ -403,7 +403,7 @@ $ cmcontrol --force-reboot-guest-role=ivi
 
 | Questions | Answer |
 |:---|:---|
-| Why not show map in default screen of Momi IVI. | When you want show map, you need extra step.  Please fallow [this page](../../06_Component_Documentation/Demo_Application/01_Momi_Navi.md).|
+| Why not show map in default screen of Momi IVI. | When you want to show the map, you need an extra step.  Please follow [this page](../../06_Component_Documentation/Demo_Application/01_Momi_Navi.md).|
 
 
 ## Appendix.1.  Typical Hardware set.
@@ -517,6 +517,6 @@ Upstream:
  1. [Kingfisher Board](https://elinux.org/R-Car/Boards/Kingfisher)
  1. [R-Car M3SK](https://elinux.org/R-Car/Boards/M3SK#Flashing_firmware)
  1. [agl reference machines](https://docs.automotivelinux.org/en/master/#02_hardware_support/01_Supported_Hardware_Overview/)
- 1. [AGL Tech Day Presenation](https://static.sched.com/hosted_files/agltechday2022/3b/agl-techday-202204.pdf)
+ 1. [AGL Tech Day Presentation](https://static.sched.com/hosted_files/agltechday2022/3b/agl-techday-202204.pdf)
  1. [Build AGL Image](https://docs.automotivelinux.org/en/master/#01_Getting_Started/02_Building_AGL_Image/0_Build_Process_Overview/)
  1. [Building for Supported Renesas Boards](https://docs.automotivelinux.org/en/master/#01_Getting_Started/02_Building_AGL_Image/09_Building_for_Supported_Renesas_Boards/)

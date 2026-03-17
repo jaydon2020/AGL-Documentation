@@ -3,7 +3,7 @@ title: Building for Rockchip boards
 ---
 
 AGL supported some Rockchip [RK3588](https://www.rock-chips.com/a/en/products/RK35_Series/2022/0926/1660.html) boards.
-[NanoPC T6](https://wiki.friendlyelec.com/wiki/index.php/NanoPC-T6) board is one of the RK3588 based board.  That is manifactured by [friendlyelec](https://www.friendlyelec.com).
+[NanoPC T6](https://wiki.friendlyelec.com/wiki/index.php/NanoPC-T6) board is one of the RK3588 based board.  That is manufactured by [friendlyelec](https://www.friendlyelec.com).
 
 This section describes the steps you need to take to build the
 AGL demo image for the NanoPC T6 board.
@@ -45,7 +45,7 @@ This section shows the `bitbake` command used to build the AGL image.
 Start the build using the `bitbake` command.
 
 **NOTE:** An initial build can take many hours depending on your
-CPU and and Internet connection speeds.
+CPU and Internet connection speeds.
 The build also takes approximately 200G-bytes of free disk space.
 
 **Flutter Based IVI demo :**
@@ -128,5 +128,5 @@ Pin assign.
 |---|---|---|
 | 1 | GND | 0V |
 | 2 | UART2_TX_M0_DEBUG | output |
-| 3 | UART2_RX_M0_DEBUG | intput |
+| 3 | UART2_RX_M0_DEBUG | input |
 

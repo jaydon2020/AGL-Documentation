@@ -12,7 +12,7 @@ hypervisors that provide virtio devices, for example, QEMU aarch64 emulation on
 PC, QEMU/KVM aarch64 virtualization on AGL Reference Hardware, etc.
 
 Below, AGL minimal image and Qt based IVI demo are used as example, but
-similiarly one can run HTML5 based demos, cluster demo, or other AGL images.
+similarly one can run HTML5 based demos, cluster demo, or other AGL images.
 
 ## 1. Making Sure Your Build Environment is Correct
 
@@ -33,7 +33,7 @@ The "-b" option sets custom build directory instead of default "build".
 
 The "-f" option might be added to override previously available configuration.
 By default, if there were already configuration files in build directory, they
-will not be overriden, as result, aglsetup.sh might not have desired effect.
+will not be overridden, as a result, aglsetup.sh might not have desired effect.
 
 ## 2. Using BitBake
 
@@ -143,7 +143,7 @@ Follow these steps to run virtual AGL on bare-metal AGL (AGL-in-AGL) on AGL Refe
 
   6. It is possible to exit from QEMU using monitor commands. Enter "Ctrl+a h" for help.
 
-Know issue: to enable hardware virtualization using KVM, option `-enable-kvm`
+Known issue: to enable hardware virtualization using KVM, option `-enable-kvm`
 could be added to QEMU command line, but it fails with:
 
 ```

@@ -49,7 +49,7 @@ The remainder of this section provides steps on how to download the AGL source f
 
    * **Stable Release:**
      Using the latest stable release gives you a solid snapshot of the
-     latest know release.
+     latest known release.
      The release is static, tested, and known to work.
      To download the [latest stable release branch](https://wiki.automotivelinux.org/agl-distro/release-notes#latest_stable_release), use
      the following commands:
